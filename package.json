@@ -1,0 +1,19 @@
+{
+  "name": "lunch-time",
+  "version": "0.0.1",
+  "description": "Application that helps you to get tasty lunch.",
+  "main": "src/server/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RomanFrom710/lunch-time"
+  },
+  "author": "Roman Chaley",
+  "license": "MIT",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "koa": "^1.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.0"
+  }
+}
