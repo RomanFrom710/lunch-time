@@ -136,3 +136,5 @@ bower_components
 .bower-tmp
 
 .idea/
+public/compiled
+typings
