@@ -1,33 +1,43 @@
 'use strict';
 // todo: split webpack config for different environments
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        polyfills: './src/client/polyfills.ts',
-        vendor: './src/client/vendor.ts',
+        vendor: './src/client/app/vendor.ts',
         app: './src/client/app/main.ts'
     },
     output: {
-        filename: './public/compiled/[name].js'
+        path: './public',
+        filename: '[name].js'
     },
     devtool: 'source-map',
     resolve: {
         extensions: ['', '.ts', '.js']
     },
     module: {
-        loaders: [{
-            test: /.ts$/,
-            loader: 'ts-loader'
-        }],
+        loaders: [
+            {
+                test: /\.ts$/,
+                loader: 'ts-loader'
+            },
+            {
+                test: /\.html/,
+                loader: 'html-loader'
+            }
+        ],
         preLoaders: [{
-            test: /.js$/,
+            test: /\.js$/,
             loader: 'source-map-loader'
         }]
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['app', 'vendor', 'polyfills']
+            names: ['app', 'vendor']
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/client/index.html'
         })
     ]
 };
