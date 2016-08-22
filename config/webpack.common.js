@@ -2,9 +2,11 @@
 // todo: split webpack config for different environments
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
+        styles: './src/client/style', // Common styles
         vendor: './src/client/app/vendor.ts',
         app: './src/client/app/main.ts'
     },
@@ -20,16 +22,24 @@ module.exports = {
         loaders: [
             {
                 test: /\.ts$/,
-                loader: 'ts-loader'
+                loader: 'ts'
             },
             {
-                test: /\.html/,
-                loader: 'html-loader'
+                test: /\.html$/,
+                loader: 'html'
+            },
+            {
+                test: /\.less$/, // Common styles
+                loader: ExtractTextPlugin.extract('css?sourcemap!less')
+            }, // todo: add rule for component styles in app folder
+            {
+                test: /\.(woff|woff2|eot|svg|ttf)/,
+                loader: 'url?limit=10000'
             }
         ],
         preLoaders: [{
             test: /\.js$/,
-            loader: 'source-map-loader'
+            loader: 'source-map'
         }]
     },
     plugins: [
@@ -38,6 +48,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: './src/client/index.html'
-        })
+        }),
+        new ExtractTextPlugin('[name].css')
     ]
 };
