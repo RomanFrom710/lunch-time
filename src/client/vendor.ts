@@ -10,3 +10,6 @@ import '@angular/http';
 import '@angular/router';
 
 import 'rxjs';
+
+// Styles
+import 'bootstrap/dist/css/bootstrap.css';

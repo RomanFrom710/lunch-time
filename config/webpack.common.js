@@ -4,10 +4,11 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const resolvePath = require('./path-resolver');
+
 module.exports = {
     entry: {
-        styles: './src/client/style', // Common styles
-        vendor: './src/client/app/vendor.ts',
+        vendor: './src/client/vendor.ts',
         app: './src/client/app/main.ts'
     },
     output: {
@@ -22,18 +23,24 @@ module.exports = {
         loaders: [
             {
                 test: /\.ts$/,
-                loader: 'ts'
+                loader: 'ts!angular2-template'
             },
             {
                 test: /\.html$/,
                 loader: 'html'
             },
             {
-                test: /\.less$/, // Common styles
-                loader: ExtractTextPlugin.extract('css?sourcemap!less')
-            }, // todo: add rule for component styles in app folder
+                test: /\.(less|css)$/, // Vendor styles
+                exclude: resolvePath('./src/client/app'),
+                loader: ExtractTextPlugin.extract('css?sourcemap')
+            },
             {
-                test: /\.(woff|woff2|eot|svg|ttf)/,
+                test: /\.less$/, // Component styles
+                include: resolvePath('./src/client/app'),
+                loader: 'raw!less'
+            },
+            {
+                test: /\.(woff|woff2|eot|svg|ttf)$/,
                 loader: 'url?limit=10000'
             }
         ],
