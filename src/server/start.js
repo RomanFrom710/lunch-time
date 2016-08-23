@@ -13,6 +13,11 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 require('./auth');
 
+const webpack = require('webpack');
+const webpackConfig = require('../../webpack.config');
+const webpackCompiler = webpack(webpackConfig);
+const webpackMiddleware = require('koa-webpack-dev-middleware')(webpackCompiler);
+
 const config = require('./config');
 
 // mongodb
@@ -29,7 +34,8 @@ app
     .use(koaBodyparser())
     .use(koaSession({ storage: new KoaMongooseStore() }))
     .use(koaPassport.initialize())
-    .use(koaPassport.session());
+    .use(koaPassport.session())
+    .use(webpackMiddleware);
 
 router
     .get('/auth/vk', passport.authenticate('vkontakte'))

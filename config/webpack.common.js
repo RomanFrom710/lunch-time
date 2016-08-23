@@ -12,7 +12,7 @@ module.exports = {
         app: './src/client/app/main.ts'
     },
     output: {
-        path: './public',
+        path: resolvePath('./public'),
         filename: '[name].js'
     },
     devtool: 'source-map',
@@ -30,7 +30,12 @@ module.exports = {
                 loader: 'html'
             },
             {
-                test: /\.(less|css)$/, // Vendor styles
+                test: /\.less$/, // Vendor styles
+                exclude: resolvePath('./src/client/app'),
+                loader: ExtractTextPlugin.extract('css?sourcemap!less')
+            },
+            {
+                test: /\.css$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
                 loader: ExtractTextPlugin.extract('css?sourcemap')
             },
