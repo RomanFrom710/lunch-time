@@ -16,7 +16,8 @@ require('./auth');
 const webpack = require('webpack');
 const webpackConfig = require('../../webpack.config');
 const webpackCompiler = webpack(webpackConfig);
-const webpackMiddleware = require('koa-webpack-dev-middleware')(webpackCompiler);
+const webpackDevMiddleware = require('koa-webpack-dev-middleware')(webpackCompiler);
+const webpackHotMiddleware = require('koa-webpack-hot-middleware')(webpackCompiler);
 
 const config = require('./config');
 
@@ -30,12 +31,13 @@ app.name = 'Lunch time'; // Just because I can.
 app.keys = [config.get('cookieKey')];
 
 app
-    .use(koaStatic('./public'))
+    //.use(koaStatic('./public'))
     .use(koaBodyparser())
     .use(koaSession({ storage: new KoaMongooseStore() }))
     .use(koaPassport.initialize())
     .use(koaPassport.session())
-    .use(webpackMiddleware);
+    .use(webpackDevMiddleware)
+    .use(webpackHotMiddleware);
 
 router
     .get('/auth/vk', passport.authenticate('vkontakte'))

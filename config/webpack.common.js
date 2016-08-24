@@ -3,17 +3,19 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin'); // todo: checkout new version, when it'll be fixed
 
 const resolvePath = require('./path-resolver');
 
 module.exports = {
     entry: {
         vendor: './src/client/vendor.ts',
+        hot: 'webpack-hot-middleware/client?reload=true', //todo: for dev only
         app: './src/client/app/main.ts'
     },
     output: {
         path: resolvePath('./public'),
-        filename: '[name].js'
+        filename: '[name].[hash].js'
     },
     devtool: 'source-map',
     resolve: {
@@ -32,12 +34,14 @@ module.exports = {
             {
                 test: /\.less$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                loader: ExtractTextPlugin.extract('css?sourcemap!less')
+                //loader: ExtractTextPlugin.extract('css!less?sourcemap')
+                loader: 'style!css!less?sourcemap'
             },
             {
                 test: /\.css$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                loader: ExtractTextPlugin.extract('css?sourcemap')
+                //loader: ExtractTextPlugin.extract('css?sourcemap')
+                loader: 'style!css?sourcemap'
             },
             {
                 test: /\.less$/, // Component styles
@@ -61,6 +65,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/client/index.html'
         }),
-        new ExtractTextPlugin('[name].css')
+        //new ExtractTextPlugin('[name].css'),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+        //new WebpackCleanupPlugin()
     ]
 };
