@@ -17,7 +17,7 @@ module.exports = {
         path: resolvePath('./public'),
         filename: '[name].[hash].js'
     },
-    devtool: 'source-map',
+    devtool: 'eval-cheap-module-source-map', // todo: for dev only
     resolve: {
         extensions: ['', '.ts', '.js']
     },
