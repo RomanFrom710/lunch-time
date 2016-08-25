@@ -1,23 +1,20 @@
 'use strict';
-// todo: split webpack config for different environments
+
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const WebpackCleanupPlugin = require('webpack-cleanup-plugin'); // todo: checkout new version, when it'll be fixed
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const resolvePath = require('./path-resolver');
 
 module.exports = {
     entry: {
         vendor: './src/client/vendor.ts',
-        hot: 'webpack-hot-middleware/client?reload=true', //todo: for dev only
         app: './src/client/app/main.ts'
     },
     output: {
         path: resolvePath('./public'),
         filename: '[name].[hash].js'
     },
-    devtool: 'eval-cheap-module-source-map', // todo: for dev only
     resolve: {
         extensions: ['', '.ts', '.js']
     },
@@ -34,14 +31,12 @@ module.exports = {
             {
                 test: /\.less$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                //loader: ExtractTextPlugin.extract('css!less?sourcemap')
-                loader: 'style!css!less?sourcemap'
+                loader: ExtractTextPlugin.extract('style', 'css!less?sourcemap')
             },
             {
                 test: /\.css$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                //loader: ExtractTextPlugin.extract('css?sourcemap')
-                loader: 'style!css?sourcemap'
+                loader: ExtractTextPlugin.extract('style', 'css?sourcemap')
             },
             {
                 test: /\.less$/, // Component styles
@@ -65,10 +60,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/client/index.html'
         }),
-        //new ExtractTextPlugin('[name].css'),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
-        //new WebpackCleanupPlugin()
+        // Since ExtractTextPlugin is used only for vendor styles, it's better
+        // to always get it enabled. We don't need HRM for vendor styles, but inserting
+        // them into DOM takes a lot of resources.
+        new ExtractTextPlugin('[name].[hash].css'),
+        new webpack.NoErrorsPlugin()
     ]
 };

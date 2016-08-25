@@ -13,12 +13,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 require('./auth');
 
-const webpack = require('webpack');
-const webpackConfig = require('../../webpack.config');
-const webpackCompiler = webpack(webpackConfig);
-const webpackDevMiddleware = require('koa-webpack-dev-middleware')(webpackCompiler);
-const webpackHotMiddleware = require('koa-webpack-hot-middleware')(webpackCompiler);
-
 const config = require('./config');
 
 // mongodb
@@ -31,13 +25,24 @@ app.name = 'Lunch time'; // Just because I can.
 app.keys = [config.get('cookieKey')];
 
 app
-    //.use(koaStatic('./public'))
     .use(koaBodyparser())
-    .use(koaSession({ storage: new KoaMongooseStore() }))
+    .use(koaSession({ store: new KoaMongooseStore() }))
     .use(koaPassport.initialize())
-    .use(koaPassport.session())
-    .use(webpackDevMiddleware)
-    .use(webpackHotMiddleware);
+    .use(koaPassport.session());
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(koaStatic('./public'));
+} else {
+    const webpack = require('webpack'); // todo: this part should be moved somewhere
+    const webpackConfig = require('../../webpack.config');
+    const webpackCompiler = webpack(webpackConfig);
+    const webpackDevMiddleware = require('koa-webpack-dev-middleware')(webpackCompiler);
+    const webpackHotMiddleware = require('koa-webpack-hot-middleware')(webpackCompiler);
+
+    app
+        .use(webpackDevMiddleware)
+        .use(webpackHotMiddleware);
+}
 
 router
     .get('/auth/vk', passport.authenticate('vkontakte'))

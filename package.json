@@ -13,8 +13,9 @@
     "node": ">= 6.3.1"
   },
   "scripts": {
-    "start": "node src/server/start.js",
-    "postinstall": "typings install"
+    "start": "node ./src/server/start.js",
+    "build": "webpack",
+    "postinstall": "typings install && webpack"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.5",
@@ -64,6 +65,7 @@
     "typings": "^1.3.2",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
+    "webpack-browser-plugin": "^1.0.12",
     "webpack-cleanup-plugin": "^0.2.0",
     "webpack-merge": "^0.14.1"
   }
