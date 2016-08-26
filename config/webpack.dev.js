@@ -11,6 +11,9 @@ const devConfig = {
     entry: {
         hot: 'webpack-hot-middleware/client?reload=true',
     },
+    output: {
+        filename: '[name].js'
+    },
     devtool: 'eval-cheap-module-source-map',
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),

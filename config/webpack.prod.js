@@ -8,6 +8,9 @@ const commonConfig = require('./webpack.common');
 
 const prodConfig = {
     devtool: 'source-map',
+    output: {
+        filename: '[name].[hash].js'
+    },
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new WebpackCleanupPlugin()

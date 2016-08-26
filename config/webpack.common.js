@@ -12,8 +12,7 @@ module.exports = {
         app: './src/client/app/main.ts'
     },
     output: {
-        path: resolvePath('./public'),
-        filename: '[name].[hash].js'
+        path: resolvePath('./public')
     },
     resolve: {
         extensions: ['', '.ts', '.js']
