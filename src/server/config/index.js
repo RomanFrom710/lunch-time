@@ -5,7 +5,13 @@ const nconf = require('nconf');
 
 const commonConfig = {
     port: 3000,
-    cookieKey: 'very-secret-key',
+    keys: {
+        cookie: 'very-secret-key',
+        vk: { // Just for development purposes
+            id: 1,
+            secret: 'key'
+        }
+    },
     db: {
         connectionString: 'mongodb://127.0.0.1/lunchtime'
     }

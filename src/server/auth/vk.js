@@ -4,8 +4,8 @@ const VkStrategy = require('passport-vkontakte').Strategy;
 const config = require('../config');
 
 const options = {
-    clientID: config.get('keys:vk:clientid'),
-    clientSecret: config.get('keys:vk:clientsecret'),
+    clientID: config.get('keys:vk:id'),
+    clientSecret: config.get('keys:vk:secret'),
     callbackURL: '/auth/vk/callback'
 };
 

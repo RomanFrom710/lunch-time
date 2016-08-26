@@ -13,7 +13,7 @@
     "node": ">= 6.3.1"
   },
   "scripts": {
-    "start": "node ./src/server/start.js",
+    "start": "node ./src/server/start",
     "build": "webpack",
     "postinstall": "typings install && webpack"
   },

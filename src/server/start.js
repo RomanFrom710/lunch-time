@@ -22,7 +22,7 @@ mongoose.connect(config.get('db:connectionString'));
 const app = koa();
 const router = koaRouter();
 app.name = 'Lunch time'; // Just because I can.
-app.keys = [config.get('cookieKey')];
+app.keys = [config.get('keys:cookie')];
 
 app
     .use(koaBodyparser())
