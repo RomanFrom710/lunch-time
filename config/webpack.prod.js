@@ -9,7 +9,7 @@ const commonConfig = require('./webpack.common');
 const prodConfig = {
     devtool: 'source-map',
     output: {
-        filename: '[name].[hash].js'
+        filename: '[name].[chunkHash].js'
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
