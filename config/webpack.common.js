@@ -63,6 +63,9 @@ module.exports = {
         // to always get it enabled. We don't need HRM for vendor styles, but inserting
         // them into DOM takes a lot of resources.
         new ExtractTextPlugin('[name].[hash].css'),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.ENV': JSON.stringify(process.env.NODE_ENV)
+        })
     ]
 };
