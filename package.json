@@ -15,6 +15,7 @@
   "scripts": {
     "start": "node ./src/server/start",
     "build": "webpack",
+    "test": "karma start",
     "postinstall": "typings install && webpack"
   },
   "dependencies": {
@@ -55,11 +56,15 @@
     "jasmine-core": "^2.4.1",
     "karma": "^1.2.0",
     "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
     "koa-webpack-dev-middleware": "^1.2.2",
     "koa-webpack-hot-middleware": "^1.0.3",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "null-loader": "^0.1.1",
+    "phantomjs-prebuilt": "^2.1.12",
     "raw-loader": "^0.5.1",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
