@@ -3,6 +3,7 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 const resolvePath = require('./path-resolver');
 
@@ -21,7 +22,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.ts$/,
-                loader: 'ts!angular2-template'
+                loader: 'awesome-typescript!angular2-template'
             },
             {
                 test: /\.html$/,
@@ -64,6 +65,7 @@ module.exports = {
         // them into DOM takes a lot of resources.
         new ExtractTextPlugin('[name].[hash].css'),
         new webpack.NoErrorsPlugin(),
+        new ForkCheckerPlugin(),
         new webpack.DefinePlugin({
             'process.env.ENV': JSON.stringify(process.env.NODE_ENV)
         })
