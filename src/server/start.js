@@ -30,9 +30,7 @@ app
     .use(koaPassport.initialize())
     .use(koaPassport.session());
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(koaStatic('./public'));
-} else {
+if (process.env.NODE_ENV === 'development') {
     const webpack = require('webpack'); // todo: this part should be moved somewhere
     const webpackConfig = require('../../webpack.config');
     const webpackCompiler = webpack(webpackConfig);
@@ -42,6 +40,8 @@ if (process.env.NODE_ENV === 'production') {
     app
         .use(webpackDevMiddleware)
         .use(webpackHotMiddleware);
+} else {
+    app.use(koaStatic('./public'));
 }
 
 router
