@@ -42,6 +42,7 @@
     "koa-static": "^2.0.0",
     "mongoose": "^4.5.8",
     "nconf": "^0.8.4",
+    "ng2-popover": "0.0.8",
     "passport": "^0.3.2",
     "passport-vkontakte": "^0.3.2",
     "reflect-metadata": "^0.1.8",

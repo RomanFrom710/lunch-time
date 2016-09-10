@@ -17,7 +17,10 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">User</a>
+                    <popover-content #signInPopover>
+                        <lt-sign-in></lt-sign-in>
+                    </popover-content>
+                    <a href="#" [popover]="signInPopover">Sign In</a>
                 </li>
             </ul>
         </div>

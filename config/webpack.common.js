@@ -44,7 +44,7 @@ module.exports = {
                 loader: 'raw!less'
             },
             {
-                test: /\.(woff|woff2|eot|svg|ttf)$/,
+                test: /\.(woff|woff2|eot|svg|ttf|png|jpg|jpeg)$/,
                 loader: 'url?limit=10000'
             }
         ],
@@ -52,6 +52,9 @@ module.exports = {
             test: /\.js$/,
             loader: 'source-map'
         }]
+    },
+    htmlLoader: {
+        root: resolvePath('./assets')
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
