@@ -13,7 +13,10 @@ const prodConfig = {
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false }
+            beautify: false,
+            comments: false,
+            compress: { screw_ie8: true, warnings: false },
+            mangle: { screw_ie8: true, keep_fnames: true }
         }),
         new WebpackCleanupPlugin()
     ]

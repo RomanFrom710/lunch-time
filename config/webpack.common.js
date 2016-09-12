@@ -22,7 +22,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.ts$/,
-                loader: 'awesome-typescript!angular2-template'
+                loader: 'awesome-typescript!angular2-template',
+                exclude: /\.spec.ts$/
             },
             {
                 test: /\.html$/,
@@ -54,7 +55,12 @@ module.exports = {
         }]
     },
     htmlLoader: {
-        root: resolvePath('./assets')
+        root: resolvePath('./assets'),
+        minimize: true,
+        removeAttributeQuotes: false,
+        caseSensitive: true,
+        customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
+        customAttrAssing: [ /\)?]?=/ ]
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
