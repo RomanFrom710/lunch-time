@@ -1,7 +1,6 @@
 'use strict';
 
 const koa = require('koa');
-const koaRouter = require('koa-router');
 const koaStatic = require('koa-static');
 const koaBodyparser = require('koa-bodyparser');
 const koaPassport = require('koa-passport');
@@ -11,16 +10,15 @@ const KoaMongooseStore = require('koa-session-mongoose');
 //todo: refactor, move some code to separate files
 const mongoose = require('mongoose');
 const passport = require('passport');
-require('./auth');
 
 const config = require('./config');
+const applyRoutes = require('./routes');
 
 // mongodb
 mongoose.connect(config.get('db:connectionString'));
 
 // koa
 const app = koa();
-const router = koaRouter();
 app.name = 'Lunch time'; // Just because I can.
 app.keys = [config.get('keys:cookie')];
 
@@ -44,14 +42,5 @@ if (process.env.NODE_ENV === 'development') {
     app.use(koaStatic('./public'));
 }
 
-router
-    .get('/auth/vk', passport.authenticate('vkontakte'))
-    .get('/auth/vk/callback', passport.authenticate('vkontakte'),
-        function *(next) {
-            console.log(this.state.user);
-            yield next;
-        });
-
-app.use(router.routes());
-
+applyRoutes(app);
 app.listen(config.get('port'));
