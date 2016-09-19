@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../shared';
+import { AuthService } from '../../shared';
 
 @Component({
     selector: 'lt-sign-in',
@@ -10,7 +10,7 @@ import { AuthService } from '../shared';
 export class SignInComponent {
     constructor(private authSerivce: AuthService) {}
 
-    authVk(): void {
-        this.authSerivce.authVk();
+    authVk(): void { // todo: this is just for test, move it somewhere
+        window.open('/auth/vk', 'newwindow', 'width=500, height=300');
     }
 }

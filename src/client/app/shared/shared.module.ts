@@ -1,12 +1,13 @@
 import { NgModule }      from '@angular/core';
 import { PopoverModule } from 'ng2-popover';
 
-import { UserModule } from '../user';
 import { HeaderComponent } from './header';
+import { AuthService } from './auth';
 
 @NgModule({
-    imports: [ PopoverModule, UserModule ],
+    imports: [ PopoverModule ],
     declarations: [ HeaderComponent ],
-    exports: [ HeaderComponent ]
+    exports: [ HeaderComponent ],
+    providers: [ AuthService ]
 })
 export class SharedModule { }
