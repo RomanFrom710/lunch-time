@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+
 import { AuthService } from '../../shared';
 
 @Component({
@@ -8,9 +9,10 @@ import { AuthService } from '../../shared';
     providers: [ AuthService ]
 })
 export class SignInComponent {
-    constructor(private authSerivce: AuthService) {}
+    constructor(private authSerivce: AuthService,
+                @Inject('config') private config) {}
 
     authVk(): void { // todo: this is just for test, move it somewhere
-        window.open('/auth/vk', 'newwindow', 'width=500, height=300');
+        window.open(this.config.links.vk.auth, 'newwindow', 'width=500, height=300');
     }
 }

@@ -15,6 +15,7 @@
   "scripts": {
     "start": "node ./src/server/start",
     "build": "webpack --progress --config ./config/webpack.prod.js",
+    "nodemon": "nodemon",
     "test": "npm run test-server && npm run test-client",
     "test-server": "jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "test-client": "karma start",
@@ -42,7 +43,6 @@
     "mongoose": "^4.5.8",
     "nconf": "^0.8.4",
     "ng2-popover": "0.0.8",
-    "passport": "^0.3.2",
     "passport-vkontakte": "^0.3.2",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
@@ -67,6 +67,7 @@
     "koa-webpack-hot-middleware": "^1.0.3",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "nodemon": "^1.10.2",
     "null-loader": "^0.1.1",
     "phantomjs-prebuilt": "^2.1.12",
     "raw-loader": "^0.5.1",

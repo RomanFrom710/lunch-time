@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 const resolvePath = require('./path-resolver');
+const appConfig = require('./app.config').get('app');
 
 module.exports = {
     entry: {
@@ -76,7 +77,8 @@ module.exports = {
         new webpack.NoErrorsPlugin(),
         new ForkCheckerPlugin(),
         new webpack.DefinePlugin({
-            'process.env.ENV': JSON.stringify(process.env.NODE_ENV)
+            'process.env.ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.CONFIG': JSON.stringify(appConfig)
         })
     ]
 };

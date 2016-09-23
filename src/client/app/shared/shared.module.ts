@@ -8,6 +8,9 @@ import { AuthService } from './auth';
     imports: [ PopoverModule ],
     declarations: [ HeaderComponent ],
     exports: [ HeaderComponent ],
-    providers: [ AuthService ]
+    providers: [
+        { provide: 'config', useValue: process.env.CONFIG },
+        AuthService
+    ]
 })
 export class SharedModule { }
