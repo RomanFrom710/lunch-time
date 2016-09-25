@@ -13,6 +13,7 @@ export class SignInComponent {
                 @Inject('config') private config) {}
 
     authVk(): void { // todo: this is just for test, move it somewhere
-        window.open(this.config.links.vk.auth, 'newwindow', 'width=500, height=300');
+        let popupWindow = window.open(this.config.links.vk.auth, 'newwindow', 'width=700,height=400,top=200,left=300');
+        popupWindow.onbeforeunload = ():void => {console.log(popupWindow.location);};
     }
 }

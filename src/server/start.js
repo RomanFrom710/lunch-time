@@ -14,6 +14,7 @@ const config = require('./config');
 const applyRoutes = require('./routes');
 
 // mongodb
+mongoose.Promise = global.Promise; // todo: remove after mongoose 5 will be released
 mongoose.connect(config.get('db:connectionString'));
 
 // koa

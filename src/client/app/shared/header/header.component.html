@@ -17,7 +17,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <popover-content #signInPopover>
+                    <popover-content #signInPopover [closeOnClickOutside]="true">
                         <ng-content select="[lt-user-popover]"></ng-content>
                     </popover-content>
                     <a href="#" [popover]="signInPopover">Sign In</a>
