@@ -15,11 +15,13 @@ const commonConfig = {
         connectionString: 'mongodb://127.0.0.1/lunchtime'
     },
     app: { // This part is available in the client app too
-        authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
-        links: {
-            vk: {
-                auth: '/auth/vk',
-                authCallback: '/auth/vk/callback'
+        auth: {
+            authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
+            links: {
+                vk: {
+                    auth: '/auth/vk',
+                    authCallback: '/auth/vk/callback'
+                }
             }
         }
     }

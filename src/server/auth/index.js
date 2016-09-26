@@ -8,7 +8,7 @@ const routes = require('./routes');
 passport.use(vk);
 
 passport.serializeUser(function(user, done) {
-    done(null, user.name);
+    done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {

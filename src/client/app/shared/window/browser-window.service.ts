@@ -8,12 +8,27 @@ export class BrowserWindowService implements WindowService {
 
     openTempWindow(newWindowUrl: string, messageName: string): Promise<boolean> {
         return new Promise<boolean>((resolve) => {
-            const tempWindow = window.open(newWindowUrl, 'newwindow', this.newWindowOptions);
-            tempWindow.addEventListener('message', (event) => {
+            var messageHandler = (event) => {
                 if (event.data === messageName) {
                     resolve(true);
+                    window.removeEventListener('message', messageHandler);
                 }
-            });
+            };
+
+            window.addEventListener('message', messageHandler);
+            window.open(newWindowUrl, 'newwindow', this.newWindowOptions);
         });
+    }
+
+    getStorageValue(key: string): any {
+        return JSON.parse(localStorage.getItem(key));
+    }
+
+    setStorageValue(key: string, value: any): void {
+        if (value === null) {
+            localStorage.removeItem(key);
+        } else {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
     }
 }
