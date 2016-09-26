@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+
+import { WindowService, Config } from '../';
 
 @Injectable()
 export class AuthService {
-    constructor(private http: Http) {}
+    constructor(private windowService: WindowService,
+                private config: Config) {}
 
     authVk(): void {
-        this.http.get('/auth/vk')
-            .toPromise()
-            .then(console.log);
+        this.windowService.openTempWindow(this.config.links.vk.auth, this.config.authEventName)
+            .then(this.checkAuth);
+    }
+
+    private checkAuth(): void {
+
     }
 }

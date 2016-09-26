@@ -1,15 +1,19 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { PopoverModule } from 'ng2-popover';
 
-import { HeaderComponent } from './header';
-import { AuthService } from './auth';
+import { Config,
+         HeaderComponent,
+         AuthService,
+         WindowService
+         BrowserWindowService } from './';
 
 @NgModule({
     imports: [ PopoverModule ],
     declarations: [ HeaderComponent ],
     exports: [ HeaderComponent ],
     providers: [
-        { provide: 'config', useValue: process.env.CONFIG },
+        { provide: Config, useValue: process.env.CONFIG },
+        { provide: WindowService, useClass: BrowserWindowService },
         AuthService
     ]
 })
