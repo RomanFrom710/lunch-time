@@ -19,8 +19,9 @@ export class AuthService {
 
     private checkAuth(): void {
         this.http.get('/auth')
+            .map(response => response.json())
             .toPromise()
-            .then((data) => {
+            .then(data => {
                 console.log(data);
                 this.windowService.setStorageValue(this.localStorageKey, data);
             })

@@ -14,7 +14,6 @@ router
     .get(config.get('app:auth:links:vk:auth'), passport.authenticate('vkontakte'))
     .get(config.get('app:auth:links:vk:authCallback'), passport.authenticate('vkontakte'),
         function *(next) {
-            console.log(this.passport.user);
             this.body = `<script>window.opener.postMessage('${authEventName}', '*');window.close()</script>`;
             yield next;
         });

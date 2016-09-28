@@ -7,8 +7,8 @@ export class BrowserWindowService implements WindowService {
     private newWindowOptions: string = 'width=700,height=400,top=200,left=300';
 
     openTempWindow(newWindowUrl: string, messageName: string): Promise<boolean> {
-        return new Promise<boolean>((resolve) => {
-            var messageHandler = (event) => {
+        return new Promise<boolean>(resolve => {
+            var messageHandler = event => {
                 if (event.data === messageName) {
                     resolve(true);
                     window.removeEventListener('message', messageHandler);

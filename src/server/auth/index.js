@@ -3,7 +3,6 @@
 const passport = require('koa-passport');
 
 const vk = require('./vk');
-const routes = require('./routes');
 
 passport.use(vk);
 
@@ -15,6 +14,5 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
-module.exports = {
-    routes: routes
-};
+exports.routes = require('./auth-routes');
+exports.authMiddleware = require('./auth-middleware');

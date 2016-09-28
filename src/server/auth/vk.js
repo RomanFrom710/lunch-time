@@ -2,6 +2,7 @@
 
 const VkStrategy = require('passport-vkontakte').Strategy;
 
+const userService = require('../user/user-service');
 const config = require('../config');
 
 const options = {
