@@ -4,6 +4,7 @@ const passport = require('koa-passport');
 
 const vk = require('./vk');
 
+
 passport.use(vk);
 
 passport.serializeUser(function(user, done) {

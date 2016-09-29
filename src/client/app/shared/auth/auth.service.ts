@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import { WindowService, Config } from '../';
 
+
 @Injectable()
 export class AuthService {
     private localStorageKey: string = 'lt-current-user';

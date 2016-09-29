@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 
+
 const cafeSchema = new mongoose.Schema({
     name: String,
     geo: { type: [Number], index: '2d' }

@@ -5,6 +5,7 @@ import { SharedModule } from './shared';
 import { UserModule } from './user';
 import { AppComponent }  from './app.component';
 
+
 @NgModule({
     imports:      [ SharedModule, UserModule, BrowserModule ],
     declarations: [ AppComponent ],

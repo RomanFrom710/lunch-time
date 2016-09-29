@@ -6,6 +6,7 @@ const router = require('koa-router')();
 const config = require('../config');
 const authEventName = config.get('app:auth:authEventName');
 
+
 router
     .get('/auth', function *() {
         this.body = yield this.passport.user;

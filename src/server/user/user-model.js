@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 // todo: add validation
+
 const userSchema = new mongoose.Schema({
     userName: { type: String, required: true },
     firstName: { type: String, required: true },

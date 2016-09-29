@@ -8,6 +8,7 @@ import { Config,
          WindowService,
          BrowserWindowService } from './';
 
+
 @NgModule({
     imports: [ PopoverModule ],
     declarations: [ HeaderComponent ],
