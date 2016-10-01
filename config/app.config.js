@@ -18,6 +18,8 @@ const commonConfig = {
         auth: {
             authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
             links: {
+                info: '/auth',
+                logout: '/auth/logout',
                 vk: {
                     auth: '/auth/vk',
                     authCallback: '/auth/vk/callback'

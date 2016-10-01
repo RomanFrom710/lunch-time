@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { WindowService, Config } from '../';
+import { User } from './';
 
 
 @Injectable()
@@ -12,19 +13,29 @@ export class AuthService {
                 private http: Http,
                 private config: Config) {}
 
-    authVk(): void {
-        this.windowService
+    authVk(): Promise<User> {
+        return this.windowService
             .openTempWindow(this.config.auth.links.vk.auth, this.config.auth.authEventName)
             .then(() => this.checkAuth());
     }
 
-    private checkAuth(): void {
-        this.http.get('/auth')
+    logout(): Promise<boolean> {
+        return this.http.post(this.config.auth.links.logout, {})
+            .toPromise()
+            .then((data) => {
+                console.log(data); // todo: handle errors (maybe better to do it globally)
+                return !!data;
+            });
+    }
+
+    private checkAuth(): Promise<User> {
+        return this.http.get(this.config.auth.links.info)
             .map(response => response.json())
             .toPromise()
-            .then(data => {
-                console.log(data);
-                this.windowService.setStorageValue(this.localStorageKey, data);
+            .then(user => {
+                console.log(user);
+                this.windowService.setStorageValue(this.localStorageKey, user);
+                return user;
             })
     }
 }

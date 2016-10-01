@@ -1,6 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose');
+
+const adjustJsonTransform = require('../shared/db-extensions').adjustJsonTransform;
 // todo: add validation
 
 const userSchema = new mongoose.Schema({
@@ -20,5 +22,6 @@ const userSchema = new mongoose.Schema({
     passwordHash: { type: String, required: false },
     passwordSalt: { type: String, required: false }
 });
+adjustJsonTransform(userSchema);
 
 module.exports = mongoose.model('user', userSchema);

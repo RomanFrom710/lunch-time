@@ -14,4 +14,8 @@ export class SignInComponent {
     authVk(): void {
         this.authSerivce.authVk();
     }
+
+    logout(): void {
+        this.authSerivce.logout();
+    }
 }
