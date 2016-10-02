@@ -13,13 +13,9 @@ const options = {
 };
 
 function verifyCallback (accessToken, refreshToken, profile, done) {
-    userService.findOrCreate(profile)
-        .then(user => {
-            done(null, user);
-        })
-        .catch(err => {
-            done(err);
-        });
+    userService.upsertThirdPartyUser(profile)
+        .then(user => done(null, user))
+        .catch(err => done(err));
 }
 
 module.exports = new VkStrategy(options, verifyCallback);

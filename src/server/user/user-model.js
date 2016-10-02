@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema({
     authType: { type: String, required: true },
     thirdPartyId: { type: String, required: false },
 
-    passwordHash: { type: String, required: false },
-    passwordSalt: { type: String, required: false }
+    passwordHash: { type: String, required: false, select: false },
+    passwordSalt: { type: String, required: false, select: false }
 });
 adjustJsonTransform(userSchema);
 

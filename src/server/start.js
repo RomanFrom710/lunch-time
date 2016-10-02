@@ -23,12 +23,6 @@ const app = koa();
 app.name = 'Lunch time'; // Just because I can.
 app.keys = [config.get('keys:cookie')];
 
-app
-    .use(koaBodyparser())
-    .use(koaSession({ store: new KoaMongooseStore() }))
-    .use(passport.initialize())
-    .use(passport.session());
-
 if (process.env.NODE_ENV === 'development') {
     const webpack = require('webpack'); // todo: this part should be moved somewhere
     const webpackConfig = require('../../webpack.config');
@@ -42,6 +36,12 @@ if (process.env.NODE_ENV === 'development') {
 } else {
     app.use(koaStatic('./public'));
 }
+
+app
+    .use(koaBodyparser())
+    .use(koaSession({ store: new KoaMongooseStore() }))
+    .use(passport.initialize())
+    .use(passport.session());
 
 applyRoutes(app);
 app.listen(config.get('port'));
