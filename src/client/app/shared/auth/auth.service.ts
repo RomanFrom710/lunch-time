@@ -22,10 +22,7 @@ export class AuthService {
     logout(): Promise<boolean> {
         return this.http.post(this.config.auth.links.logout, {})
             .toPromise()
-            .then((data) => {
-                console.log(data); // todo: handle errors (maybe better to do it globally)
-                return !!data;
-            });
+            .then(data => !!data);
     }
 
     private checkAuth(): Promise<User> {
