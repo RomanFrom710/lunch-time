@@ -1,24 +1,23 @@
-import { NgModule,  } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { PopoverModule } from 'ng2-popover';
 import { ToastModule } from 'ng2-toastr';
-import { HttpModule, XHRBackend } from '@angular/http';
 
 import { Config,
          HeaderComponent,
          AuthService,
          WindowService,
-         CustomConnectionBackend,
+         ErrorHandlingInterceptor,
          BrowserWindowService } from './';
 
 
 @NgModule({
-    imports: [ PopoverModule, HttpModule, ToastModule ],
+    imports: [ PopoverModule, ToastModule ],
     declarations: [ HeaderComponent ],
     exports: [ HeaderComponent ],
     providers: [
         { provide: Config, useValue: process.env.CONFIG },
         { provide: WindowService, useClass: BrowserWindowService },
-        { provide: XHRBackend, useClass: CustomConnectionBackend },
+        ErrorHandlingInterceptor,
         AuthService
     ]
 })

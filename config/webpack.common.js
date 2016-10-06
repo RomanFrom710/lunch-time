@@ -11,7 +11,7 @@ const appConfig = require('./app.config').get('app');
 module.exports = {
     entry: {
         vendor: './src/client/vendor.ts',
-        app: './src/client/app/main.ts'
+        app: './src/client/main.ts'
     },
     output: {
         path: resolvePath('./public')

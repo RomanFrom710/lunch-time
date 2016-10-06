@@ -33,6 +33,6 @@ export class AuthService {
                 console.log(user);
                 this.windowService.setStorageValue(this.localStorageKey, user);
                 return user;
-            })
+            });
     }
 }
