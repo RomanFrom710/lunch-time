@@ -8,10 +8,15 @@ const resolvePath = require('./path-resolver');
 const testConfig = {
     devtool: 'inline-source-map',
     output: {
+        path: null,
         filename: '[name].[chunkHash].js'
     },
     module: {
         loaders: [
+            {
+                test: /\.spec.ts$/,
+                loader: 'awesome-typescript!angular2-template'
+            },
             { // We don't need vendor styles
                 test: /\.less$/,
                 exclude: resolvePath('./src/client/app'),

@@ -60,6 +60,7 @@ module.exports = {
         minimize: true,
         removeAttributeQuotes: false,
         caseSensitive: true,
+        // Enabling custom angular2 attributes support
         customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
         customAttrAssing: [ /\)?]?=/ ]
     },

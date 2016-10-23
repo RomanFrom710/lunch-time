@@ -8,7 +8,7 @@ export class MockWindowService implements WindowService {
     private mockStorage: Object = {};
 
     openTempWindow(newWindowUrl: string, messageName: string): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => { reject() });
+        return Promise.reject<boolean>(false);
     }
 
     getStorageValue(key: string): any {

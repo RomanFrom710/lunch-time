@@ -22,7 +22,12 @@ export class AuthService {
     logout(): Promise<boolean> {
         return this.http.post(this.config.auth.links.logout, {})
             .toPromise()
-            .then(data => !!data);
+            .then(data => {
+                if (data) {
+                    this.windowService.setStorageValue(this.localStorageKey, null);
+                }
+                return !!data
+            });
     }
 
     private checkAuth(): Promise<User> {
