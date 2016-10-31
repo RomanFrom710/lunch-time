@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { AuthService, User } from '../';
 
 
 @Component({
@@ -6,5 +9,9 @@ import { Component } from '@angular/core';
     templateUrl: './header.component.html'
 })
 export class HeaderComponent {
+    private currentUser: Observable<User>;
 
+    constructor(private authService: AuthService) {
+        this.currentUser = this.authService.currentUser;
+    }
 }

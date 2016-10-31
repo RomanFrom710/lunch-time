@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared';
-import { SignInComponent, UserService } from './';
+import { SignInComponent, UserMenuComponent, UserService } from './';
 
 
 @NgModule({
     imports: [ SharedModule ],
-    declarations: [ SignInComponent ],
-    providers: [ UserService ],
-    exports: [ SignInComponent ]
+    declarations: [ SignInComponent, UserMenuComponent ],
+    exports: [ SignInComponent, UserMenuComponent ],
+    providers: [ UserService ]
 })
 export class UserModule { }

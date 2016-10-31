@@ -16,11 +16,17 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <li *ngIf="!(currentUser | async)">
                     <popover-content #signInPopover [closeOnClickOutside]="true">
-                        <ng-content select="[lt-user-popover]"></ng-content>
+                        <ng-content select="[lt-sign-in-popover]"></ng-content>
                     </popover-content>
                     <a href="#" [popover]="signInPopover">Sign In</a>
+                </li>
+                <li *ngIf="currentUser | async">
+                    <popover-content #menuPopover [closeOnClickOutside]="true">
+                        <ng-content select="[lt-user-menu-popover]"></ng-content>
+                    </popover-content>
+                    <a href="#" [popover]="menuPopover">{{(currentUser | async)?.fullName}}</a>
                 </li>
             </ul>
         </div>

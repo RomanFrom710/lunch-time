@@ -21,4 +21,8 @@ export class User {
     thirdPartyId: string;
     userName: string;
     userType: UserType;
+
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
 }
