@@ -18,8 +18,8 @@ import { Config,
     providers: [
         { provide: Config, useValue: process.env.CONFIG },
         { provide: WindowService, useClass: BrowserWindowService },
-        ErrorHandlingInterceptor,
-        AuthService
+        AuthService,
+        ErrorHandlingInterceptor
     ]
 })
 export class SharedModule { }

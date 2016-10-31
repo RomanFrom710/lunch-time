@@ -14,9 +14,7 @@ export class AuthService {
     constructor(private windowService: WindowService,
                 private http: Http,
                 private config: Config) {
-        const currentUser = this.windowService.getStorageValue(this.localStorageKey);
-        console.log(currentUser.fullName);
-        this.user.next(currentUser);
+        this.checkAuth();
     }
 
     get currentUser() {
@@ -42,9 +40,10 @@ export class AuthService {
 
     private checkAuth(): Promise<User> {
         return this.http.get(this.config.auth.links.info)
-            .map(response => response.json())
+            .map(response => {console.log(response);return response ? (new User()).fromData(response.json()) : null})
             .toPromise()
             .then(user => {
+                console.log(user);
                 this.windowService.setStorageValue(this.localStorageKey, user);
                 this.user.next(user);
                 return user;

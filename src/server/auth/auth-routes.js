@@ -12,6 +12,9 @@ router
     // common
     .get(config.get('app:auth:links:info'), function* () {
         this.body = this.passport.user;
+        if (!this.body) {
+            this.throw(401);
+        }
     })
     .post(config.get('app:auth:links:logout'), authMiddleware, function* () {
         this.logout();

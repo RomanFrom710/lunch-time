@@ -1,3 +1,6 @@
+import { Serializable } from '../';
+
+
 export enum Gender {
     Male,
     Female
@@ -9,7 +12,7 @@ export enum UserType {
     Admin
 }
 
-export class User {
+export class User extends Serializable {
     authType: string;
     created: Date;
     firstName: string;

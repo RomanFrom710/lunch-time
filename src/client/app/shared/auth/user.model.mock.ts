@@ -1,6 +1,6 @@
 import { User, Gender, UserType } from './';
 
-export const vkMockUser = <User>{
+export const vkMockUser = (new User()).fromData({
     authType: 'vkontakte',
     created: new Date('2016-10-22T10:11:34.359Z'),
     firstName: 'John',
@@ -13,4 +13,4 @@ export const vkMockUser = <User>{
     thirdPartyId: '1',
     userName: 'johnnn',
     userType: UserType.User
-};
+});
