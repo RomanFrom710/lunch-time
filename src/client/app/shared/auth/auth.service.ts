@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { BehaviorSubject } from 'rxjs';
 
 import { WindowService, Config } from '../';
-import { User } from './';
+import { User, UserStore } from './';
 
 
 @Injectable()
 export class AuthService {
-    private localStorageKey: string = 'lt-current-user';
-    private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
     constructor(private windowService: WindowService,
                 private http: Http,
+                private userStore: UserStore,
                 private config: Config) {
         this.checkAuth();
     }
 
     get currentUser() {
-        return this.user.asObservable();
+        return this.userStore.getUser();
     }
 
     authVk(): Promise<User> {
@@ -32,7 +30,7 @@ export class AuthService {
             .toPromise()
             .then(data => {
                 if (data) {
-                    this.windowService.setStorageValue(this.localStorageKey, null);
+                    this.userStore.resetUser();
                 }
                 return !!data
             });
@@ -40,13 +38,12 @@ export class AuthService {
 
     private checkAuth(): Promise<User> {
         return this.http.get(this.config.auth.links.info)
-            .map(response => {console.log(response);return response ? (new User()).fromData(response.json()) : null})
+            .map(response => response.json())
             .toPromise()
             .then(user => {
-                console.log(user);
-                this.windowService.setStorageValue(this.localStorageKey, user);
-                this.user.next(user);
-                return user;
+                const typedUser : User = (new User()).fromData(user);
+                this.userStore.setUser(typedUser);
+                return typedUser;
             });
     }
 }

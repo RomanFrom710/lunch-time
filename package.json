@@ -44,7 +44,7 @@
     "lodash": "^4.16.2",
     "mongoose": "^4.6.1",
     "nconf": "^0.8.4",
-    "ng2-interceptors": "^1.1.2",
+    "ng2-interceptors": "^1.2.0",
     "ng2-popover": "0.0.8",
     "ng2-toastr": "^1.1.2",
     "object-mapper": "^3.0.1",

@@ -5,6 +5,7 @@ import { ToastModule } from 'ng2-toastr';
 
 import { Config,
          HeaderComponent,
+         UserStore,
          AuthService,
          WindowService,
          ErrorHandlingInterceptor,
@@ -18,6 +19,7 @@ import { Config,
     providers: [
         { provide: Config, useValue: process.env.CONFIG },
         { provide: WindowService, useClass: BrowserWindowService },
+        UserStore,
         AuthService,
         ErrorHandlingInterceptor
     ]

@@ -7,7 +7,6 @@ export const vkMockUser = (new User()).fromData({
     gender: Gender.Male,
     id: '8875befe-9909-11e6-9f33-a24fc0d9649c',
     lastName: 'Doe',
-    fullName: 'John Doe',
     photoUrl: 'https://pp.vk.me/c629231/v629231001/c543/FfB--bOEVOY.jpg',
     profileUrl: 'https://vk.com/id1',
     thirdPartyId: '1',
