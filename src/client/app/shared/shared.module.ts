@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from 'ng2-popover';
+import { DropdownModule } from 'ng2-dropdown';
 import { ToastModule } from 'ng2-toastr';
 
 import { Config,
@@ -13,7 +14,7 @@ import { Config,
 
 
 @NgModule({
-    imports: [ CommonModule, PopoverModule, ToastModule ],
+    imports: [ CommonModule, PopoverModule, DropdownModule, ToastModule ],
     declarations: [ HeaderComponent ],
     exports: [ HeaderComponent ],
     providers: [

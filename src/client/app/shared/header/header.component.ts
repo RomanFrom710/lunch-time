@@ -14,4 +14,8 @@ export class HeaderComponent {
     constructor(private authService: AuthService) {
         this.currentUser = this.authService.currentUser;
     }
+
+    logout(): void {
+        this.authService.logout();
+    }
 }

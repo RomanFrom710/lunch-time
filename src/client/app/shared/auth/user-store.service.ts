@@ -12,8 +12,11 @@ export class UserStore {
     private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
     constructor(private windowService: WindowService) {
-        const user = (new User()).fromData(this.windowService.getStorageValue(this.localStorageKey));
-        this.setUser(user);
+        const rawUser = this.windowService.getStorageValue(this.localStorageKey);
+        if (rawUser) {
+            const user = (new User()).fromData(this.windowService.getStorageValue(this.localStorageKey));
+            this.setUser(user);
+        }
     }
 
     getUser() : Observable<User> {

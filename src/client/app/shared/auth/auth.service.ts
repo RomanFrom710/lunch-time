@@ -11,9 +11,7 @@ export class AuthService {
     constructor(private windowService: WindowService,
                 private http: Http,
                 private userStore: UserStore,
-                private config: Config) {
-        this.checkAuth();
-    }
+                private config: Config) { }
 
     get currentUser() {
         return this.userStore.getUser();

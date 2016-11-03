@@ -20,11 +20,8 @@ describe('sign-in component', () => {
         const authService = fixture.debugElement.injector.get(AuthService);
 
         spyOn(authService, 'authVk').and.returnValue(Promise.resolve(new User()));
-        spyOn(authService, 'logout').and.returnValue(Promise.resolve(true));
 
         fixture.componentInstance.authVk();
         expect(authService.authVk).toHaveBeenCalled();
-        fixture.componentInstance.logout();
-        expect(authService.logout).toHaveBeenCalled();
     });
 });

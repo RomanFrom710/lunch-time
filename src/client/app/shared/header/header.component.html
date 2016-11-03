@@ -12,21 +12,29 @@
                 <li class="active">
                     <a href="#">Map</a>
                 </li>
-                <li><a href="#">Places</a></li>
+                <li>
+                    <a href="#">Places</a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="!(currentUser | async)">
                     <popover-content #signInPopover [closeOnClickOutside]="true">
-                        <ng-content select="[lt-sign-in-popover]"></ng-content>
+                        <ng-content select="lt-sign-in"></ng-content>
                     </popover-content>
                     <a href="#" [popover]="signInPopover">Sign In</a>
                 </li>
-                <li *ngIf="currentUser | async">
-                    <popover-content #menuPopover [closeOnClickOutside]="true">
-                        <ng-content select="[lt-user-menu-popover]"></ng-content>
-                    </popover-content>
-                    <a href="#" [popover]="menuPopover">{{(currentUser | async)?.fullName}}</a>
+
+                <li *ngIf="currentUser | async" dropdown>
+                    <a href="#" dropdown-open>
+                        {{(currentUser | async)?.fullName}}
+                        <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" (click)="logout()">Logout</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

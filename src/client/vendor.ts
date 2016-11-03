@@ -12,5 +12,5 @@ import '@angular/router';
 import 'rxjs';
 
 // Styles
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/less/bootstrap.less';
 import 'ng2-toastr/ng2-toastr.css'
