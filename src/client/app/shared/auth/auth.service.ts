@@ -19,12 +19,12 @@ export class AuthService {
 
     authVk(): Promise<User> {
         return this.windowService
-            .openTempWindow(this.config.auth.links.vk.auth, this.config.auth.authEventName)
+            .openTempWindow(this.config.links.auth.vk.auth, this.config.auth.authEventName)
             .then(() => this.checkAuth());
     }
 
     logout(): Promise<boolean> {
-        return this.http.post(this.config.auth.links.logout, {})
+        return this.http.post(this.config.links.auth.logout, {})
             .toPromise()
             .then(data => {
                 if (data) {
@@ -35,7 +35,7 @@ export class AuthService {
     }
 
     private checkAuth(): Promise<User> {
-        return this.http.get(this.config.auth.links.info)
+        return this.http.get(this.config.links.auth.info)
             .map(response => response.json())
             .toPromise()
             .then(user => {

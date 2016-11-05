@@ -3,7 +3,7 @@ import { HttpModule, Http } from "@angular/http";
 import { BrowserModule } from '@angular/platform-browser';
 import { provideInterceptorService, InterceptorService } from 'ng2-interceptors';
 
-import { routes } from './routes';
+import { AppRoutingModule } from './app-routing.module';
 import { SharedModule, ErrorHandlingInterceptor } from './shared';
 import { UserModule } from './user';
 import { CafeModule } from './cafe';
@@ -14,7 +14,7 @@ import { AppComponent }  from './app.component';
 @NgModule({
     imports: [
         BrowserModule,
-        routes,
+        AppRoutingModule,
         InfoModule,
         SharedModule,
         CafeModule,

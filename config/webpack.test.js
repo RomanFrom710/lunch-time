@@ -3,7 +3,7 @@
 const webpackMerge = require('webpack-merge');
 
 const commonConfig = require('./webpack.common');
-const resolvePath = require('./path-resolver');
+const resolvePath = require('./helpers/path-resolver');
 
 const testConfig = {
     devtool: 'inline-source-map',

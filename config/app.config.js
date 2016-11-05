@@ -2,6 +2,9 @@
 
 const nconf = require('nconf');
 
+const resolveLinks = require('./helpers/link-resolver');
+
+
 const commonConfig = {
     port: 3000,
     keys: {
@@ -17,17 +20,24 @@ const commonConfig = {
     app: { // This part is available in the client app too
         auth: {
             authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
-            links: {
-                info: '/auth',
-                logout: '/auth/logout',
+        },
+        links: {
+            prefix: 'api',
+            auth: {
+                prefix: 'auth',
+                info: '',
+                logout: 'logout',
                 vk: {
-                    auth: '/auth/vk',
-                    authCallback: '/auth/vk/callback'
+                    prefix: 'vk',
+                    auth: '',
+                    authCallback: 'callback'
                 }
             }
         }
     }
 };
+
+commonConfig.app.links = resolveLinks(commonConfig.app.links);
 
 //todo: update nconf when lowerCase option will be fixed
 module.exports = nconf

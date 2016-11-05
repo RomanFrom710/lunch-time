@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
-const resolvePath = require('./path-resolver');
+const resolvePath = require('./helpers/path-resolver');
 const appConfig = require('./app.config').get('app');
 
 module.exports = {

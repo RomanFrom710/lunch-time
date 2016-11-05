@@ -5,7 +5,10 @@ import { Injectable } from '@angular/core';
 export class Config {
     auth: {
         authEventName: string;
-        links: {
+    };
+
+    links: {
+        auth: {
             info: string;
             logout: string;
             vk: {

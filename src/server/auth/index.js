@@ -17,5 +17,5 @@ passport.deserializeUser(function(id, done) {
         .then(user => done(null, user));
 });
 
-exports.routes = require('./auth-routes');
-exports.authMiddleware = require('./auth-middleware');
+exports.routes = require('./routes');
+exports.authMiddleware = require('./middleware');

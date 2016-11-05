@@ -1,4 +1,3 @@
 'use strict';
 
-const router = require('koa-router')({ prefix: '/user' });
-
+const router = require('koa-router')();
