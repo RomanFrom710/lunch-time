@@ -17,5 +17,8 @@
 * *keys__vk__id* &mdash; your application ID.
 * *keys__vk__secret* &mdash; your application secret key.
 
+### db
+* *db__connectionString* &mdash; connection string for your MongoDB.
+
 ## For WebStorm users
 Disable "safe write" option if you have troubles with webpack dev middleware.
