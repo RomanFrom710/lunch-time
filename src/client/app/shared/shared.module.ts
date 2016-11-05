@@ -7,6 +7,7 @@ import { ToastModule } from 'ng2-toastr';
 
 import {
     Config,
+    EmptyLink,
     HeaderComponent,
     UserStore,
     AuthService,
@@ -24,7 +25,7 @@ import {
         ToastModule,
         RouterModule
     ],
-    declarations: [ HeaderComponent ],
+    declarations: [ HeaderComponent, EmptyLink ],
     exports: [ HeaderComponent ],
     providers: [
         { provide: Config, useValue: process.env.CONFIG },

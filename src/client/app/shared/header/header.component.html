@@ -22,7 +22,7 @@
                     <popover-content #signInPopover [closeOnClickOutside]="true">
                         <ng-content select="lt-sign-in"></ng-content>
                     </popover-content>
-                    <a href="#" [popover]="signInPopover">Sign In</a>
+                    <a ltEmptyLink [popover]="signInPopover">Sign In</a>
                 </li>
 
                 <li *ngIf="currentUser | async" dropdown>
