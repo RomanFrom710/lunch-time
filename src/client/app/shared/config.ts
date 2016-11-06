@@ -7,6 +7,11 @@ export class Config {
         authEventName: string;
     };
 
+    map: {
+        initialPoint: number[];
+        initialZoom: number;
+    };
+
     links: {
         auth: {
             info: string;

@@ -21,6 +21,10 @@ const commonConfig = {
         auth: {
             authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
         },
+        map: {
+            initialPoint: [53.904692, 27.561523],
+            initialZoom: 12
+        },
         links: {
             prefix: 'api',
             auth: {
