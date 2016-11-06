@@ -5,6 +5,7 @@ const webpackConfig = require('../../webpack.config');
 const webpackDevMiddleware = require('koa-webpack-dev-middleware');
 const webpackHotMiddleware = require('koa-webpack-hot-middleware');
 
+const koaHistoryApiFallback = require('koa-history-api-fallback');
 const koaStatic = require('koa-static');
 const koaPassport = require('koa-passport');
 const koaBodyparser = require('koa-bodyparser');
@@ -16,6 +17,9 @@ const config = require('./config');
 
 module.exports = function (app) {
     app.keys = [config.get('keys:cookie')];
+
+    // Allowing to access client routes
+    app.use(koaHistoryApiFallback());
 
     if (process.env.NODE_ENV === 'development') {
         const webpackCompiler = webpack(webpackConfig);
