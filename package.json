@@ -33,6 +33,7 @@
     "@angular/router": "^3.1.2",
     "angular2-google-maps": "^0.15.0",
     "angular2-localstorage": "^0.4.0",
+    "bcryptjs": "https://github.com/dcodeIO/bcrypt.js.git#master",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "koa": "^1.2.1",
