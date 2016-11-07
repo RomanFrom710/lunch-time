@@ -45,7 +45,7 @@
     "koa-static": "^2.0.0",
     "lodash": "^4.16.2",
     "mongoose": "^4.6.1",
-    "nconf": "^0.8.4",
+    "nconf": "https://github.com/indexzero/nconf.git#master",
     "ng2-dropdown": "0.0.15",
     "ng2-interceptors": "^1.2.0",
     "ng2-popover": "0.0.8",

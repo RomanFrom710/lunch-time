@@ -43,7 +43,6 @@ const commonConfig = {
 
 commonConfig.app.links = resolveLinks(commonConfig.app.links);
 
-//todo: update nconf when lowerCase option will be fixed
 module.exports = nconf
-    .env({ separator: '__' })
+    .env({ separator: '__', lowerCase: true })
     .defaults(commonConfig);
