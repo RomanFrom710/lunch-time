@@ -26,13 +26,13 @@
                 </li>
 
                 <li *ngIf="currentUser | async" dropdown>
-                    <a href="#" dropdown-open>
+                    <a ltEmptyLink dropdown-open>
                         {{(currentUser | async)?.fullName}}
                         <i class="caret"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" (click)="logout()">Logout</a>
+                            <a ltEmptyLink (click)="logout()">Logout</a>
                         </li>
                     </ul>
                 </li>

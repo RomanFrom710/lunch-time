@@ -5,7 +5,7 @@ const koa = require('koa');
 const mongoose = require('mongoose');
 
 const config = require('./config');
-const setupServer = require('./setting');
+const serverSetup = require('./setup');
 const applyRoutes = require('./routes');
 
 
@@ -15,7 +15,8 @@ mongoose.connect(config.get('db:connectionString'));
 const app = koa();
 app.name = 'Lunch time'; // Just because I can.
 
-setupServer(app);
+serverSetup.configureApp(app);
 applyRoutes(app);
+serverSetup.setupFileServing(app);
 
 app.listen(config.get('port'));

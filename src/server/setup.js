@@ -15,9 +15,17 @@ const KoaMongooseStore = require('koa-session-mongoose');
 const config = require('./config');
 
 
-module.exports = function (app) {
+exports.configureApp = function (app) {
     app.keys = [config.get('keys:cookie')];
 
+    app
+        .use(koaBodyparser())
+        .use(koaSession({ store: new KoaMongooseStore() }))
+        .use(koaPassport.initialize())
+        .use(koaPassport.session());
+};
+
+exports.setupFileServing = function (app) {
     // Allowing to access client routes
     app.use(koaHistoryApiFallback());
 
@@ -30,10 +38,4 @@ module.exports = function (app) {
     } else {
         app.use(koaStatic('./public'));
     }
-
-    app
-        .use(koaBodyparser())
-        .use(koaSession({ store: new KoaMongooseStore() }))
-        .use(koaPassport.initialize())
-        .use(koaPassport.session());
 };

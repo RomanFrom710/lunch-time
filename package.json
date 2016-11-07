@@ -14,12 +14,13 @@
   },
   "scripts": {
     "start": "node ./src/server/start",
-    "build": "webpack --progress --config ./config/webpack.prod.js",
+    "build-prod": "webpack --progress --config ./config/webpack.prod.js",
+    "build-dev": "webpack --progress --config ./config/webpack.no-hmr.dev.js",
     "nodemon": "nodemon",
     "test": "npm run test-server && npm run test-client",
     "test-server": "jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "test-client": "karma start",
-    "postinstall": "typings install && npm run build"
+    "postinstall": "typings install && npm run build-prod"
   },
   "dependencies": {
     "@angular/common": "^2.1.2",
