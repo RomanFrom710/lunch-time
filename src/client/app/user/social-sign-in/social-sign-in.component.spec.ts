@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SignInComponent } from './';
+import { SocialSignInComponent } from './';
 import { AuthService, MockAuthService, User, WindowService, MockWindowService } from '../../shared';
 
 
-describe('sign-in component', () => {
+describe('social-sign-in component', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [ SignInComponent ],
+            declarations: [ SocialSignInComponent ],
             providers: [
                 { provide: AuthService, useClass: MockAuthService },
                 { provide: WindowService, useClass: MockWindowService }
@@ -16,7 +16,7 @@ describe('sign-in component', () => {
     });
 
     it ('should call authService methods', () => {
-        const fixture = TestBed.createComponent(SignInComponent);
+        const fixture = TestBed.createComponent(SocialSignInComponent);
         const authService = fixture.debugElement.injector.get(AuthService);
 
         spyOn(authService, 'authVk').and.returnValue(Promise.resolve(new User()));

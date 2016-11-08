@@ -20,8 +20,8 @@ export class User extends Serializable {
     id: string;
     lastName: string;
     photoUrl: string;
-    profileUrl: string;
     thirdPartyId: string;
+    thirdPartyProfileUrl: string;
     userName: string;
     userType: UserType;
 

@@ -19,6 +19,9 @@ export class Config {
             vk: {
                 auth: string;
                 auth_callback: string;
+            },
+            local: {
+                auth: string;
             }
         }
     }

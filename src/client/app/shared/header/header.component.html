@@ -20,7 +20,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="!(currentUser | async)">
                     <popover-content #signInPopover [closeOnClickOutside]="true">
-                        <ng-content select="lt-sign-in"></ng-content>
+                        <ng-content select="[signInPopover]"></ng-content>
                     </popover-content>
                     <a ltEmptyLink [popover]="signInPopover">Sign In</a>
                 </li>

@@ -5,7 +5,7 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
 export class EmptyLink {
     @HostBinding('attr.href') href = '';
 
-    @HostListener('click', ['$event']) onClick(event) {
+    @HostListener('click', ['$event']) onClick(event: MouseEvent) {
         event.preventDefault();
     }
 }

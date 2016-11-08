@@ -9,6 +9,10 @@ exports.findById = function (id) {
     return User.findById(id);
 };
 
+exports.findByUsername = function (username) {
+    return User.find({ username: username });
+};
+
 exports.upsertThirdPartyUser = function (user) {
     const query = _.pick(user, ['thirdPartyId', 'authType']);
     return User.findOneAndUpdate(

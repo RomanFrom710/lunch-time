@@ -27,6 +27,18 @@ router
     .get(config.get('app:links:auth:vk:authCallback'), passport.authenticate('vkontakte'),
         function* () {
             this.body = `<script>window.opener.postMessage('${authEventName}', '*');window.close()</script>`;
-        });
+        })
+
+    .get(config.get('app:links:auth:local:auth'), passport.authenticate('local',
+        function* (err, user) {
+            if (err) {
+                this.throw(err);
+            } else if (user) {
+                this.body = user;
+            } else {
+                this.body = 'Wrong username or password!';
+                this.throw(400);
+            }
+        }));
 
 module.exports = router.routes();

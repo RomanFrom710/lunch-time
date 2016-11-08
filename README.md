@@ -12,14 +12,23 @@
 ## Environment variables
 ### keys
 #### cookies
-* *cookieKey* &mdash; your cookie key.
+* *COOKIEKEY* &mdash; your cookie key.
 
 #### vk
-* *keys__vk__id* &mdash; your application ID.
-* *keys__vk__secret* &mdash; your application secret key.
+* *KEYS__VK__ID* &mdash; your application ID.
+* *KEYS__VK__SECRET* &mdash; your application secret key.
 
 ### db
-* *db__connectionString* &mdash; connection string for your MongoDB.
+* *DB__CONNECTIONSTRING* &mdash; connection string for your MongoDB.
+
+### server
+* *PORT* &mdash; your port number.
+
+### admin
+Use these variables only to create the first admin account. It'll be created automatically.
+Set them and delete them right after starting the server for security reasons.
+* *ADMIN__USERNAME* &mdash; admin's username.
+* *ADMIN__PASSWORD* &mdash; admin's password.
 
 ## For WebStorm users
 Disable "safe write" option if you have troubles with webpack dev middleware.

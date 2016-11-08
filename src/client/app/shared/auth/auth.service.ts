@@ -23,6 +23,14 @@ export class AuthService {
             .then(() => this.checkAuth());
     }
 
+    authLocal(username: string, password: string): Promise<User> {
+        return this.http.post(this.config.links.auth.local.auth,
+                              { username: username, password: password })
+            .map(response => response.json())
+            .toPromise()
+            .then(this.saveUser);
+    }
+
     logout(): Promise<boolean> {
         return this.http.post(this.config.links.auth.logout, {})
             .toPromise()
@@ -38,10 +46,12 @@ export class AuthService {
         return this.http.get(this.config.links.auth.info)
             .map(response => response.json())
             .toPromise()
-            .then(user => {
-                const typedUser : User = (new User()).fromData(user);
-                this.userStore.setUser(typedUser);
-                return typedUser;
-            });
+            .then(this.saveUser);
+    }
+
+    private saveUser(user) : User {
+        const typedUser : User = (new User()).fromData(user);
+        this.userStore.setUser(typedUser);
+        return typedUser;
     }
 }

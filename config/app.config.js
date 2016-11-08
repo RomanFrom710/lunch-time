@@ -35,6 +35,10 @@ const commonConfig = {
                     prefix: 'vk',
                     auth: '',
                     authCallback: 'callback'
+                },
+                local: {
+                    prefix: 'local',
+                    auth: ''
                 }
             }
         }

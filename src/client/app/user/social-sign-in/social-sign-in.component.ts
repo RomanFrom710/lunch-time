@@ -4,11 +4,11 @@ import { AuthService } from '../../shared';
 
 
 @Component({
-    selector: 'lt-sign-in',
-    templateUrl: './sign-in.component.html',
-    styleUrls: ['./sign-in.component.less']
+    selector: 'lt-social-sign-in',
+    templateUrl: 'social-sign-in.component.html',
+    styleUrls: ['social-sign-in.component.less']
 })
-export class SignInComponent {
+export class SocialSignInComponent {
     constructor(private authSerivce: AuthService) {}
 
     authVk(): void {
