@@ -10,7 +10,7 @@ exports.findById = function (id) {
 };
 
 exports.findByUsername = function (username) {
-    return User.find({ username: username });
+    return User.findOne({ username: username });
 };
 
 exports.upsertThirdPartyUser = function (user) {

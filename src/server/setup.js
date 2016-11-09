@@ -39,3 +39,14 @@ exports.setupFileServing = function (app) {
         app.use(koaStatic('./public'));
     }
 };
+
+exports.setErrorHandling = function (app) {
+    app.use(function* (next) {
+        try {
+            yield next;
+        } catch (err) {
+            this.status = err.status || 500;
+            this.body = err.message;
+        }
+    });
+};

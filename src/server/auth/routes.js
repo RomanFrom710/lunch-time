@@ -19,7 +19,7 @@ router
     .post(config.get('app:links:auth:logout'), authMiddleware, function* () {
         this.logout();
         this.session = null;
-        this.status = 200;
+        this.body = true;
     })
 
     // vk
@@ -29,16 +29,20 @@ router
             this.body = `<script>window.opener.postMessage('${authEventName}', '*');window.close()</script>`;
         })
 
-    .get(config.get('app:links:auth:local:auth'), passport.authenticate('local',
-        function* (err, user) {
-            if (err) {
-                this.throw(err);
-            } else if (user) {
-                this.body = user;
-            } else {
-                this.body = 'Wrong username or password!';
-                this.throw(400);
-            }
-        }));
+    // local
+    .post(config.get('app:links:auth:local:auth'), function *(next) {
+        const context = this;
+
+        yield passport.authenticate('local',
+            function* (err, user) {
+                if (err) {
+                    context.throw(err);
+                } else if (user) {
+                    context.body = user;
+                } else {
+                    context.throw(400, 'Wrong username or password!');
+                }
+            }).call(this, next);
+    });
 
 module.exports = router.routes();

@@ -20,7 +20,7 @@ export class AuthService {
     authVk(): Promise<User> {
         return this.windowService
             .openTempWindow(this.config.links.auth.vk.auth, this.config.auth.authEventName)
-            .then(() => this.checkAuth());
+            .then(this.checkAuth.bind(this));
     }
 
     authLocal(username: string, password: string): Promise<User> {
@@ -28,7 +28,7 @@ export class AuthService {
                               { username: username, password: password })
             .map(response => response.json())
             .toPromise()
-            .then(this.saveUser);
+            .then(this.saveUser.bind(this));
     }
 
     logout(): Promise<boolean> {
@@ -46,7 +46,7 @@ export class AuthService {
         return this.http.get(this.config.links.auth.info)
             .map(response => response.json())
             .toPromise()
-            .then(this.saveUser);
+            .then(this.saveUser.bind(this));
     }
 
     private saveUser(user) : User {

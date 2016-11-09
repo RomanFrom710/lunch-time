@@ -12,9 +12,14 @@ export class ErrorHandlingInterceptor implements Interceptor {
 
     public interceptAfter(interceptedResponse: InterceptedResponse): InterceptedResponse {
         if (interceptedResponse.response.status === 401) {
+            // Suppress error, just logout user.
             this.userStore.resetUser();
-        } else if (!interceptedResponse.response.ok) { // todo: provide better error messages
-            this.toastr.error(interceptedResponse.response.statusText);
+            interceptedResponse.response.status = 200;
+            interceptedResponse.response.ok = true;
+        } else if (!interceptedResponse.response.ok) {
+            const errorMessage = interceptedResponse.response.text() ||
+                                 interceptedResponse.response.statusText;
+            this.toastr.error(errorMessage);
         }
 
         return interceptedResponse;
