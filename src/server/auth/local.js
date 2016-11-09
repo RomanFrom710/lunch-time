@@ -13,7 +13,7 @@ const strategyOptions = {
 function verifyCallback(username, password, done) {
     let savedUser;
 
-    userService.findByUsername(username)
+    userService.findLocalByUsernameWithPassword(username)
         .then(user => {
             if (user) {
                 savedUser = user;
@@ -22,7 +22,14 @@ function verifyCallback(username, password, done) {
                 done(null, false);
             }
         })
-        .then(isValid => isValid ? done(null, savedUser) : done(null, false))
+        .then(isValid => {
+            if (isValid) {
+                delete savedUser.passwordHash;
+                done(null, savedUser);
+            } else {
+                done(null, false);
+            }
+        })
         .catch(err => done(err));
 }
 

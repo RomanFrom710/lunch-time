@@ -13,6 +13,12 @@ exports.findByUsername = function (username) {
     return User.findOne({ username: username });
 };
 
+exports.findLocalByUsernameWithPassword = function (username) {
+    return User
+        .findOne({ username: username, authType: 'local' })
+        .select('+passwordHash');
+};
+
 exports.upsertThirdPartyUser = function (user) {
     const query = _.pick(user, ['thirdPartyId', 'authType']);
     return User.findOneAndUpdate(
@@ -20,4 +26,8 @@ exports.upsertThirdPartyUser = function (user) {
         user,
         { upsert: true, new: true }
     );
+};
+
+exports.createLocalUser = function (userDto) {
+    return User.create(userDto);
 };

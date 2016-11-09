@@ -29,7 +29,7 @@ exports.setupFileServing = function (app) {
     // Allowing to access client routes
     app.use(koaHistoryApiFallback());
 
-    if (process.env.NODE_ENV === 'development') {
+    if (isDevelopmentEnv()) {
         const webpackCompiler = webpack(webpackConfig);
 
         app
@@ -45,8 +45,20 @@ exports.setErrorHandling = function (app) {
         try {
             yield next;
         } catch (err) {
-            this.status = err.status || 500;
-            this.body = err.message;
+            if (isDevelopmentEnv()) {
+                console.error(err);
+            }
+
+            if (err.status && err.status < 500) {
+                this.status = err.status;
+                this.body = err.message; // Better to keep it in secret
+            } else {
+                this.status = 500;
+            }
         }
     });
 };
+
+function isDevelopmentEnv() {
+    return process.env.NODE_ENV === 'development';
+}

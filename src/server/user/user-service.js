@@ -2,6 +2,7 @@
 
 const mapper = require('object-mapper');
 
+const securityService = require('./security-service');
 const userEnums = require('./user-enums');
 const userRepository = require('./user-repository');
 const config = require('../config');
@@ -13,8 +14,8 @@ exports.findById = function (id) {
     return userRepository.findById(id);
 };
 
-exports.findByUsername = function (username) {
-    return userRepository.findByUsername(username);
+exports.findLocalByUsernameWithPassword = function (username) {
+    return userRepository.findLocalByUsernameWithPassword(username);
 };
 
 exports.upsertThirdPartyUser = function (profile) {
@@ -43,9 +44,28 @@ function mapProfileToUserModel(profile) {
     return mapper(profile, profileToUserTransform);
 }
 
+// Creating admin user
 function updateAdmin() {
     const admin = config.get('admin');
     if (admin && admin.username && admin.password) {
-
+        userRepository.findLocalByUsernameWithPassword(admin.username)
+            .then(user => {
+                if (user) {
+                    throw new Error('Admin already exists');
+                } else {
+                    return securityService.hashPassword(admin.password);
+                }
+            })
+            .then(hashedPassword => {
+                const adminDto = {
+                    userType: userEnums.userType.admin,
+                    authType: 'local',
+                    username: admin.username,
+                    firstName: admin.username, // It's not personality, it's admin
+                    passwordHash: hashedPassword
+                };
+                return userRepository.createLocalUser(adminDto);
+            })
+            .catch(() => { }); // At least we've tried
     }
 }
