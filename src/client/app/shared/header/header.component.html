@@ -31,8 +31,8 @@
                         <i class="caret"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a ltEmptyLink (click)="logout()">Logout</a>
+                        <li *ngFor="let item of menuItems">
+                            <a ltEmptyLink (click)="item.action()">{{item.title}}</a>
                         </li>
                     </ul>
                 </li>

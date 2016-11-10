@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AuthService, User } from '../';
+import { AuthService, User, UserMenuService, UserMenuItem } from '../';
 
 
 @Component({
@@ -12,8 +12,13 @@ import { AuthService, User } from '../';
 export class HeaderComponent {
     private currentUser: Observable<User>;
 
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService,
+                private userMenuService: UserMenuService) {
         this.currentUser = this.authService.currentUser;
+    }
+
+    get menuItems() : UserMenuItem[] {
+        return this.userMenuService.menuItems;
     }
 
     logout(): void {

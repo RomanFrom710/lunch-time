@@ -12,6 +12,7 @@ import {
     UserStore,
     AuthService,
     WindowService,
+    UserMenuService,
     ErrorHandlingInterceptor,
     BrowserWindowService
 } from './';
@@ -32,6 +33,7 @@ import {
         { provide: WindowService, useClass: BrowserWindowService },
         UserStore,
         AuthService,
+        UserMenuService,
         ErrorHandlingInterceptor
     ]
 })

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import { WindowService, Config } from '../';
 import { User, UserStore } from './';
+import {Observable} from "rxjs";
 
 
 @Injectable()
@@ -13,7 +14,7 @@ export class AuthService {
                 private userStore: UserStore,
                 private config: Config) { }
 
-    get currentUser() {
+    get currentUser() : Observable<User> {
         return this.userStore.getUser();
     }
 
