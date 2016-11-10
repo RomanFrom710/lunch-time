@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AuthService, User, UserMenuService, UserMenuItem } from '../';
+import {
+    AuthService,
+    SocialAuth,
+    SocialAuthTypesService,
+    User,
+    UserMenuService,
+    UserMenuItem
+} from '../';
 
 
 @Component({
@@ -11,10 +18,13 @@ import { AuthService, User, UserMenuService, UserMenuItem } from '../';
 })
 export class HeaderComponent {
     private currentUser: Observable<User>;
+    private socialAuthTypes: SocialAuth[];
 
     constructor(private authService: AuthService,
+                private socialAuthTypesService: SocialAuthTypesService,
                 private userMenuService: UserMenuService) {
         this.currentUser = this.authService.currentUser;
+        this.socialAuthTypes = this.socialAuthTypesService.types;
     }
 
     get menuItems() : UserMenuItem[] {

@@ -7,6 +7,7 @@ import { WindowService } from './window.service';
 export class BrowserWindowService implements WindowService {
     private newWindowOptions: string = 'width=700,height=400,top=200,left=300';
 
+    // todo: rewrite with observable
     openTempWindow(newWindowUrl: string, messageName: string): Promise<boolean> {
         return new Promise<boolean>(resolve => {
             var messageHandler = event => {

@@ -7,7 +7,7 @@ const adjustJsonTransform = require('../shared/db-extensions').adjustJsonTransfo
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
-    firstName: { type: String, required: true },
+    firstName: { type: String, required: false },
     lastName: { type: String, required: false },
     gender: { type: String, required: false },
 

@@ -1,4 +1,4 @@
 export class UserMenuItem {
-    constructor(private title: string,
-                private action: () => void) { }
+    constructor(public title: string,
+                public action: () => void) { }
 }

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared';
 import {
-    SocialSignInComponent,
     LocalSignInComponent,
     SignInScreenComponent,
     UserService
@@ -13,8 +12,8 @@ import {
 
 @NgModule({
     imports: [ SharedModule, RouterModule, FormsModule ],
-    declarations: [ SocialSignInComponent, LocalSignInComponent, SignInScreenComponent ],
-    exports: [ SocialSignInComponent, SignInScreenComponent ],
+    declarations: [ LocalSignInComponent, SignInScreenComponent ],
+    exports: [ SignInScreenComponent ],
     providers: [ UserService ]
 })
 export class UserModule { }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { WindowService } from '../';
-import { User } from './';
+import { WindowService } from '../../';
+import { User } from '../';
 
 
 // This class is internal for shared module

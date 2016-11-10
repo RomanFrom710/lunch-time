@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
 
 import { WindowService, Config } from '../';
 import { User, UserStore } from './';
-import {Observable} from "rxjs";
 
 
 @Injectable()

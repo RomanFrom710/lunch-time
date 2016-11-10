@@ -1,5 +1,8 @@
-import { Serializable } from '../';
+import { Serializable } from '../../';
 
+
+// All this stuff is stored in shared module, because checking current user
+// is common task and is needed throughout the whole app.
 
 export enum Gender {
     Male,
@@ -22,10 +25,14 @@ export class User extends Serializable {
     photoUrl: string;
     thirdPartyId: string;
     thirdPartyProfileUrl: string;
-    userName: string;
+    username: string;
     userType: UserType;
 
     get fullName() {
-        return this.lastName ? `${this.firstName} ${this.lastName}` : this.firstName;
+        if (this.lastName) {
+            return `${this.firstName} ${this.lastName}`;
+        } else {
+            return this.firstName || this.username;
+        }
     }
 }

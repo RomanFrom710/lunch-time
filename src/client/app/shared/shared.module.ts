@@ -14,6 +14,7 @@ import {
     WindowService,
     UserMenuService,
     ErrorHandlingInterceptor,
+    SocialAuthTypesService,
     BrowserWindowService
 } from './';
 
@@ -34,6 +35,7 @@ import {
         UserStore,
         AuthService,
         UserMenuService,
+        SocialAuthTypesService,
         ErrorHandlingInterceptor
     ]
 })
