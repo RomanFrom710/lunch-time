@@ -4,7 +4,7 @@ const passport = require('koa-passport');
 const router = require('koa-router')();
 
 const config = require('../config');
-const authMiddleware = require('./middleware');
+const authMiddlewares = require('./middleware');
 const authEventName = config.get('app:auth:authEventName');
 
 
@@ -16,21 +16,21 @@ router
             this.throw(401);
         }
     })
-    .post(config.get('app:links:auth:logout'), authMiddleware, function* () {
+    .post(config.get('app:links:auth:logout'), authMiddlewares.userOnly, function* () {
         this.logout();
         this.session = null;
         this.body = true;
     })
 
     // vk
-    .get(config.get('app:links:auth:vk:auth'), passport.authenticate('vkontakte'))
+    .get(config.get('app:links:auth:vk:auth'), authMiddlewares.anonOnly, passport.authenticate('vkontakte'))
     .get(config.get('app:links:auth:vk:authCallback'), passport.authenticate('vkontakte'),
         function* () {
             this.body = `<script>window.opener.postMessage('${authEventName}', '*');window.close()</script>`;
         })
 
     // local
-    .post(config.get('app:links:auth:local:auth'), function *(next) {
+    .post(config.get('app:links:auth:local:auth'), authMiddlewares.anonOnly, function *(next) {
         const context = this;
 
         yield passport.authenticate('local',

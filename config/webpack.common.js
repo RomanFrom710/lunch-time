@@ -17,6 +17,7 @@ module.exports = {
         path: resolvePath('./public')
     },
     resolve: {
+        root: resolvePath('./'),
         extensions: ['', '.ts', '.js']
     },
     module: {
