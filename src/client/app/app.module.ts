@@ -8,6 +8,7 @@ import { SharedModule, ErrorHandlingInterceptor } from './shared';
 import { UserModule } from './user';
 import { CafeModule } from './cafe';
 import { InfoModule } from './info';
+import { AdminModule } from './admin';
 import { AppComponent }  from './app.component';
 
 
@@ -19,6 +20,7 @@ import { AppComponent }  from './app.component';
         SharedModule,
         CafeModule,
         UserModule,
+        AdminModule,
         HttpModule
     ],
     declarations: [ AppComponent ],

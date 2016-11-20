@@ -1,12 +1,12 @@
 'use strict';
 
 exports.gender = {
-    male: 'male',
-    female: 'female'
+    male: 'Male',
+    female: 'Female'
 };
 
 exports.userType = {
-    user: 'user',
-    spotOwner: 'spot_owner',
-    admin: 'admin'
+    user: 'User',
+    spotOwner: 'SpotOwner',
+    admin: 'Admin'
 };

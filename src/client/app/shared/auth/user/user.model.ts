@@ -4,6 +4,7 @@ import { Serializable } from '../../';
 // All this stuff is stored in shared module, because checking current user
 // is common task and is needed throughout the whole app.
 
+// todo: rewrite to string-based enums, when this feature will be released in typescript
 export enum Gender {
     Male,
     Female
@@ -34,5 +35,13 @@ export class User extends Serializable {
         } else {
             return this.firstName || this.username;
         }
+    }
+
+    get isSpotOwner() {
+        return this.userType === UserType.SpotOwner || UserType[this.userType.toString()] === UserType.SpotOwner;
+    }
+
+    get isAdmin() {
+        return this.userType === UserType.Admin || UserType[this.userType.toString()] === UserType.Admin;
     }
 }
