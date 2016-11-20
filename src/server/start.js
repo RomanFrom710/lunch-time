@@ -15,9 +15,9 @@ mongoose.connect(config.get('db:connectionString'));
 const app = koa();
 app.name = 'Lunch time'; // Just because I can.
 
-serverSetup.setErrorHandling(app);
+serverSetup.setupErrorHandling(app);
+serverSetup.setupFileServing(app);
 serverSetup.configureApp(app);
 applyRoutes(app);
-serverSetup.setupFileServing(app);
 
 app.listen(config.get('port'));

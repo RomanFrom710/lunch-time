@@ -39,10 +39,11 @@ router
                     context.throw(err);
                 } else if (user) {
                     context.body = user;
+                    yield context.login(user);
                 } else {
                     context.throw(400, 'Wrong username or password!');
                 }
-            }).call(this, next);
+            }).call(context, next);
     });
 
 module.exports = router.routes();

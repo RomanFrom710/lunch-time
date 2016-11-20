@@ -16,7 +16,7 @@ function verifyCallback(username, password, done) {
     userService.findLocalByUsernameWithPassword(username)
         .then(user => {
             if (user) {
-                savedUser = user;
+                savedUser = user.toJSON();
                 return securityService.verifyPassword(password, user.passwordHash);
             } else {
                 done(null, false);
