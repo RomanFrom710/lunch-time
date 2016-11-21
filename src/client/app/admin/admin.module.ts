@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { AdminPanelComponent } from './panel';
+import {
+    AdminPanelComponent,
+    ManageCafesComponent,
+    ManageUsersComponent
+} from './';
 
 
 @NgModule({
-    imports: [ ],
-    declarations: [ AdminPanelComponent ],
+    imports: [ RouterModule ],
+    declarations: [ AdminPanelComponent, ManageCafesComponent, ManageUsersComponent ],
     exports: [ ],
     providers: [ ],
 })

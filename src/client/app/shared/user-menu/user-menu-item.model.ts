@@ -1,4 +1,9 @@
 export class UserMenuItem {
     constructor(public title: string,
-                public action: () => void) { }
+                public link: string,
+                public action?: () => void) {
+        if (!action) {
+            this.action = () => { };
+        }
+    }
 }

@@ -4,7 +4,11 @@ import { RouterModule } from '@angular/router';
 import { CafeMapComponent, CafeListComponent } from './cafe';
 import { MainPageComponent, NotFoundComponent } from './info';
 import { SignInScreenComponent } from './user';
-import { AdminPanelComponent } from './admin';
+import {
+    AdminPanelComponent,
+    ManageCafesComponent,
+    ManageUsersComponent
+} from './admin';
 
 
 @NgModule({
@@ -13,7 +17,11 @@ import { AdminPanelComponent } from './admin';
             { path: 'map', component: CafeMapComponent },
             { path: 'places', component: CafeListComponent },
             { path: 'login', component: SignInScreenComponent },
-            { path: 'admin', component: AdminPanelComponent },
+            { path: 'admin', component: AdminPanelComponent, children: [
+                { path: '', redirectTo: 'places' },
+                { path: 'users', component: ManageUsersComponent },
+                { path: 'places', component: ManageCafesComponent }
+            ] },
             { path: '', component: MainPageComponent },
             { path: '**', component: NotFoundComponent }
         ])

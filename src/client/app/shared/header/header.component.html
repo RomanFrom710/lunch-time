@@ -10,10 +10,10 @@
         <div>
             <ul class="nav navbar-nav">
                 <li routerLinkActive="active">
-                    <a routerLink="/map">Map</a>
+                    <a routerLink="map">Map</a>
                 </li>
                 <li routerLinkActive="active">
-                    <a routerLink="/places">Places</a>
+                    <a routerLink="places">Places</a>
                 </li>
             </ul>
 
@@ -37,7 +37,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li *ngFor="let item of menuItems">
-                            <a ltEmptyLink (click)="item.action()">{{item.title}}</a>
+                            <a *ngIf="item.link" [routerLink]="item.link">{{item.title}}</a>
+                            <a *ngIf="!item.link" ltEmptyLink (click)="item.action()">{{item.title}}</a>
                         </li>
                     </ul>
                 </li>

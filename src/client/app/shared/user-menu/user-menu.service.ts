@@ -10,11 +10,11 @@ export class UserMenuService {
     private currentUser: User;
 
     private adminOnlyItems : UserMenuItem[] = [
-        new UserMenuItem('Admin', () => this.router.navigate(['/admin']))
+        new UserMenuItem('Admin', 'admin')
     ];
     private spotOwnerOnlyItems : UserMenuItem[] = [];
     private commonItems : UserMenuItem[] = [
-        new UserMenuItem('Logout', () => this.authService.logout())
+        new UserMenuItem('Logout', null, () => this.authService.logout())
     ];
 
     constructor(private authService: AuthService,
