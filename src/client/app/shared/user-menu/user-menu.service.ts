@@ -10,11 +10,11 @@ export class UserMenuService {
     private currentUser: User;
 
     private adminOnlyItems : UserMenuItem[] = [
-        new UserMenuItem('Admin', 'admin')
+        new UserMenuItem('Админ', 'admin')
     ];
     private spotOwnerOnlyItems : UserMenuItem[] = [];
     private commonItems : UserMenuItem[] = [
-        new UserMenuItem('Logout', null, () => this.authService.logout())
+        new UserMenuItem('Выйти', null, () => this.authService.logout())
     ];
 
     constructor(private authService: AuthService,

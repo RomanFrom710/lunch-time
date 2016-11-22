@@ -10,10 +10,10 @@
         <div>
             <ul class="nav navbar-nav">
                 <li routerLinkActive="active">
-                    <a routerLink="map">Map</a>
+                    <a routerLink="map">Карта</a>
                 </li>
                 <li routerLinkActive="active">
-                    <a routerLink="places">Places</a>
+                    <a routerLink="places">Список мест</a>
                 </li>
             </ul>
 
@@ -25,9 +25,9 @@
                                 <img [src]="authType.logoUrl" [alt]="authType.name" (click)="authType.action()">
                             </li>
                         </ul>
-                        <a routerLink="/login">Local</a>
+                        <a routerLink="/login" class="btn btn-primary">Войти с паролем</a>
                     </popover-content>
-                    <a ltEmptyLink [popover]="signInPopover">Sign In</a>
+                    <a ltEmptyLink [popover]="signInPopover">Вход</a>
                 </li>
 
                 <li *ngIf="currentUser | async" dropdown>
