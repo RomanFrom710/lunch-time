@@ -5,7 +5,7 @@ import { Config } from '../';
 
 @Component({
     selector: 'lt-map',
-    templateUrl: './map.component.html'
+    templateUrl: 'map.component.html'
 })
 export class MapComponent {
     @Input() mapHeight: string = '500px'; // Default value
