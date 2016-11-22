@@ -1,5 +1,6 @@
 <sebm-google-map [latitude]="initialLatitude"
                  [longitude]="initialLongitude"
                  [zoom]="initialZoom"
-                 [style.height]="mapHeight">
+                 (mapClick)="onClick($event)"
+                 [style.height]="'500px'">
 </sebm-google-map>

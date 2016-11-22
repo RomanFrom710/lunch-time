@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { CafeMapComponent, CafeListComponent } from './cafe';
 import { MainPageComponent, NotFoundComponent } from './info';
-import { SignInScreenComponent } from './user';
+import { SignInScreenComponent, ProfileSettingsComponent } from './user';
 import {
     AdminPanelComponent,
     ManageCafesComponent,
@@ -17,6 +17,7 @@ import {
             { path: 'map', component: CafeMapComponent },
             { path: 'places', component: CafeListComponent },
             { path: 'login', component: SignInScreenComponent },
+            { path: 'profile', component: ProfileSettingsComponent },
             { path: 'admin', component: AdminPanelComponent, children: [
                 { path: '', redirectTo: 'places' },
                 { path: 'users', component: ManageUsersComponent },

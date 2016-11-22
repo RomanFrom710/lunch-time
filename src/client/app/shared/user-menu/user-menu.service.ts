@@ -14,6 +14,7 @@ export class UserMenuService {
     ];
     private spotOwnerOnlyItems : UserMenuItem[] = [];
     private commonItems : UserMenuItem[] = [
+        new UserMenuItem('Профиль', 'profile'),
         new UserMenuItem('Выйти', null, () => this.authService.logout())
     ];
 

@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { PopoverModule } from 'ng2-popover';
 import { DropdownModule } from 'ng2-dropdown';
 import { ToastModule } from 'ng2-toastr';
-import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import {
     Config,
@@ -14,7 +13,6 @@ import {
     AuthService,
     WindowService,
     UserMenuService,
-    MapComponent,
     ErrorHandlingInterceptor,
     SocialAuthTypesService,
     BrowserWindowService
@@ -27,11 +25,10 @@ import {
         PopoverModule,
         DropdownModule,
         ToastModule,
-        AgmCoreModule.forRoot(),
         RouterModule
     ],
-    declarations: [ HeaderComponent, MapComponent, EmptyLink ],
-    exports: [ HeaderComponent, MapComponent ],
+    declarations: [ HeaderComponent, EmptyLink ],
+    exports: [ HeaderComponent ],
     providers: [
         { provide: Config, useValue: process.env.CONFIG },
         { provide: WindowService, useClass: BrowserWindowService },
