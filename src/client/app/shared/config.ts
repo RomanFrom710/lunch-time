@@ -10,6 +10,7 @@ export class Config {
     map: {
         initialPoint: number[];
         initialZoom: number;
+        increasedZoom: number;
     };
 
     links: {

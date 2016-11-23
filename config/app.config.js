@@ -23,7 +23,8 @@ const commonConfig = {
         },
         map: {
             initialPoint: [53.904692, 27.561523], // Minsk
-            initialZoom: 12
+            initialZoom: 12,
+            increasedZoom: 15
         },
         links: {
             prefix: 'api',
