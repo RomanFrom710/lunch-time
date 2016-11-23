@@ -41,6 +41,13 @@ const commonConfig = {
                     prefix: 'local',
                     auth: ''
                 }
+            },
+            user: {
+                prefix: 'user',
+                profile: {
+                    prefix: 'profile',
+                    updatePlace: 'place'
+                }
             }
         }
     }

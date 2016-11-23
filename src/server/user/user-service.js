@@ -1,6 +1,7 @@
 'use strict';
 
 const mapper = require('object-mapper');
+const _ = require('lodash');
 
 const securityService = require('./security-service');
 const userEnums = require('./user-enums');
@@ -35,6 +36,15 @@ exports.registerLocalUser = function (localUserDto) {
     localUserDto.authType = 'local';
     localUserDto.userType = localUserDto.userType || userEnums.userType.user;
 };
+
+exports.updateUserInfo = function (userDto) {
+    const id = userDto.id;
+    const allowedFields = ['username', 'firstName', 'lastName', 'gender', 'photoUrl', 'place'];
+    userDto = _.pick(userDto, allowedFields);
+
+    return userRepository.updateUserInfo(id, userDto);
+};
+
 
 // Converts passport.js generic profile to user model.
 function mapProfileToUserModel(profile) {

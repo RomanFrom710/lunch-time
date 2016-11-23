@@ -34,3 +34,11 @@ exports.createLocalUser = function (userDto) {
 exports.createThirdPartyUser = function (userDto) {
     return User.create(userDto);
 };
+
+exports.updateUserInfo = function (id, userDto) {
+    return User.findOneAndUpdate(
+        { _id: id },
+        { $set: userDto },
+        { new: true }
+    );
+};

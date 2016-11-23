@@ -1,8 +1,11 @@
 'use strict';
 
-const auth = require('./auth');
+const authRoutes = require('./auth').routes;
+const userRoutes = require('./user/user-routes');
 
 
 module.exports = function (app) {
-    app.use(auth.routes);
+    app
+        .use(authRoutes)
+        .use(userRoutes);
 };

@@ -24,6 +24,11 @@ export class Config {
             local: {
                 auth: string;
             }
+        },
+        user: {
+            profile: {
+                updatePlace: string;
+            }
         }
     }
 }

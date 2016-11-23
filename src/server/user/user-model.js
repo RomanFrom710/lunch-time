@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const adjustJsonTransform = require('../shared/db-extensions').adjustJsonTransform;
+const dbExtensions = require('../shared/db-extensions');
 // todo: add validation
 
 const userSchema = new mongoose.Schema({
@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
 
     passwordHash: { type: String, required: false, select: false }
 });
-adjustJsonTransform(userSchema);
+dbExtensions.applyRemovePrivateFieldsTransform(userSchema);
+dbExtensions.applyGeoTransform(userSchema, 'place');
 
 module.exports = mongoose.model('user', userSchema);
