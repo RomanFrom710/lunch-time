@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema({
     thirdPartyId: { type: String, required: false },
     thirdPartyProfileUrl: { type: String, required: false },
 
+    place: { type: [Number], index: '2d', required: false },
+
     passwordHash: { type: String, required: false, select: false }
 });
 adjustJsonTransform(userSchema);

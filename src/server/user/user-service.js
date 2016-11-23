@@ -18,10 +18,17 @@ exports.findLocalByUsernameWithPassword = function (username) {
     return userRepository.findLocalByUsernameWithPassword(username);
 };
 
-exports.upsertThirdPartyUser = function (profile) {
+exports.findOrCreateThirdPartyUser = function (profile) {
     const user = mapProfileToUserModel(profile);
     user.userType = userEnums.userType.user;
-    return userRepository.upsertThirdPartyUser(user);
+    return userRepository.findThirdPartyUser(user.authType, user.thirdPartyId)
+        .then(userFromDb => {
+            if (userFromDb) {
+                return userFromDb;
+            } else {
+                return userRepository.createThirdPartyUser(user);
+            }
+        });
 };
 
 exports.registerLocalUser = function (localUserDto) {

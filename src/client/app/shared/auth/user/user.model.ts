@@ -1,4 +1,4 @@
-import { Serializable } from '../../';
+import { Serializable, Point } from '../../';
 
 
 // All this stuff is stored in shared module, because checking current user
@@ -24,6 +24,7 @@ export class User extends Serializable {
     id: string;
     lastName: string;
     photoUrl: string;
+    place: Point;
     thirdPartyId: string;
     thirdPartyProfileUrl: string;
     username: string;

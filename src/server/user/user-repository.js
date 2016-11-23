@@ -1,7 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
-
 const User = require('./user-model');
 
 
@@ -19,15 +17,20 @@ exports.findLocalByUsernameWithPassword = function (username) {
         .select('+passwordHash');
 };
 
-exports.upsertThirdPartyUser = function (user) {
-    const query = _.pick(user, ['thirdPartyId', 'authType']);
-    return User.findOneAndUpdate(
-        query,
-        user,
-        { upsert: true, new: true }
-    );
+exports.findThirdPartyUser = function (authType, thirdPartyId) {
+    const query = {
+        authType: authType,
+        thirdPartyId: thirdPartyId
+    };
+
+    return User.findOne(query);
 };
 
+
 exports.createLocalUser = function (userDto) {
+    return User.create(userDto);
+};
+
+exports.createThirdPartyUser = function (userDto) {
     return User.create(userDto);
 };

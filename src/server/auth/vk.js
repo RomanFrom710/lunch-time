@@ -13,7 +13,7 @@ const options = {
 };
 
 function verifyCallback (accessToken, refreshToken, profile, done) {
-    userService.upsertThirdPartyUser(profile)
+    userService.findOrCreateThirdPartyUser(profile)
         .then(user => done(null, user))
         .catch(err => done(err));
 }
