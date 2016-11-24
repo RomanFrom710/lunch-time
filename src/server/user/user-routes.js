@@ -8,10 +8,10 @@ const authMiddleware = require('../auth/middleware').userOnly;
 
 router
     .post(config.get('app:links:user:profile:updatePlace'), authMiddleware, function* () {
-        yield userService.updateUserInfo(this.request.body)
+        const userDto = { place: this.request.body };
+        yield userService.updateUserInfo(userDto)
             .then(newUser => {
                 this.login(newUser);
-                return newUser;
             });
     });
 

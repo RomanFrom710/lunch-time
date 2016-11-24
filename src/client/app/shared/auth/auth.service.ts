@@ -43,7 +43,7 @@ export class AuthService {
             });
     }
 
-    private checkAuth(): Promise<User> {
+    checkAuth(): Promise<User> {
         return this.http.get(this.config.links.auth.info)
             .map(response => response.json())
             .toPromise()

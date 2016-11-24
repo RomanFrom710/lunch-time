@@ -12,9 +12,9 @@ import { Config } from '../../config';
 })
 export class SelectPointComponent implements OnInit {
     @Input() mapHeight: string = '500px'; // Default value
-    @Input() initialPoint: Point = null;
+    @Input() point: Point = null;
 
-    @Output() point: Observable<Point>;
+    @Output() pointChange: Observable<Point>;
 
     private initialLatitude: number = this.config.map.initialPoint[0];
     private initialLongitude: number = this.config.map.initialPoint[1];
@@ -24,8 +24,12 @@ export class SelectPointComponent implements OnInit {
     constructor(private config: Config) { }
 
     ngOnInit(): void {
-        this.currentPoint = new BehaviorSubject(this.initialPoint);
-        this.point = this.currentPoint.asObservable();
+        this.currentPoint = new BehaviorSubject(this.point);
+        this.pointChange = this.currentPoint.asObservable();
+    }
+
+    resetPoint(): void {
+        this.currentPoint.next(null);
     }
 
     private onClick(event: MouseEvent) {

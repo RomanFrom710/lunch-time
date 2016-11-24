@@ -1,1 +1,19 @@
-<lt-select-point></lt-select-point>
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+        <div class="select-point">
+            <lt-select-point #selectPoint [(point)]=""></lt-select-point>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-3 col-md-3">
+                <button (click)="updatePlace()" class="btn btn-success">Сохранить</button>
+            </div>
+            <div class="col-md-3">
+                <button (click)="selectPoint.resetPoint()" class="btn btn-danger">Сбросить</button>
+            </div>
+        </div>
+    </div>
+</div>
