@@ -6,9 +6,9 @@ const dbExtensions = require('../shared/db-extensions');
 // todo: add validation
 
 const userSchema = new mongoose.Schema({
-    username: { type: String, required: true },
-    firstName: { type: String, required: false },
-    lastName: { type: String, required: false },
+    username: { type: String, trim: true, required: true },
+    firstName: { type: String, trim: true, required: false },
+    lastName: { type: String, trim: true, required: false },
     gender: { type: String, required: false },
 
     photoUrl: { type: String, required: false },
@@ -20,11 +20,10 @@ const userSchema = new mongoose.Schema({
     thirdPartyId: { type: String, required: false },
     thirdPartyProfileUrl: { type: String, required: false },
 
-    place: { type: [Number], index: '2d', required: false },
+    place: dbExtensions.getGeoFieldDescriptor({ required: false }),
 
     passwordHash: { type: String, required: false, select: false }
 });
 dbExtensions.applyRemovePrivateFieldsTransform(userSchema);
-dbExtensions.applyGeoTransform(userSchema, 'place');
 
 module.exports = mongoose.model('user', userSchema);

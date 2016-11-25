@@ -12,12 +12,15 @@ import { Point, User, AuthService } from '../../shared';
 })
 export class ProfileSettingsComponent {
     private currentUser: Observable<User> = this.authService.currentUser;
-    //private currentPlace: Point = this.currentUser. todo: bind to current user property
+    private currentPlace: Point = null;
 
     constructor(private userService: UserService,
-                private authService: AuthService) { }
+                private authService: AuthService) {
+        //this.currentUser = this.authService.currentUser;
+        //this.currentUser.subscribe(newUser => this.currentPlace = newUser.place);
+    }
 
     updatePlace(): void {
-
+        this.userService.updatePlace(this.currentPlace);
     }
 }

@@ -2,10 +2,12 @@
 
 const mongoose = require('mongoose');
 
+const dbExtensions = require('../shared/db-extensions');
+
 
 const cafeSchema = new mongoose.Schema({
     name: String,
-    geo: { type: [Number], index: '2d' }
+    geo: dbExtensions.getGeoFieldDescriptor({ required: true })
 });
 
 module.exports = mongoose.model('cafe', cafeSchema);

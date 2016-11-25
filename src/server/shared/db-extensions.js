@@ -20,25 +20,15 @@ exports.applyRemovePrivateFieldsTransform = function (schema) {
 // We store get coords like an array in db. But for client it's more
 // preferable to get it like a nice object. The same thing is for
 // getting geo info from client.
-exports.applyGeoTransform = function (schema, geoFieldName) {
-    addTransform(schema, function (doc, ret) {
-        const coords = ret[geoFieldName];
-        if (_.isArray(coords)) {
-            ret[geoFieldName] = {
-                latitude: coords[0],
-                longitude: coords[1]
-            };
-        }
-    });
+exports.getGeoFieldDescriptor = function (sourceDescriptor) {
+    sourceDescriptor = sourceDescriptor || {};
 
-    schema.pre('save', next => {
-        if (_.isObject(this[geoFieldName])) {
-            const coordsObject = this[geoFieldName];
-            this[geoFieldName] = [coordsObject.latitude, coordsObject.longitude];
-        }
+    sourceDescriptor.type = [Number];
+    sourceDescriptor.index = '2d';
+    sourceDescriptor.get = dbValue => { return { latitude: dbValue[0], longitude: dbValue[1] } };
+    sourceDescriptor.set = inputValue => [inputValue.latitude, inputValue.longitude];
 
-        next();
-    });
+    return sourceDescriptor;
 };
 
 

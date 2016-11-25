@@ -17,15 +17,12 @@ import {
     styleUrls: ['header.component.less']
 })
 export class HeaderComponent {
-    private currentUser: Observable<User>;
-    private socialAuthTypes: SocialAuth[];
+    private currentUser: Observable<User> = this.authService.currentUser;
+    private socialAuthTypes: SocialAuth[] = this.socialAuthTypesService.types;
 
     constructor(private authService: AuthService,
                 private socialAuthTypesService: SocialAuthTypesService,
-                private userMenuService: UserMenuService) {
-        this.currentUser = this.authService.currentUser;
-        this.socialAuthTypes = this.socialAuthTypesService.types;
-    }
+                private userMenuService: UserMenuService) { }
 
     get menuItems() : UserMenuItem[] {
         return this.userMenuService.menuItems;

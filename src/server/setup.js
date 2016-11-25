@@ -44,9 +44,9 @@ exports.setupErrorHandling = function (app) {
         try {
             yield next;
         } catch (err) {
-            if (isDevelopmentEnv()) {
+            //if (isDevelopmentEnv()) {
                 console.error(err);
-            }
+            //}
 
             if (err.status && err.status < 500) {
                 this.status = err.status;

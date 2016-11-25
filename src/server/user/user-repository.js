@@ -36,8 +36,8 @@ exports.createThirdPartyUser = function (userDto) {
 };
 
 exports.updateUserInfo = function (id, userDto) {
-    return User.findOneAndUpdate(
-        { _id: id },
+    return User.findByIdAndUpdate(
+        id,
         { $set: userDto },
         { new: true }
     );

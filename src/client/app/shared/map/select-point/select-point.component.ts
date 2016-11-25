@@ -21,11 +21,13 @@ export class SelectPointComponent implements OnInit {
     private initialZoom: number = this.config.map.initialZoom;
     private currentPoint: BehaviorSubject<Point>;
 
-    constructor(private config: Config) { }
+    constructor(private config: Config) {
+        this.currentPoint = new BehaviorSubject(null);
+        this.pointChange = this.currentPoint.asObservable();
+    }
 
     ngOnInit(): void {
-        this.currentPoint = new BehaviorSubject(this.point);
-        this.pointChange = this.currentPoint.asObservable();
+        this.currentPoint.next(this.point);
     }
 
     resetPoint(): void {
