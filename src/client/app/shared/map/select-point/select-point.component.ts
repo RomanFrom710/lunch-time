@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, Output, OnChanges } from '@angular/core';
 import { MouseEvent, LatLngLiteral } from 'angular2-google-maps/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -10,14 +10,13 @@ import { Config } from '../../config';
     selector: 'lt-select-point',
     templateUrl: 'select-point.component.html'
 })
-export class SelectPointComponent implements OnInit {
+export class SelectPointComponent implements OnChanges {
     @Input() mapHeight: string = '500px'; // Default value
     @Input() point: Point = null;
 
     @Output() pointChange: Observable<Point>;
 
-    private initialLatitude: number = this.config.map.initialPoint[0];
-    private initialLongitude: number = this.config.map.initialPoint[1];
+    private initialPoint: Point = this.config.map.initialPoint;
     private initialZoom: number = this.config.map.initialZoom;
     private currentPoint: BehaviorSubject<Point>;
 
@@ -26,11 +25,13 @@ export class SelectPointComponent implements OnInit {
         this.pointChange = this.currentPoint.asObservable();
     }
 
-    ngOnInit(): void {
-        this.currentPoint.next(this.point);
+    ngOnChanges(): void {
+        if (this.point) {
+            this.currentPoint.next(this.point);
+        }
     }
 
-    resetPoint(): void {
+    deletePoint(): void {
         this.currentPoint.next(null);
     }
 

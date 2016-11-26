@@ -12,8 +12,7 @@ export class ShowPointComponent {
     @Input() mapHeight: string = '500px'; // Default value
     @Input() point: Point;
 
-    private initialLatitude: number = this.config.map.initialPoint[0];
-    private initialLongitude: number = this.config.map.initialPoint[1];
+    private initialPoint: Point = this.config.map.initialPoint;
     private initialZoom: number = this.config.map.increasedZoom;
 
     constructor(private config: Config) { }

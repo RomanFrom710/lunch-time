@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Point } from './';
+
 
 @Injectable()
 export class Config {
@@ -8,7 +10,7 @@ export class Config {
     };
 
     map: {
-        initialPoint: number[];
+        initialPoint: Point;
         initialZoom: number;
         increasedZoom: number;
     };

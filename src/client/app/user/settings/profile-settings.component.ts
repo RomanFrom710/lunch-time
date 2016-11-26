@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { UserService } from '../';
 import { Point, User, AuthService } from '../../shared';
@@ -11,16 +10,22 @@ import { Point, User, AuthService } from '../../shared';
     styleUrls: ['profile-settings.component.less']
 })
 export class ProfileSettingsComponent {
-    private currentUser: Observable<User> = this.authService.currentUser;
+    private currentUser: User;
     private currentPlace: Point = null;
 
     constructor(private userService: UserService,
                 private authService: AuthService) {
-        //this.currentUser = this.authService.currentUser;
-        //this.currentUser.subscribe(newUser => this.currentPlace = newUser.place);
+        this.authService.currentUser.subscribe(newUser => {
+            this.currentUser = newUser;
+            this.currentPlace = newUser.place;
+        });
     }
 
     updatePlace(): void {
         this.userService.updatePlace(this.currentPlace);
+    }
+
+    resetPoint(): void {
+        this.currentPlace = this.currentUser.place;
     }
 }

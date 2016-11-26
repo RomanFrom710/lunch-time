@@ -37,8 +37,7 @@ exports.registerLocalUser = function (localUserDto) {
     localUserDto.userType = localUserDto.userType || userEnums.userType.user;
 };
 
-exports.updateUserInfo = function (userDto) {
-    const id = userDto.id;
+exports.updateUserInfo = function (id, userDto) {
     const allowedFields = ['username', 'firstName', 'lastName', 'gender', 'photoUrl', 'place'];
     userDto = _.pick(userDto, allowedFields);
 

@@ -20,10 +20,11 @@ const userSchema = new mongoose.Schema({
     thirdPartyId: { type: String, required: false },
     thirdPartyProfileUrl: { type: String, required: false },
 
-    place: dbExtensions.getGeoFieldDescriptor({ required: false }),
+    place: { type: [Number], index: '2d', required: false },
 
     passwordHash: { type: String, required: false, select: false }
 });
 dbExtensions.applyRemovePrivateFieldsTransform(userSchema);
+dbExtensions.applyGeoTransform(userSchema, 'place');
 
 module.exports = mongoose.model('user', userSchema);

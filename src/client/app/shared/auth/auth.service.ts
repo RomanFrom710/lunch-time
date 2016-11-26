@@ -12,7 +12,9 @@ export class AuthService {
     constructor(private windowService: WindowService,
                 private http: Http,
                 private userStore: UserStore,
-                private config: Config) { }
+                private config: Config) {
+        this.checkAuth();
+    }
 
     get currentUser() : Observable<User> {
         return this.userStore.getUser();

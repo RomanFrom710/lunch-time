@@ -7,13 +7,10 @@
             <lt-select-point #selectPoint [(point)]="currentPlace"></lt-select-point>
         </div>
 
-        <div class="row">
-            <div class="col-md-offset-3 col-md-3">
-                <button (click)="updatePlace()" class="btn btn-success">Сохранить</button>
-            </div>
-            <div class="col-md-3">
-                <button (click)="selectPoint.resetPoint()" class="btn btn-danger">Сбросить</button>
-            </div>
+        <div class="btn-group btn-group-justified">
+            <a ltEmptyLink (click)="updatePlace()" class="btn btn-success">Сохранить</a>
+            <a ltEmptyLink (click)="resetPoint()" class="btn btn-warning">Сбросить</a>
+            <a ltEmptyLink (click)="selectPoint.deletePoint()" class="btn btn-danger">Удалить</a>
         </div>
     </div>
 </div>

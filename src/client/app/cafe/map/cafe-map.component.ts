@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Config } from '../../shared';
+import { Config, Point } from '../../shared';
 
 
 @Component({
@@ -10,8 +10,7 @@ import { Config } from '../../shared';
 export class CafeMapComponent {
     @Input() mapHeight: string = '500px'; // Default value
 
-    private initialLatitude: number = this.config.map.initialPoint[0];
-    private initialLongitude: number = this.config.map.initialPoint[1];
+    private initialPoint: Point = this.config.map.initialPoint;
     private initialZoom: number = this.config.map.initialZoom;
 
     constructor (private config: Config) { }

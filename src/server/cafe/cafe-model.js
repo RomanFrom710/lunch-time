@@ -7,7 +7,8 @@ const dbExtensions = require('../shared/db-extensions');
 
 const cafeSchema = new mongoose.Schema({
     name: String,
-    geo: dbExtensions.getGeoFieldDescriptor({ required: true })
+    place: { type: [Number], index: '2d', required: true }
 });
+dbExtensions.applyGeoTransform(cafeSchema, 'place');
 
 module.exports = mongoose.model('cafe', cafeSchema);

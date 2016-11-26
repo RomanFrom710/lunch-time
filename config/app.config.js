@@ -22,7 +22,10 @@ const commonConfig = {
             authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
         },
         map: {
-            initialPoint: [53.904692, 27.561523], // Minsk
+            initialPoint: { // Minsk
+                latitude: 53.904692,
+                longitude: 27.561523
+            },
             initialZoom: 12,
             increasedZoom: 15
         },
