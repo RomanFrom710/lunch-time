@@ -10,6 +10,12 @@
 * *npm run nodemon* &mdash; start server with nodemon (you must build client part before it).
 
 ## Environment variables
+
+* *NODE_ENV* === 'production' &mdash; by default, enables minification.
+* *NODE_ENV* === 'development' &mdash; enables webpack Hot Module Replacement.
+* *NODE_ENV* === 'nodemon' &mdash; the same as *production*, but enables errors in console on the server.
+
+
 ### keys
 #### cookies
 * *COOKIEKEY* &mdash; your cookie key.

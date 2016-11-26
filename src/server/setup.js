@@ -44,9 +44,9 @@ exports.setupErrorHandling = function (app) {
         try {
             yield next;
         } catch (err) {
-            //if (isDevelopmentEnv()) {
+            if (isDevelopmentEnv() || isNodemonEvn()) {
                 console.error(err);
-            //}
+            }
 
             if (err.status && err.status < 500) {
                 this.status = err.status;
@@ -72,4 +72,8 @@ function* apiFallbackMiddleware(next) {
 
 function isDevelopmentEnv() {
     return process.env.NODE_ENV === 'development';
+}
+
+function isNodemonEvn() {
+    return process.env.NODE_ENV === 'nodemon';
 }
