@@ -3,8 +3,8 @@
                  [zoom]="initialZoom"
                  (mapClick)="onClick($event)"
                  [style.height]="mapHeight">
-    <sebm-google-map-marker *ngIf="currentPoint | async"
-                            [latitude]="(currentPoint | async)?.latitude"
-                            [longitude]="(currentPoint | async)?.longitude">
+    <sebm-google-map-marker *ngIf="point"
+                            [latitude]="point.latitude"
+                            [longitude]="point.longitude">
     </sebm-google-map-marker>
 </sebm-google-map>

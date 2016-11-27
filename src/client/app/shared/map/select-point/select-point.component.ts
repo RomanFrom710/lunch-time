@@ -1,6 +1,5 @@
-import { Component, Input, Output, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MouseEvent, LatLngLiteral } from 'angular2-google-maps/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Point } from '../';
 import { Config } from '../../config';
@@ -10,33 +9,22 @@ import { Config } from '../../config';
     selector: 'lt-select-point',
     templateUrl: 'select-point.component.html'
 })
-export class SelectPointComponent implements OnChanges {
+export class SelectPointComponent {
     @Input() mapHeight: string = '500px'; // Default value
     @Input() point: Point = null;
-
-    @Output() pointChange: Observable<Point>;
+    @Output() pointChange: EventEmitter<Point> = new EventEmitter<Point>();
 
     private initialPoint: Point = this.config.map.initialPoint;
     private initialZoom: number = this.config.map.initialZoom;
-    private currentPoint: BehaviorSubject<Point>;
 
-    constructor(private config: Config) {
-        this.currentPoint = new BehaviorSubject(null);
-        this.pointChange = this.currentPoint.asObservable();
-    }
-
-    ngOnChanges(): void {
-        if (this.point) {
-            this.currentPoint.next(this.point);
-        }
-    }
+    constructor(private config: Config) { }
 
     deletePoint(): void {
-        this.currentPoint.next(null);
+        this.pointChange.emit(null);
     }
 
     private onClick(event: MouseEvent) {
         const coords: LatLngLiteral = event.coords;
-        this.currentPoint.next(new Point(coords.lat, coords.lng));
+        this.pointChange.emit(new Point(coords.lat, coords.lng));
     }
 }
