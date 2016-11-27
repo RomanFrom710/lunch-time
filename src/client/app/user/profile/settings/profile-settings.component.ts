@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { UserService } from '../';
-import { Point, User, AuthService } from '../../shared';
+import { UserService } from '../../';
+import { Point, User, AuthService } from '../../../shared';
 
 
 @Component({
@@ -12,6 +12,7 @@ import { Point, User, AuthService } from '../../shared';
 export class ProfileSettingsComponent {
     private currentUser: User;
     private currentPlace: Point = null;
+    private isEditMode = false;
 
     constructor(private userService: UserService,
                 private authService: AuthService) {

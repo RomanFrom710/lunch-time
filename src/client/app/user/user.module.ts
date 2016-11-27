@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -7,6 +8,7 @@ import {
     LocalSignInComponent,
     ProfileSettingsComponent,
     SignInScreenComponent,
+    UserDetailsComponent,
     UserService
 } from './';
 
@@ -15,11 +17,13 @@ import {
     imports: [
         SharedModule,
         RouterModule,
+        CommonModule,
         FormsModule
     ],
     declarations: [
         LocalSignInComponent,
         SignInScreenComponent,
+        UserDetailsComponent,
         ProfileSettingsComponent
     ],
     exports: [ SignInScreenComponent ],

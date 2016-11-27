@@ -1,7 +1,12 @@
 <div class="row">
     <div class="col-md-6">
-
+        <lt-user-details #userDetails [(user)]="currentUser" [isEditMode]="isEditMode"></lt-user-details>
+        <div class="btn-group btn-group-justified">
+            <a ltEmptyLink (click)="isEditMode = true" class="btn btn-success">Редактировать</a>
+            <a ltEmptyLink (click)="resetPoint()" class="btn btn-warning">Сбросить</a>
+        </div>
     </div>
+
     <div class="col-md-6">
         <div class="select-point">
             <lt-select-point #selectPoint [(point)]="currentPlace"></lt-select-point>

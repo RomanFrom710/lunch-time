@@ -1,0 +1,25 @@
+<div *ngIf="!isEditMode">
+    <dl>
+        <dt>Имя</dt>
+        <dd>{{user.firstName}}</dd>
+    </dl>
+    <dl>
+        <dt>Фамилия</dt>
+        <dd>{{user.lastName}}</dd>
+    </dl>
+</div>
+
+<form *ngIf="isEditMode" class="form-horizontal">
+    <div class="form-group">
+        <label>
+            Имя
+            <input [(ngModel)]="user.firstName" type="text" name="firstName" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Фамилия
+            <input [(ngModel)]="user.lastName" type="text" name="lastName" class="form-control">
+        </label>
+    </div>
+</form>
