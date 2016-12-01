@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { User } from '../../../shared';
+import { User, Gender } from '../../../shared';
 import { UserService } from '../../';
 
 // todo: Add validation for this component
@@ -12,6 +12,8 @@ export class UserDetailsComponent {
     @Input() isEditMode: boolean = false;
     @Input() user: User = null;
     @Output() userChange: EventEmitter<User> = new EventEmitter<User>();
+
+    private GenderEnum = Gender;
 
     constructor(private userService: UserService) { }
 }

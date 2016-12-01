@@ -18,6 +18,7 @@ import {
     SocialAuthTypesService,
     SelectPointComponent,
     ShowPointComponent,
+    GenderPipe,
     BrowserWindowService
 } from './';
 
@@ -25,6 +26,7 @@ import {
 const components = [ // Obviously everything that is declared in shared module should be exported too.
     HeaderComponent,
     EmptyLink,
+    GenderPipe,
     SelectPointComponent,
     ShowPointComponent
 ];

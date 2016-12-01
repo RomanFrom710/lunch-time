@@ -7,6 +7,18 @@
         <dt>Фамилия</dt>
         <dd>{{user.lastName}}</dd>
     </dl>
+    <dl>
+        <dt>Ник</dt>
+        <dd>{{user.username}}</dd>
+    </dl>
+    <dl>
+        <dt>Пол</dt>
+        <dd>{{user.gender | ltGender}}</dd>
+    </dl>
+    <dl>
+        <dt>Дата регистрации</dt>
+        <dd>{{user.created | date}}</dd>
+    </dl>
 </div>
 
 <form *ngIf="isEditMode" class="form-horizontal">
@@ -21,5 +33,28 @@
             Фамилия
             <input [(ngModel)]="user.lastName" type="text" name="lastName" class="form-control">
         </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Ник
+            <input [(ngModel)]="user.username" type="text" name="username" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <fieldset>
+            <label>Пол</label>
+            <div class="radio">
+                <label>
+                    <input [(ngModel)]="user.gender" type="radio" name="gender" value="GenderEnum.Male">
+                    {{GenderEnum.Male | ltGender}}
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input [(ngModel)]="user.gender" type="radio" name="gender" value="GenderEnum.Female">
+                    {{GenderEnum.Female | ltGender}}
+                </label>
+            </div>
+        </fieldset>
     </div>
 </form>

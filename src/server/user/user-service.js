@@ -54,10 +54,14 @@ function mapProfileToUserModel(profile) {
         'name.familyName': 'lastName',
         'photos[0].value': 'photoUrl',
         'provider': 'authType',
-        'gender': 'gender',
         'profileUrl': 'thirdPartyProfileUrl'
     };
-    return mapper(profile, profileToUserTransform);
+    const mappedUser = mapper(profile, profileToUserTransform);
+    if (profile.gender) {
+        mappedUser.gender = userEnums.gender[profile.gender];
+    }
+
+    return mappedUser;
 }
 
 // Creating admin user
