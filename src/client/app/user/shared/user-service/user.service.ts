@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { AuthService, Config, Point } from '../../shared';
+import { Config, Point } from '../../../shared';
+import { AuthService } from '../';
 
 
 @Injectable()

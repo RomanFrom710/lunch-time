@@ -8,7 +8,7 @@ import {
     User,
     UserMenuService,
     UserMenuItem
-} from '../';
+} from '../../user';
 
 
 @Component({

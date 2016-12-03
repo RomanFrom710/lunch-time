@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { SocialAuth } from './';
-import { AuthService } from '../';
+import { AuthService } from '../../';
 
 
 @Injectable()

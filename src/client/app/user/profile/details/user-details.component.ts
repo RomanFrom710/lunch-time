@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { User, Gender } from '../../../shared';
-import { UserService } from '../../';
+import { UserService, User, Gender } from '../../';
+
 
 // todo: Add validation for this component
 @Component({

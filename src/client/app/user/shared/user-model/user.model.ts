@@ -1,4 +1,4 @@
-import { Serializable, Point } from '../../';
+import { Serializable, Point } from '../../../shared';
 
 
 // All this stuff is stored in shared module, because checking current user

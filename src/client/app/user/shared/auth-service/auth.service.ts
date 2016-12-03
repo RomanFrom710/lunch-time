@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { WindowService, Config } from '../';
-import { User, UserStore } from './';
+import { WindowService, Config } from '../../../shared';
+import { UserStore } from '../../store';
+import { User } from '../../';
 
 
 @Injectable()
 export class AuthService {
-
     constructor(private windowService: WindowService,
                 private http: Http,
                 private userStore: UserStore,

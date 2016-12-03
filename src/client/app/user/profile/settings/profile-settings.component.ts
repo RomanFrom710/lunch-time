@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { UserService } from '../../';
-import { Point, User, AuthService } from '../../../shared';
+import { UserService, User, AuthService } from '../../';
+import { Point } from '../../../shared';
 
 
 @Component({

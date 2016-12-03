@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserMenuItem } from './';
-import { AuthService, User, UserType } from '../';
+import { AuthService, User } from '../shared';
 
 
 @Injectable()

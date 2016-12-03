@@ -16,7 +16,7 @@ router
             this.throw(401);
         }
     })
-    .post(config.get('app:links:auth:logout'), authMiddlewares.userOnly, function* () {
+    .post(config.get('app:links:auth:logout'), function* () {
         this.logout();
         this.session = null;
         this.body = true;

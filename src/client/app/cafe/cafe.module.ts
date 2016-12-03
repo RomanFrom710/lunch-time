@@ -5,6 +5,7 @@ import { SharedModule } from '../shared';
 import {
     CafeMapComponent,
     CafeListComponent,
+    CafeService,
     CafePreviewComponent } from './';
 
 

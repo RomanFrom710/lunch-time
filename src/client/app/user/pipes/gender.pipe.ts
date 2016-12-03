@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Gender } from '../';
+import { Gender } from '../../user';
 
 
 @Pipe({
@@ -8,6 +8,10 @@ import { Gender } from '../';
 })
 export class GenderPipe implements PipeTransform {
     transform(value: Gender, args: any[]): string {
+        if (!value) {
+            return 'Не указан';
+        }
+
         if (value === Gender.Male || Gender[value.toString()] === Gender.Male) {
             return 'Мужской';
         } else {

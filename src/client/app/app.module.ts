@@ -5,7 +5,7 @@ import { provideInterceptorService, InterceptorService } from 'ng2-interceptors'
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule, ErrorHandlingInterceptor } from './shared';
-import { UserModule } from './user';
+import { UserModule, AuthHandlingInterceptor } from './user';
 import { CafeModule } from './cafe';
 import { InfoModule } from './info';
 import { AdminModule } from './admin';
@@ -16,8 +16,8 @@ import { AppComponent }  from './app.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        InfoModule,
         SharedModule,
+        InfoModule,
         CafeModule,
         UserModule,
         AdminModule,
@@ -25,7 +25,7 @@ import { AppComponent }  from './app.component';
     ],
     declarations: [ AppComponent ],
     providers: [
-        provideInterceptorService([ErrorHandlingInterceptor]),
+        provideInterceptorService([ErrorHandlingInterceptor, AuthHandlingInterceptor]),
         { provide: Http, useExisting: InterceptorService }
     ],
     bootstrap: [ AppComponent ]

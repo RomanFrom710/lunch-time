@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { WindowService } from '../';
-import { User, vkMockUser } from './';
+import { WindowService } from '../../../shared';
+import { User, vkMockUser } from '../../shared';
 
 
 @Injectable()

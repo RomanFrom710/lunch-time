@@ -4,12 +4,18 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared';
+import { UserStore } from './store';  // UserStore is internal, so it's not in the barrel
 import {
     LocalSignInComponent,
     ProfileSettingsComponent,
     SignInScreenComponent,
     UserDetailsComponent,
-    UserService
+    UserMenuService,
+    SocialAuthTypesService,
+    GenderPipe,
+    AuthService,
+    UserService,
+    AuthHandlingInterceptor
 } from './';
 
 
@@ -24,9 +30,17 @@ import {
         LocalSignInComponent,
         SignInScreenComponent,
         UserDetailsComponent,
+        GenderPipe,
         ProfileSettingsComponent
     ],
-    exports: [ SignInScreenComponent ],
-    providers: [ UserService ]
+    exports: [ SignInScreenComponent, GenderPipe ],
+    providers: [
+        UserStore,
+        AuthService,
+        SocialAuthTypesService,
+        UserService,
+        UserMenuService,
+        AuthHandlingInterceptor
+    ]
 })
 export class UserModule { }

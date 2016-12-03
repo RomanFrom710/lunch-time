@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { WindowService } from '../../';
+import { WindowService } from '../../shared';
 import { User } from '../';
 
 
-// This class is internal for shared module
+// This class is internal for the user module
 @Injectable()
 export class UserStore {
     private localStorageKey: string = 'lt-current-user';

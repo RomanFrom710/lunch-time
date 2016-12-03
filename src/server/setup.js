@@ -50,9 +50,9 @@ exports.setupErrorHandling = function (app) {
 
             if (err.status && err.status < 500) {
                 this.status = err.status;
-                this.body = err.message; // Better to keep it in secret
+                this.body = { error: err.message };
             } else {
-                this.status = 500;
+                this.status = 500; // Better to keep it in secret
             }
         }
     });
