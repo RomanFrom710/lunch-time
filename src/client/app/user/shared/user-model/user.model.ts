@@ -11,6 +11,7 @@ export enum Gender {
 }
 
 export enum UserType {
+    Anon, // Needed for guards compatibility
     User,
     SpotOwner,
     Admin

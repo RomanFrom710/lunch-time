@@ -14,6 +14,7 @@ import {
     SocialAuthTypesService,
     GenderPipe,
     AuthService,
+    AuthGuard,
     UserService,
     AuthHandlingInterceptor
 } from './';
@@ -40,6 +41,7 @@ import {
         SocialAuthTypesService,
         UserService,
         UserMenuService,
+        AuthGuard,
         AuthHandlingInterceptor
     ]
 })
