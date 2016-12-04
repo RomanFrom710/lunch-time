@@ -12,23 +12,27 @@ export class UserStore {
     private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
     constructor(private windowService: WindowService) {
-        const rawUser = this.windowService.getStorageValue(this.localStorageKey);
-        if (rawUser) {
-            const user = (new User()).fromData(this.windowService.getStorageValue(this.localStorageKey));
+        const user = this.windowService.getStorageValue(this.localStorageKey);
+        if (user) {
             this.setUser(user);
         }
     }
 
-    getUser() : Observable<User> {
+    getUser(): Observable<User> {
         return this.user.asObservable();
     }
 
-    setUser(user: User) : void {
+    setUser(user: User): void {
         this.windowService.setStorageValue(this.localStorageKey, user);
-        this.user.next(user);
+        this.user.next((new User()).fromData(user));
     }
 
-    resetUser() : void {
+    updateUser(userDto: any): void {
+        const newUser = this.user.getValue().fromData(userDto);
+        this.user.next(newUser);
+    }
+
+    resetUser(): void {
         this.windowService.setStorageValue(this.localStorageKey, null);
         this.user.next(null);
     }

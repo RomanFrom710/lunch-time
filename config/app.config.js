@@ -49,7 +49,7 @@ const commonConfig = {
                 prefix: 'user',
                 profile: {
                     prefix: 'profile',
-                    updatePlace: 'place'
+                    update: ''
                 }
             }
         }

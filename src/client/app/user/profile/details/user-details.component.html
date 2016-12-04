@@ -45,13 +45,13 @@
             <label>Пол</label>
             <div class="radio">
                 <label>
-                    <input [(ngModel)]="user.gender" type="radio" name="gender" value="GenderEnum.Male">
+                    <input [(ngModel)]="user.gender" type="radio" name="gender" value="{{GenderEnum.Male.toString()}}">
                     {{GenderEnum.Male | ltGender}}
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input [(ngModel)]="user.gender" type="radio" name="gender" value="GenderEnum.Female">
+                    <input [(ngModel)]="user.gender" type="radio" name="gender" value="{{GenderEnum.Female.toString()}}">
                     {{GenderEnum.Female | ltGender}}
                 </label>
             </div>

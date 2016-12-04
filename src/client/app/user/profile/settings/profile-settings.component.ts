@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 
-import { UserService, User, AuthService } from '../../';
+import {
+    UserService,
+    User,
+    AuthService,
+    SocialAuthTypesService,
+    SocialAuth
+} from '../../';
 import { Point } from '../../../shared';
 
 
@@ -10,15 +16,22 @@ import { Point } from '../../../shared';
     styleUrls: ['profile-settings.component.less']
 })
 export class ProfileSettingsComponent {
-    private currentUser: User;
-    private currentPlace: Point = null;
     private isEditMode = false;
+    private socialAuth: SocialAuth;
+
+    private currentUser: User; // Template is bound to this user
+    private originalUser: User; // Saved for reset feature
+
+    private currentPlace: Point;
 
     constructor(private userService: UserService,
+                private socialAuthService: SocialAuthTypesService,
                 private authService: AuthService) {
         this.authService.currentUser.subscribe(newUser => {
             this.currentUser = newUser;
-            this.currentPlace = newUser.place;
+            this.originalUser = newUser;
+            this.currentPlace = this.currentPlace || newUser.place;
+            this.socialAuth = this.socialAuthService.findType(newUser.authType);
         });
     }
 
@@ -26,7 +39,21 @@ export class ProfileSettingsComponent {
         this.userService.updatePlace(this.currentPlace);
     }
 
-    resetPoint(): void {
+    resetPlace(): void {
         this.currentPlace = this.currentUser.place;
+    }
+
+    updateProfile(): void {
+        this.userService.updateProfile(this.currentUser)
+            .then(() => this.isEditMode = false);
+    }
+
+    resetProfile(): void {
+        this.currentUser.fromData(this.originalUser);
+        this.isEditMode = false;
+    }
+
+    updateFromSource(): void {
+        // todo
     }
 }

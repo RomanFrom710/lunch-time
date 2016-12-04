@@ -2,8 +2,10 @@
     <div class="col-md-6">
         <lt-user-details #userDetails [(user)]="currentUser" [isEditMode]="isEditMode"></lt-user-details>
         <div class="btn-group btn-group-justified">
-            <a ltEmptyLink (click)="isEditMode = true" class="btn btn-success">Редактировать</a>
-            <a ltEmptyLink (click)="resetPoint()" class="btn btn-warning">Сбросить</a>
+            <a ltEmptyLink *ngIf="!isEditMode" (click)="isEditMode = true" class="btn btn-success">Редактировать</a>
+            <a ltEmptyLink *ngIf="!isEditMode && socialAuth" (click)="updateFromSource()" class="btn btn-default">Обновить из источника</a>
+            <a ltEmptyLink *ngIf="isEditMode" (click)="updateProfile()" class="btn btn-success">Сохранить</a>
+            <a ltEmptyLink *ngIf="isEditMode" (click)="resetProfile()" class="btn btn-warning">Отмена</a>
         </div>
     </div>
 
@@ -14,7 +16,7 @@
 
         <div class="btn-group btn-group-justified">
             <a ltEmptyLink (click)="updatePlace()" class="btn btn-success">Сохранить</a>
-            <a ltEmptyLink (click)="resetPoint()" class="btn btn-warning">Сбросить</a>
+            <a ltEmptyLink (click)="resetPlace()" class="btn btn-warning">Сбросить</a>
             <a ltEmptyLink (click)="selectPoint.deletePoint()" class="btn btn-danger">Удалить</a>
         </div>
     </div>

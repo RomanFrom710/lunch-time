@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Point } from '../';
 import { Config } from '../../config';
@@ -8,12 +8,16 @@ import { Config } from '../../config';
     selector: 'lt-show-point',
     templateUrl: 'show-point.component.html'
 })
-export class ShowPointComponent {
+export class ShowPointComponent implements OnInit {
     @Input() mapHeight: string = '500px'; // Default value
     @Input() point: Point;
 
-    private initialPoint: Point = this.config.map.initialPoint;
+    private initialPoint: Point;
     private initialZoom: number = this.config.map.increasedZoom;
 
     constructor(private config: Config) { }
+
+    ngOnInit(): void {
+        this.initialPoint = this.point || this.config.map.initialPoint;
+    }
 }
