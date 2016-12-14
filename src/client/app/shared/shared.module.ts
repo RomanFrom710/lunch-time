@@ -9,15 +9,13 @@ import {
     WindowService,
     ErrorHandlingInterceptor,
     SelectPointComponent,
-    ShowPointComponent,
     BrowserWindowService
 } from './';
 
 
 const components = [ // Obviously everything that is declared in shared module should be exported too.
     EmptyLink,
-    SelectPointComponent,
-    ShowPointComponent
+    SelectPointComponent
 ];
 
 @NgModule({

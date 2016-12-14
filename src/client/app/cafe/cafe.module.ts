@@ -6,13 +6,13 @@ import {
     CafeMapComponent,
     CafeListComponent,
     CafeService,
-    CafePreviewComponent } from './';
+    CafeDetailsComponent } from './';
 
 
 @NgModule({
     imports: [ SharedModule, AgmCoreModule.forRoot() ],
-    declarations: [ CafeMapComponent, CafeListComponent, CafePreviewComponent ],
-    exports: [ ],
-    providers: [ ]
+    declarations: [ CafeMapComponent, CafeListComponent, CafeDetailsComponent ],
+    exports: [ CafeDetailsComponent ],
+    providers: [ CafeService ]
 })
 export class CafeModule { }

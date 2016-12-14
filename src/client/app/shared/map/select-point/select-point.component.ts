@@ -11,6 +11,8 @@ import { Config } from '../../config';
 })
 export class SelectPointComponent implements OnInit {
     @Input() mapHeight: string = '500px'; // Default value
+    @Input() isEditMode = false;
+
     @Input() point: Point = null;
     @Output() pointChange: EventEmitter<Point> = new EventEmitter<Point>();
 
@@ -27,7 +29,11 @@ export class SelectPointComponent implements OnInit {
         this.pointChange.emit(null);
     }
 
-    private onClick(event: MouseEvent) {
+    private onClick(event: MouseEvent): void {
+        if (!this.isEditMode) {
+            return;
+        }
+
         const coords: LatLngLiteral = event.coords;
         this.pointChange.emit(new Point(coords.lat, coords.lng));
     }

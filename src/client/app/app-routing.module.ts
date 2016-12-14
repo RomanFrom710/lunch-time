@@ -13,6 +13,7 @@ import {
 import {
     AdminPanelComponent,
     ManageCafesComponent,
+    AddCafeComponent,
     ManageUsersComponent
 } from './admin';
 
@@ -21,21 +22,66 @@ import {
     imports: [
         UserModule,
         RouterModule.forRoot([
-            { path: 'map', component: CafeMapComponent },
-            { path: 'places', component: CafeListComponent },
-            { path: 'login', component: SignInScreenComponent,
-                canActivate: [AuthGuard], data: { roles: [UserType.Anon] } },
-            { path: 'profile', component: ProfileSettingsComponent,
-                canActivate: [AuthGuard], data: { roles: [UserType.Admin, UserType.SpotOwner, UserType.User] }},
-            { path: 'admin', component: AdminPanelComponent, children: [
-                { path: 'users', component: ManageUsersComponent,
-                    canActivate: [AuthGuard], data: { roles: [UserType.Admin] } },
-                { path: 'places', component: ManageCafesComponent,
-                    canActivate: [AuthGuard], data: { roles: [UserType.Admin] } },
-                { path: '', redirectTo: 'places' }
-            ] },
-            { path: '', component: MainPageComponent },
-            { path: '**', component: NotFoundComponent }
+            {
+                path: 'map',
+                component: CafeMapComponent
+            },
+            {
+                path: 'places',
+                component: CafeListComponent
+            },
+            {
+                path: 'login',
+                component: SignInScreenComponent,
+                canActivate: [AuthGuard],
+                data: { roles: [UserType.Anon] }
+            },
+            {
+                path: 'profile',
+                component: ProfileSettingsComponent,
+                canActivate: [AuthGuard],
+                data: { roles: [UserType.Admin, UserType.SpotOwner, UserType.User] }
+            },
+            {
+                path: 'admin',
+                component: AdminPanelComponent,
+                children: [
+                    {
+                        path: 'users',
+                        component: ManageUsersComponent,
+                        canActivate: [AuthGuard],
+                        data: { roles: [UserType.Admin] }
+                    },
+                    {
+                        path: 'places',
+                        component: ManageCafesComponent,
+                        canActivate: [AuthGuard],
+                        data: { roles: [UserType.Admin] },
+                        children: [
+                            {
+                                path: 'add',
+                                component: AddCafeComponent
+                            },
+                            {
+                                path: '', // Why is it working?
+                                redirectTo: ''
+                            }
+                        ]
+                    },
+                    {
+                        path: '',
+                        redirectTo: 'places'
+                    }
+                ]
+            },
+            {
+                path: '',
+                component: MainPageComponent
+            },
+            {
+                path: '**',
+                component: NotFoundComponent
+            }
         ])
     ],
     exports: [ RouterModule ]

@@ -3,4 +3,3 @@
 // because it has much cafe-related logic.
 export * from './point.model';
 export * from './select-point';
-export * from './show-point';

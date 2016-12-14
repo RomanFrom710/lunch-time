@@ -4,13 +4,20 @@ import { RouterModule } from '@angular/router';
 import {
     AdminPanelComponent,
     ManageCafesComponent,
+    AddCafeComponent,
     ManageUsersComponent
 } from './';
+import { CafeModule } from '../cafe';
 
 
 @NgModule({
-    imports: [ RouterModule ],
-    declarations: [ AdminPanelComponent, ManageCafesComponent, ManageUsersComponent ],
+    imports: [ RouterModule, CafeModule ],
+    declarations: [
+        AdminPanelComponent,
+        ManageCafesComponent,
+        AddCafeComponent,
+        ManageUsersComponent
+    ],
     exports: [ ],
     providers: [ ],
 })
