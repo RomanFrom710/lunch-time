@@ -13,7 +13,7 @@ export class UserService {
                 private userStore: UserStore) { }
 
     updatePlace(point: Point): Promise<Point> {
-        return this.http.post(this.config.links.user.profile.update, { place: point })
+        return this.http.put(this.config.links.user.selfUpdate, { place: point })
             .map(response => {
                 const user: User = response.json();
                 this.userStore.updateUser({ place: user.place });
@@ -23,7 +23,7 @@ export class UserService {
     }
 
     updateProfile(user: User): Promise<User> {
-        return this.http.post(this.config.links.user.profile.update, user)
+        return this.http.put(this.config.links.user.selfUpdate, user)
             .map(response => {
                 const newUser = (new User()).fromData(response.json());
                 this.userStore.setUser(newUser);

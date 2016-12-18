@@ -47,10 +47,11 @@ const commonConfig = {
             },
             user: {
                 prefix: 'user',
-                profile: {
-                    prefix: 'profile',
-                    update: ''
-                }
+                selfUpdate: ''
+            },
+            cafe: {
+                prefix: 'cafe',
+                add: ''
             }
         }
     }

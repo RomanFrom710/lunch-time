@@ -29,7 +29,7 @@ export class UserStore {
 
     updateUser(userDto: any): void {
         const newUser = this.user.getValue().fromData(userDto);
-        this.user.next(newUser);
+        this.setUser(newUser);
     }
 
     resetUser(): void {

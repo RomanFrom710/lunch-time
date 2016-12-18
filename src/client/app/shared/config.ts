@@ -28,9 +28,10 @@ export class Config {
             }
         },
         user: {
-            profile: {
-                update: string;
-            }
+            selfUpdate: string;
+        },
+        cafe: {
+            add: string;
         }
     }
 }

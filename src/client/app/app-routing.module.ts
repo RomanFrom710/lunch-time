@@ -56,17 +56,13 @@ import {
                         path: 'places',
                         component: ManageCafesComponent,
                         canActivate: [AuthGuard],
-                        data: { roles: [UserType.Admin] },
-                        children: [
-                            {
-                                path: 'add',
-                                component: AddCafeComponent
-                            },
-                            {
-                                path: '', // Why is it working?
-                                redirectTo: ''
-                            }
-                        ]
+                        data: { roles: [UserType.Admin] }
+                    },
+                    {
+                        path: 'places/add',
+                        component: AddCafeComponent,
+                        canActivate: [AuthGuard],
+                        data: { roles: [UserType.Admin] }
                     },
                     {
                         path: '',
