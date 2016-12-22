@@ -12,6 +12,10 @@ exports.userOnly = function* (next) {
 };
 
 exports.adminOnly = function* (next) {
+    if (!this.isAuthenticated()) {
+        this.throw(401);
+    }
+
     const user = this.passport.user;
     if (user.userType === userEnums.userType.admin) {
         yield next;

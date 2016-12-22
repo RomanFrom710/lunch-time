@@ -1,1 +1,2 @@
-export * from './cafe.service';
+export * from './cafe-model';
+export * from './cafe-service';

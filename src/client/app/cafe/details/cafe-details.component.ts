@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { CafeService } from '../';
+import { CafeService, Cafe } from '../';
 
 
 // todo: Add validation for this component
@@ -10,8 +10,8 @@ import { CafeService } from '../';
 })
 export class CafeDetailsComponent {
     @Input() isEditMode: boolean = false;
-    //@Input() cafe: Cafe = null;
-    //@Output() cafeChange: EventEmitter<Cafe> = new EventEmitter<Cafe>();
+    @Input() cafe: Cafe = null;
+    @Output() cafeChange: EventEmitter<Cafe> = new EventEmitter<Cafe>();
 
     constructor(private cafeService: CafeService) { }
 }

@@ -8,8 +8,10 @@ const cafeService = require('./cafe-service');
 
 
 router
-    .post(config.get('app:links:cafe:add'), authMiddlewares.adminOnly(), function* () {
-
+    .post(config.get('app:links:cafe:add'), authMiddlewares.adminOnly, function* () {
+        const cafe = this.request.body;
+        yield cafeService.createCafe(cafe)
+            .then(result => this.body = result);
     });
 
 

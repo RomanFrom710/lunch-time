@@ -31,24 +31,11 @@ exports.applyGeoTransform = function (schema, geoFieldName) {
         }
     });
 
-    schema.pre('findOneAndUpdate', function (next) {
-        const update = this.getUpdate();
-        if (update.$set && _.isObject(update.$set[geoFieldName])) {
-            const coordsObject = update.$set[geoFieldName];
-            update.$set[geoFieldName] = [coordsObject.latitude, coordsObject.longitude];
-        }
-
-        next();
-    });
-
-    schema.pre('save', function (next) {
-        if (_.isObject(this[geoFieldName])) {
-            const coordsObject = this[geoFieldName];
-            this[geoFieldName] = [coordsObject.latitude, coordsObject.longitude];
-        }
-
-        next();
-    });
+    const options = schema.path(geoFieldName).options;
+    options.set = function (value) {
+        return _.isObject(value) ? [value.latitude, value.longitude] : value;
+    };
+    schema.path(geoFieldName, options);
 };
 
 
