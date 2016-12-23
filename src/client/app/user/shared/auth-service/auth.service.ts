@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { WindowService, Config } from '../../../shared';
@@ -11,6 +12,7 @@ import { User } from '../../';
 export class AuthService {
     constructor(private windowService: WindowService,
                 private http: Http,
+                private router: Router,
                 private userStore: UserStore,
                 private config: Config) {
         this.checkAuth();
@@ -39,6 +41,7 @@ export class AuthService {
             .toPromise()
             .then(data => {
                 if (data) {
+                    this.router.navigate(['/']);
                     this.userStore.resetUser();
                 }
                 return !!data
@@ -49,7 +52,8 @@ export class AuthService {
         return this.http.get(this.config.links.auth.info)
             .map(response => response.json())
             .toPromise()
-            .then(this.saveUser.bind(this));
+            .then(this.saveUser.bind(this))
+            .catch(() => {}); // It's just a check, nothing serious...
     }
 
     private saveUser(user) : User {

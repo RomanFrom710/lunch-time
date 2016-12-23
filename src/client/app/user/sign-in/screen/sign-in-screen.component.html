@@ -1,7 +1,18 @@
-<div class="row">
-    <div class="col-md-6">
-
+<div class="row sign-in-screen">
+    <div class="col-md-6 text-center">
+        <p>
+            Чтобы зарегистрироваться... (todo)
+        </p>
+        <p>
+            Или всё-таки войдите через одну из социальный сетей:
+        </p>
+        <ul class="list-inline social-buttons">
+            <li *ngFor="let authType of socialAuthTypes">
+                <img [src]="authType.logoUrl" [alt]="authType.name" (click)="authType.action()">
+            </li>
+        </ul>
     </div>
+
     <div class="col-md-6">
         <lt-local-sign-in></lt-local-sign-in>
     </div>

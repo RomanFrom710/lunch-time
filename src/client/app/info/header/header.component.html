@@ -20,12 +20,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="!(currentUser | async)">
                     <popover-content #signInPopover [closeOnClickOutside]="true">
-                        <ul class="list-inline social-buttons">
+                        <ul (click)="signInPopover.hide()" class="list-inline social-buttons">
                             <li *ngFor="let authType of socialAuthTypes">
                                 <img [src]="authType.logoUrl" [alt]="authType.name" (click)="authType.action()">
                             </li>
                         </ul>
-                        <a routerLink="/login" class="btn btn-primary">Войти с паролем</a>
+                        <a (click)="signInPopover.hide()" routerLink="/login" class="btn btn-primary">Войти с паролем</a>
                     </popover-content>
                     <a ltEmptyLink [popover]="signInPopover">Вход</a>
                 </li>
