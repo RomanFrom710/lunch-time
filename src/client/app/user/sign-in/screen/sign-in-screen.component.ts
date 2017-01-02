@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { SocialAuth, SocialAuthTypesService } from '../';
 import { AuthService } from '../../';
@@ -10,16 +11,21 @@ import { AuthService } from '../../';
     templateUrl: 'sign-in-screen.component.html',
     styleUrls: ['sign-in-screen.component.less']
 })
-export class SignInScreenComponent {
+export class SignInScreenComponent implements OnDestroy {
     private socialAuthTypes: SocialAuth[] = this.socialAuthTypesService.types;
+    private currentUserSubscription: Subscription;
 
     constructor(private authService: AuthService,
                 private socialAuthTypesService: SocialAuthTypesService,
                 private router: Router) {
-        authService.currentUser.subscribe(newUser => {
+        this.currentUserSubscription = authService.currentUser.subscribe(newUser => {
             if (newUser) {
                 router.navigate(['/']);
             }
         });
+    }
+
+    ngOnDestroy(): void {
+        this.currentUserSubscription.unsubscribe();
     }
 }

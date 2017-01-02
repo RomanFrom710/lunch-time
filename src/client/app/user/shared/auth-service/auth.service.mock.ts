@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { WindowService } from '../../../shared';
 import { User, vkMockUser } from '../../shared';
@@ -10,13 +11,13 @@ export class MockAuthService {
 
     constructor(private windowService: WindowService) {}
 
-    authVk(): Promise<User> {
+    authVk(): Observable<User> {
         this.windowService.setStorageValue(this.localStorageKey, vkMockUser);
-        return Promise.resolve<User>(vkMockUser);
+        return Observable.of(vkMockUser);
     }
 
-    logout(): Promise<boolean> {
+    logout(): Observable<boolean> {
         this.windowService.setStorageValue(this.localStorageKey, null);
-        return Promise.resolve<boolean>(true);
+        return Observable.of(true);
     }
 }

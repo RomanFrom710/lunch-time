@@ -32,6 +32,7 @@ export class Config {
         },
         cafe: {
             add: string;
+            coords: string;
         }
     }
 }

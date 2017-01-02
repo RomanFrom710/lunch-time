@@ -2,4 +2,8 @@
                  [longitude]="initialPoint.longitude"
                  [zoom]="initialZoom"
                  [style.height]="mapHeight">
+    <sebm-google-map-marker *ngFor="let cafe of cafes | async"
+                            [latitude]="cafe.place.latitude"
+                            [longitude]="cafe.place.longitude">
+    </sebm-google-map-marker>
 </sebm-google-map>

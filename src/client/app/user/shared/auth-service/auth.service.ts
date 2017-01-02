@@ -22,34 +22,31 @@ export class AuthService {
         return this.userStore.getUser();
     }
 
-    authVk(): Promise<User> {
-        return this.windowService
+    authVk(): void {
+        this.windowService
             .openTempWindow(this.config.links.auth.vk.auth, this.config.auth.authEventName)
-            .then(this.checkAuth.bind(this));
+            .subscribe(this.checkAuth.bind(this));
     }
 
-    authLocal(username: string, password: string): Promise<User> {
-        return this.http.post(this.config.links.auth.local.auth,
+    authLocal(username: string, password: string): void {
+        this.http.post(this.config.links.auth.local.auth,
                               { username: username, password: password })
             .map(response => response.json())
-            .toPromise()
-            .then(this.saveUser.bind(this));
+            .subscribe(this.saveUser.bind(this));
     }
 
-    logout(): Promise<boolean> {
-        return this.http.post(this.config.links.auth.logout, {})
-            .toPromise()
-            .then(data => {
+    logout(): void {
+        this.http.post(this.config.links.auth.logout, {})
+            .subscribe(data => {
                 if (data) {
-                    this.router.navigate(['/']);
-                    this.userStore.resetUser();
+                    this.router.navigate(['/'])
+                        .then(this.userStore.resetUser.bind(this.userStore));
                 }
-                return !!data
             });
     }
 
-    checkAuth(): Promise<User> {
-        return this.http.get(this.config.links.auth.info)
+    checkAuth(): void {
+        this.http.get(this.config.links.auth.info)
             .map(response => response.json())
             .toPromise()
             .then(this.saveUser.bind(this))

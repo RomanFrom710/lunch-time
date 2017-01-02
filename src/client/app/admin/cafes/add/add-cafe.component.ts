@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Cafe, CafeService } from '../../../cafe';
 
@@ -10,9 +11,12 @@ import { Cafe, CafeService } from '../../../cafe';
 export class AddCafeComponent {
     private cafe: Cafe = new Cafe();
 
-    constructor(private cafeService: CafeService) { }
+    constructor(private cafeService: CafeService,
+                private router: Router,
+                private currentRoute: ActivatedRoute) { }
 
     addCafe(): void {
-        this.cafeService.addCafe(this.cafe);
+        this.cafeService.addCafe(this.cafe)
+            .subscribe(() => this.router.navigate(['../'], { relativeTo: this.currentRoute }));
     }
 }

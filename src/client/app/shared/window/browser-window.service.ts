@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 import { WindowService } from './window.service';
 
@@ -7,19 +8,19 @@ import { WindowService } from './window.service';
 export class BrowserWindowService implements WindowService {
     private newWindowOptions: string = 'width=700,height=400,top=200,left=300';
 
-    // todo: rewrite with observable
-    openTempWindow(newWindowUrl: string, messageName: string): Promise<boolean> {
-        return new Promise<boolean>(resolve => {
-            var messageHandler = event => {
-                if (event.data === messageName) {
-                    resolve(true);
-                    window.removeEventListener('message', messageHandler);
-                }
-            };
+    openTempWindow(newWindowUrl: string, messageName: string): Observable<boolean> {
+        const subject = new Subject<boolean>();
+        const messageHandler = event => {
+            if (event.data === messageName) {
+                subject.next(true);
+                window.removeEventListener('message', messageHandler);
+            }
+        };
 
-            window.addEventListener('message', messageHandler);
-            window.open(newWindowUrl, 'newwindow', this.newWindowOptions);
-        });
+        window.addEventListener('message', messageHandler);
+        window.open(newWindowUrl, 'newwindow', this.newWindowOptions);
+
+        return subject.asObservable();
     }
 
     getStorageValue(key: string): any {

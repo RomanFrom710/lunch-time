@@ -36,6 +36,19 @@ exports.applyGeoTransform = function (schema, geoFieldName) {
         return _.isObject(value) ? [value.latitude, value.longitude] : value;
     };
     schema.path(geoFieldName, options);
+
+    // Setters don't work for updates.
+    // https://github.com/Automattic/mongoose/issues/751
+    // Love mongoose so much.
+    schema.pre('findOneAndUpdate', function (next) {
+        const update = this.getUpdate();
+        if (update.$set && _.isObject(update.$set[geoFieldName])) {
+            const coordsObject = update.$set[geoFieldName];
+            update.$set[geoFieldName] = [coordsObject.latitude, coordsObject.longitude];
+        }
+
+        next();
+    });
 };
 
 

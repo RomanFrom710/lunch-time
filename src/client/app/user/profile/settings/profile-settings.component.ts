@@ -36,7 +36,7 @@ export class ProfileSettingsComponent {
     }
 
     updatePlace(): void {
-        this.userService.updatePlace(this.currentPlace);
+        this.userService.updatePlace(this.currentPlace).subscribe();
     }
 
     resetPlace(): void {
@@ -45,7 +45,7 @@ export class ProfileSettingsComponent {
 
     updateProfile(): void {
         this.userService.updateProfile(this.currentUser)
-            .then(() => this.isEditMode = false);
+            .subscribe(() => this.isEditMode = false);
     }
 
     resetProfile(): void {

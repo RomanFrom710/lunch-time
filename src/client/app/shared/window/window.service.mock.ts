@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { WindowService } from './window.service';
 
@@ -7,8 +8,8 @@ import { WindowService } from './window.service';
 export class MockWindowService implements WindowService {
     private mockStorage: Object = {};
 
-    openTempWindow(newWindowUrl: string, messageName: string): Promise<boolean> {
-        return Promise.reject<boolean>(false);
+    openTempWindow(newWindowUrl: string, messageName: string): Observable<boolean> {
+        return Observable.throw(false);
     }
 
     getStorageValue(key: string): any {

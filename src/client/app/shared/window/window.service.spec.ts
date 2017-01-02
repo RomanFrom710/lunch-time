@@ -1,5 +1,6 @@
 import { BrowserWindowService, MockWindowService } from './';
 
+
 const testObject = {
     a: 5,
     nested: {
