@@ -21,6 +21,9 @@ const commonConfig = {
         auth: {
             authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
         },
+        cafe: {
+            itemsPerPage: 15
+        },
         map: {
             initialPoint: { // Minsk
                 latitude: 53.904692,
@@ -52,6 +55,7 @@ const commonConfig = {
             cafe: {
                 prefix: 'cafe',
                 add: '',
+                getAll: '',
                 coords: 'coords'
             }
         }

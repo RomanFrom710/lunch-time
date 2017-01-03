@@ -1,5 +1,5 @@
 'use strict';
-
+// todo: separate by files
 const webpack = require('webpack');
 const webpackConfig = require('../../webpack.config');
 const webpackDevMiddleware = require('koa-webpack-dev-middleware');

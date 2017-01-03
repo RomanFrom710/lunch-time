@@ -9,6 +9,10 @@ export class Config {
         authEventName: string;
     };
 
+    cafe: {
+        itemsPerPage: number;
+    };
+
     map: {
         initialPoint: Point;
         initialZoom: number;
@@ -32,6 +36,7 @@ export class Config {
         },
         cafe: {
             add: string;
+            getAll: string;
             coords: string;
         }
     }

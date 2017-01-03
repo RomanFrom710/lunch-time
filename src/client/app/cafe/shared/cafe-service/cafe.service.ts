@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { Cafe } from '../';
-import { Config } from '../../../shared';
+import { Cafe, CafeQuery } from '../';
+import { Config, PaginationResult } from '../../../shared';
 
 
 @Injectable()
@@ -13,6 +13,11 @@ export class CafeService {
 
     getCoords(): Observable<Cafe[]> {
         return this.http.get(this.config.links.cafe.coords)
+            .map(response => response.json());
+    }
+
+    getAll(query: CafeQuery): Observable<PaginationResult<Cafe>> {
+        return this.http.get(this.config.links.cafe.getAll)
             .map(response => response.json());
     }
 

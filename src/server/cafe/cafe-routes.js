@@ -12,6 +12,10 @@ router
         yield cafeService.getAllCafeCoords()
             .then(result => this.body = result);
     })
+    .get(config.get('app:links:cafe:getAll'), function* () {
+        yield cafeService.getAllCafes({}) // todo: get it from the query params
+            .then(result => this.body = result);
+    })
     .post(config.get('app:links:cafe:add'), authMiddlewares.adminOnly, function* () {
         const cafe = this.request.body;
         yield cafeService.createCafe(cafe)

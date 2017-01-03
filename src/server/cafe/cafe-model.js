@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const paginate = require('mongoose-paginate');
 
 const dbExtensions = require('../shared/db-extensions');
 
@@ -16,5 +17,6 @@ const cafeSchema = new mongoose.Schema({
 });
 dbExtensions.applyRemovePrivateFieldsTransform(cafeSchema);
 dbExtensions.applyGeoTransform(cafeSchema, 'place');
+cafeSchema.plugin(paginate);
 
 module.exports = mongoose.model('cafe', cafeSchema);
