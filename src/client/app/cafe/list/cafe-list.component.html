@@ -1,5 +1,11 @@
-<ul class="list-inline">
-    <li *ngFor="let cafe of (cafes | async)?.data" class="col-lg-3 col-md-4 col-sm-6">
+<div class="row">
+    <div *ngFor="let cafe of cafes | async | paginate : { itemsPerPage: query.itemsPerPage, currentPage: query.page, totalItems: total }"
+        class="col-lg-3 col-md-4 col-sm-6">
         {{cafe.name}}
-    </li>
-</ul>
+    </div>
+</div>
+
+<div>
+<pagination-controls (pageChange)="pageChanged($event)"
+                     [autoHide]="true"></pagination-controls>
+</div>

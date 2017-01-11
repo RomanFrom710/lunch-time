@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Cafe, CafeService, CafeQuery } from '../';
-import { PaginationResult } from '../../shared';
+import { Config } from '../../shared';
 
 
 @Component({
@@ -11,7 +11,22 @@ import { PaginationResult } from '../../shared';
 })
 export class CafeListComponent {
     private query: CafeQuery = new CafeQuery();
-    private cafes: Observable<PaginationResult<Cafe>> = this.cafeService.getAll(this.query);
+    private cafes: Observable<Cafe[]>;
+    private page: Number;
+    private total: Number;
 
-    constructor(private cafeService: CafeService) { }
+    constructor(private cafeService: CafeService,
+                private config: Config) {
+        this.query.itemsPerPage = config.cafe.itemsPerPage;
+        this.pageChanged(1);
+    }
+
+    private pageChanged(pageNumber: Number): void {
+        this.query.page = pageNumber;
+        this.cafes = this.cafeService.getAll(this.query).map(response => {
+            this.page = pageNumber;
+            this.total = response.total;
+            return response.data;
+        });
+    }
 }

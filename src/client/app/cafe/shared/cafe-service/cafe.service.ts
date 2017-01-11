@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { Cafe, CafeQuery } from '../';
@@ -17,7 +17,11 @@ export class CafeService {
     }
 
     getAll(query: CafeQuery): Observable<PaginationResult<Cafe>> {
-        return this.http.get(this.config.links.cafe.getAll)
+        const params = new URLSearchParams();
+        params.set('page', query.page.toString());
+        params.set('itemsPerPage', query.itemsPerPage.toString());
+
+        return this.http.get(this.config.links.cafe.getAll, { search: params })
             .map(response => response.json());
     }
 

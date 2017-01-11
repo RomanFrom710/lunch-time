@@ -13,7 +13,12 @@ router
             .then(result => this.body = result);
     })
     .get(config.get('app:links:cafe:getAll'), function* () {
-        yield cafeService.getAllCafes({}) // todo: get it from the query params
+        const query = {
+            page: +this.query.page,
+            itemsPerPage: +this.query.itemsPerPage
+        };
+
+        yield cafeService.getAllCafes(query)
             .then(result => this.body = result);
     })
     .post(config.get('app:links:cafe:add'), authMiddlewares.adminOnly, function* () {
