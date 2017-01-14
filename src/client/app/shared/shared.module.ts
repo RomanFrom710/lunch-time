@@ -5,7 +5,8 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import {
     Config,
-    EmptyLink,
+    EmptyLinkDirective,
+    DefaultImageDirective,
     WindowService,
     ErrorHandlingInterceptor,
     SelectPointComponent,
@@ -13,8 +14,9 @@ import {
 } from './';
 
 
-const components = [ // Obviously everything that is declared in shared module should be exported too.
-    EmptyLink,
+const components = [ // Everything that is declared in shared module should be exported too.
+    EmptyLinkDirective,
+    DefaultImageDirective,
     SelectPointComponent
 ];
 

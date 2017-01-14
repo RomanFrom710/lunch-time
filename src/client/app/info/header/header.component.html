@@ -30,8 +30,12 @@
                     <a ltEmptyLink [popover]="signInPopover">Вход</a>
                 </li>
 
-                <li *ngIf="currentUser | async" dropdown>
+                <li *ngIf="currentUser | async" dropdown class="user-menu">
                     <a ltEmptyLink dropdown-open>
+                        <img [src]="(currentUser | async)?.photoUrl"
+                             [alt]="(currentUser | async)?.fullName"
+                             [ltDefaultImage]="'./no_avatar.png'"
+                             class="img-circle avatar">
                         {{(currentUser | async)?.fullName}}
                         <i class="caret"></i>
                     </a>

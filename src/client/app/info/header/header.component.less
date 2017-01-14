@@ -7,3 +7,16 @@
     cursor: pointer;
   }
 }
+
+@headerHeight: 50px;
+@avatarHeight: 36px;
+.user-menu {
+  & > a {
+    padding-top: (@headerHeight - @avatarHeight) / 2;
+    padding-bottom: (@headerHeight - @avatarHeight) / 2;
+  }
+
+  .avatar {
+    height: @avatarHeight;
+  }
+}
