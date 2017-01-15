@@ -7,6 +7,7 @@ const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const commonConfig = require('./webpack.common');
 const appConfig = require('../src/server/config');
 
+
 const devConfig = {
     entry: {
         hot: 'webpack-hot-middleware/client?reload=true',
@@ -16,7 +17,6 @@ const devConfig = {
     },
     devtool: 'eval-cheap-module-source-map',
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new WebpackBrowserPlugin({
             url: 'http://localhost',

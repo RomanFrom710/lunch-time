@@ -6,6 +6,7 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common');
 
+
 const prodConfig = {
     devtool: 'source-map',
     output: {
@@ -15,7 +16,8 @@ const prodConfig = {
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             comments: false,
-            compress: { screw_ie8: true, warnings: false },
+            sourceMap: true,
+            compress: { screw_ie8: true },
             mangle: { screw_ie8: true, keep_fnames: true }
         }),
         new WebpackCleanupPlugin()

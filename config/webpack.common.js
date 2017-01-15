@@ -3,10 +3,10 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 const resolvePath = require('./helpers/path-resolver');
 const appConfig = require('./app.config').get('app');
+
 
 module.exports = {
     entry: {
@@ -17,53 +17,82 @@ module.exports = {
         path: resolvePath('./public')
     },
     resolve: {
-        root: resolvePath('./'),
-        extensions: ['', '.ts', '.js']
+        modules: [
+            resolvePath('./'),
+            'node_modules'
+        ],
+        extensions: ['.ts', '.js']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.ts$/,
-                loader: 'awesome-typescript!angular2-template',
-                exclude: /\.spec.ts$/
+                exclude: /\.spec.ts$/,
+                use: [
+                    'ts-loader',
+                    'angular2-template-loader'
+                ],
             },
             {
                 test: /\.html$/,
-                loader: 'html'
+                use: ['raw-loader']
             },
             {
                 test: /\.less$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                loader: ExtractTextPlugin.extract('style', 'css!less?sourcemap')
+                loader: ExtractTextPlugin.extract({ // WTF, api from webpack v1. I like JS world so much.
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        {
+                            loader: 'css-loader'
+                        },
+                        {
+                            loader: 'less-loader',
+                            query: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
             },
             {
                 test: /\.css$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                loader: ExtractTextPlugin.extract('style', 'css?sourcemap')
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        {
+                            loader: 'css-loader',
+                            query: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
             },
             {
                 test: /\.less$/, // Component styles
                 include: resolvePath('./src/client/app'),
-                loader: 'raw!less'
+                use: [
+                    'raw-loader',
+                    'less-loader'
+                ]
             },
             {
                 test: /\.(woff|woff2|eot|svg|ttf|png|jpg|jpeg)$/,
-                loader: 'url?limit=3000'
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 3000
+                    }
+                }]
+            },
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                use: ['source-map-loader']
             }
-        ],
-        preLoaders: [{
-            test: /\.js$/,
-            loader: 'source-map'
-        }]
-    },
-    htmlLoader: {
-        root: resolvePath('./assets'),
-        minimize: true,
-        removeAttributeQuotes: false,
-        caseSensitive: true,
-        // Enabling custom angular2 attributes support
-        customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
-        customAttrAssing: [ /\)?]?=/ ]
+        ]
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
@@ -75,9 +104,10 @@ module.exports = {
         // Since ExtractTextPlugin is used only for vendor styles, it's better
         // to always get it enabled. We don't need HRM for vendor styles, but inserting
         // them into DOM takes a lot of resources.
-        new ExtractTextPlugin('[name].[hash].css'),
+        new ExtractTextPlugin({
+            filename: '[name].[hash].css'
+        }),
         new webpack.NoErrorsPlugin(),
-        new ForkCheckerPlugin(),
         new webpack.DefinePlugin({
             'process.env.ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.CONFIG': JSON.stringify(appConfig)

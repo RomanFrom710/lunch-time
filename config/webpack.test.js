@@ -5,6 +5,7 @@ const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common');
 const resolvePath = require('./helpers/path-resolver');
 
+
 const testConfig = {
     devtool: 'inline-source-map',
     output: {
@@ -12,24 +13,27 @@ const testConfig = {
         filename: '[name].[chunkHash].js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.spec.ts$/,
-                loader: 'awesome-typescript!angular2-template'
+                use: [
+                    'ts-loader',
+                    'angular2-template-loader'
+                ],
             },
             { // We don't need vendor styles
                 test: /\.less$/,
                 exclude: resolvePath('./src/client/app'),
-                loader: 'null'
+                use: ['null-loader']
             },
             {
                 test: /\.css$/,
                 exclude: resolvePath('./src/client/app'),
-                loader: 'null'
+                use: ['null-loader']
             },
             {
                 test: /\.(woff|woff2|eot|svg|ttf)$/,
-                loader: 'null'
+                use: ['null-loader']
             }
         ]
     },
