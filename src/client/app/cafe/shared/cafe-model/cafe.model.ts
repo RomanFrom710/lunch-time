@@ -7,4 +7,5 @@ export class Cafe extends Serializable {
     address: string;
     description: string;
     place: Point;
+    photoUrl: string;
 }

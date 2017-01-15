@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ImageResult } from 'ng2-imageupload';
 
 import { CafeService, Cafe } from '../';
 
@@ -13,5 +14,11 @@ export class CafeDetailsComponent {
     @Input() cafe: Cafe = null;
     @Output() cafeChange: EventEmitter<Cafe> = new EventEmitter<Cafe>();
 
+    private imageSrc: string;
+
     constructor(private cafeService: CafeService) { }
+
+    private selected(imageResult: ImageResult): void {
+        this.imageSrc = imageResult.dataURL;
+    }
 }

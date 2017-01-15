@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PaginationModule } from 'ng2-pagination';
+import { ImageUploadModule } from 'ng2-imageupload';
 
 import { SharedModule } from '../shared';
 import {
@@ -18,7 +19,9 @@ import {
         CommonModule,
         FormsModule,
         Ng2PaginationModule,
-        AgmCoreModule.forRoot() ],
+        ImageUploadModule,
+        AgmCoreModule.forRoot()
+    ],
     declarations: [ CafeMapComponent, CafeListComponent, CafeDetailsComponent ],
     exports: [ CafeDetailsComponent ],
     providers: [ CafeService ]
