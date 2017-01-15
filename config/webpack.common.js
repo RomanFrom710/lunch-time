@@ -3,6 +3,7 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
 const resolvePath = require('./helpers/path-resolver');
 const appConfig = require('./app.config').get('app');
@@ -29,7 +30,7 @@ module.exports = {
                 test: /\.ts$/,
                 exclude: /\.spec.ts$/,
                 use: [
-                    'ts-loader',
+                    'awesome-typescript-loader',
                     'angular2-template-loader'
                 ],
             },
@@ -107,7 +108,8 @@ module.exports = {
         new ExtractTextPlugin({
             filename: '[name].[hash].css'
         }),
-        new webpack.NoErrorsPlugin(),
+        new CheckerPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env.ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.CONFIG': JSON.stringify(appConfig)

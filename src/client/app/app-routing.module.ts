@@ -66,6 +66,7 @@ import {
                     },
                     {
                         path: '',
+                        pathMatch: 'full',
                         redirectTo: 'places'
                     }
                 ]
