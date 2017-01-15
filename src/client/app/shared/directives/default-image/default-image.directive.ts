@@ -13,11 +13,10 @@ export class DefaultImageDirective implements OnChanges{
     @Input()
     src: string;
 
-    @Input('ltDefaultImage')
-    defaultSrc: string;
+    @Input('ltDefaultImage') defaultSrc: string;
 
     // Webpack needs context for dynamic requires.
-    private imagesContext: __WebpackModuleApi.RequireContext = require.context('assets', true, /\.(png|jpg|jpeg)$/);
+    private imagesContext = require.context('assets', true, /\.(png|jpg|jpeg)$/);
 
     ngOnChanges(): void {
         if (!this.src) {
