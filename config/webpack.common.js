@@ -20,7 +20,7 @@ module.exports = {
     resolve: {
         modules: [
             resolvePath('./'),
-            'node_modules'
+            resolvePath('./node_modules')
         ],
         extensions: ['.ts', '.js']
     },
@@ -90,6 +90,11 @@ module.exports = {
             },
             {
                 test: /\.js$/,
+                exclude: [ // Libs without sourcemaps.
+                    resolvePath('./node_modules/ng2-toastr'),
+                    resolvePath('./node_modules/ng2-imageupload'),
+                    resolvePath('./node_modules/ng2-interceptors')
+                ],
                 enforce: 'pre',
                 use: ['source-map-loader']
             }
@@ -108,6 +113,11 @@ module.exports = {
         new ExtractTextPlugin({
             filename: '[name].[hash].css'
         }),
+        new webpack.ContextReplacementPlugin( // Fixing warnings about dynamic requires in angular 2 code.
+            // The (\\|\/) piece accounts for path separators in *nix and Windows
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            resolvePath('./src')
+        ),
         new CheckerPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
