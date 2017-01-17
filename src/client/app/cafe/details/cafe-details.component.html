@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<form *ngIf="isEditMode" class="form-horizontal">
+<form *ngIf="isEditMode" class="form-horizontal cafe-form">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -45,11 +45,19 @@
                     <textarea [(ngModel)]="cafe.description" name="description" class="form-control"></textarea>
                 </label>
             </div>
+            <div class="form-group">
+                <label>
+                    Изображение
+                    <input image-upload
+                           (imageSelected)="selected($event)"
+                           type="file"
+                           name="photo"
+                           class="form-control">
+                </label>
+            </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 image-preview">
             <img [src]="imageSrc" [alt]="cafe.name" [ltDefaultImage]="'./no_image.png'">
-            <br>
-            <input type="file" image-upload (imageSelected)="selected($event)">
         </div>
     </div>
 

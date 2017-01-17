@@ -7,7 +7,8 @@ import { CafeService, Cafe } from '../';
 // todo: Add validation for this component
 @Component({
     selector: 'lt-cafe-details',
-    templateUrl: 'cafe-details.component.html'
+    templateUrl: 'cafe-details.component.html',
+    styleUrls: ['cafe-details.component.less']
 })
 export class CafeDetailsComponent {
     @Input() isEditMode: boolean = false;
