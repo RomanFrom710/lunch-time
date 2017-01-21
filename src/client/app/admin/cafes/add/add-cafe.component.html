@@ -1,6 +1,9 @@
 <div>
-    <lt-cafe-details [isEditMode]="true" [(cafe)]="cafe"></lt-cafe-details>
+    <lt-cafe-details #cafeDetails
+                     [isEditMode]="true"
+                     [(cafe)]="cafe"></lt-cafe-details>
 </div>
+
 <div class="row">
     <button (click)="addCafe()" class="btn btn-primary">Сохранить</button>
 </div>

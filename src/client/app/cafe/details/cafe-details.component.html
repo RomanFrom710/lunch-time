@@ -24,32 +24,55 @@
     </div>
 </div>
 
-<form *ngIf="isEditMode" class="form-horizontal cafe-form">
+<form #form="ngForm" *ngIf="isEditMode" class="form-horizontal cafe-form">
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="hasError(name)">
                 <label>
                     Название
-                    <input [(ngModel)]="cafe.name" type="text" name="name" class="form-control">
+                    <input #name="ngModel"
+                           [(ngModel)]="cafe.name"
+                           type="text"
+                           name="name"
+                           required
+                           class="form-control">
                 </label>
+                <div *ngIf="hasError(name)" class="text-danger">
+                    <p *ngIf="name.errors.required">
+                        Название необходимо для кафе
+                    </p>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="hasError(address)">
                 <label>
                     Адрес
-                    <input [(ngModel)]="cafe.address" type="text" name="address" class="form-control">
+                    <input #address="ngModel"
+                           [(ngModel)]="cafe.address"
+                           type="text"
+                           name="address"
+                           required
+                           class="form-control">
                 </label>
+                <div *ngIf="hasError(address)" class="text-danger">
+                    <p *ngIf="address.errors.required">
+                        Адрес необходим для кафе
+                    </p>
+                </div>
             </div>
             <div class="form-group">
                 <label>
                     Описание
-                    <textarea [(ngModel)]="cafe.description" name="description" class="form-control"></textarea>
+                    <textarea [(ngModel)]="cafe.description"
+                              name="description"
+                              required
+                              class="form-control"></textarea>
                 </label>
             </div>
             <div class="form-group">
                 <label>
                     Изображение
                     <input image-upload
-                           (imageSelected)="selected($event)"
+                           (imageSelected)="imageSelected($event)"
                            type="file"
                            name="photo"
                            class="form-control">

@@ -10,7 +10,8 @@ import {
     CafeMapComponent,
     CafeListComponent,
     CafeService,
-    CafeDetailsComponent } from './';
+    CafeDetailsComponent
+} from './';
 
 
 @NgModule({
