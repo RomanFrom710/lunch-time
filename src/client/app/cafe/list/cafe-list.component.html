@@ -1,7 +1,7 @@
 <div class="row">
-    <div *ngFor="let cafe of cafes | async | paginate : { itemsPerPage: query.itemsPerPage, currentPage: query.page, totalItems: total }"
+    <div *ngFor="let cafe of cafes | async | paginate : paginateQuery"
         class="col-lg-3 col-md-4 col-sm-6">
-        {{cafe.name}}
+        <a [routerLink]="[cafe.id]">{{cafe.name}}</a>
     </div>
 </div>
 
@@ -9,3 +9,5 @@
 <pagination-controls (pageChange)="pageChanged($event)"
                      [autoHide]="true"></pagination-controls>
 </div>
+
+<router-outlet><!-- Modal window placeholder --></router-outlet>

@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { CafeMapComponent, CafeListComponent } from './cafe';
 import { MainPageComponent, NotFoundComponent } from './info';
+import {
+    CafeMapComponent,
+    CafeListComponent,
+    CafeModalComponent
+} from './cafe';
 import {
     SignInScreenComponent,
     ProfileSettingsComponent,
@@ -26,10 +30,18 @@ import {
                 path: 'map',
                 component: CafeMapComponent
             },
+
             {
                 path: 'places',
-                component: CafeListComponent
+                component: CafeListComponent,
+                children: [
+                    {
+                        path: ':id',
+                        component: CafeModalComponent
+                    }
+                ]
             },
+
             {
                 path: 'login',
                 component: SignInScreenComponent,

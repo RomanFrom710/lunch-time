@@ -21,6 +21,14 @@ export class CafeListComponent {
         this.pageChanged(1);
     }
 
+    private get paginateQuery() {
+        return {
+            itemsPerPage: this.query.itemsPerPage,
+            currentPage: this.query.page,
+            totalItems: this.total
+        };
+    }
+
     private pageChanged(pageNumber: Number): void {
         this.query.page = pageNumber;
         this.cafes = this.cafeService.getAll(this.query).map(response => {

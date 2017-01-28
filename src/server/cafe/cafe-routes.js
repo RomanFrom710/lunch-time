@@ -15,6 +15,11 @@ router
         yield cafeService.getAllCafeCoords()
             .then(result => this.body = result);
     })
+    .get(config.get('app:links:cafe:getById'), function* () {
+        const id = this.params.id;
+        yield cafeService.findById(id)
+            .then(result => this.body = result);
+    })
     .get(config.get('app:links:cafe:getAll'), function* () {
         const query = {
             page: +this.query.page,

@@ -1,0 +1,11 @@
+<route-modal>
+    <modal-header>
+        <h2>{{(cafe | async)?.name}}</h2>
+    </modal-header>
+    <modal-content>
+        {{(cafe | async)?.description}}
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" [routerLink]="['../']">Закрыть</button>
+    </modal-footer>
+</route-modal>

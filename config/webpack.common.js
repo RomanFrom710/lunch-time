@@ -92,6 +92,7 @@ module.exports = {
                 test: /\.js$/,
                 exclude: [ // Libs without sourcemaps.
                     resolvePath('./node_modules/ng2-toastr'),
+                    resolvePath('./node_modules/ng2-modal'),
                     resolvePath('./node_modules/ng2-imageupload'),
                     resolvePath('./node_modules/ng2-interceptors')
                 ],

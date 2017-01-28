@@ -25,6 +25,12 @@ export class CafeService {
             .map(response => response.json());
     }
 
+    getById(id: string): Observable<Cafe> {
+        const url = this.config.links.cafe.getById.replace(':id', id);
+        return this.http.get(url)
+            .map(response => response.json());
+    }
+
     addCafe(cafe: Cafe): Observable<boolean> {
         return this.http.post(this.config.links.cafe.add, cafe)
             .map(response => response.json());

@@ -8,7 +8,7 @@ import {
 import { NgForm, NgModel } from '@angular/forms';
 import { ImageResult } from 'ng2-imageupload';
 
-import { CafeService, Cafe } from '../';
+import { Cafe } from '../';
 
 
 @Component({
@@ -23,10 +23,9 @@ export class CafeDetailsComponent {
     @Output() cafeChange: EventEmitter<Cafe> = new EventEmitter<Cafe>();
 
     @ViewChild('form') private form: NgForm;
+
     private imageSrc: string;
     private isValidated: boolean = false;
-
-    constructor(private cafeService: CafeService) { }
 
     validate(): boolean {
         if (!this.isEditMode) {
