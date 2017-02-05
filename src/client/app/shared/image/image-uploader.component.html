@@ -1,0 +1,13 @@
+<div class="image-preview">
+    <img [src]="imageSrc" [ltDefaultImage]="'./no_image.png'" alt="Uploading image preview">
+</div>
+<div>
+    <input image-upload
+           ng2FileSelect
+           (imageSelected)="imageSelected($event)"
+           [uploader]="uploader"
+           type="file"
+           name="image"
+           class="form-control">
+    <button (click)="uploader.queue[0].upload()" class="btn btn-primary">Загрузить</button>
+</div>

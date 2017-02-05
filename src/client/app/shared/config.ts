@@ -37,8 +37,11 @@ export class Config {
         cafe: {
             add: string;
             getAll: string;
-            getById: string;
             coords: string;
+            one: {
+                get: string;
+                image: string;
+            }
         }
     }
 }

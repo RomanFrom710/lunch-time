@@ -26,7 +26,7 @@ export class CafeService {
     }
 
     getById(id: string): Observable<Cafe> {
-        const url = this.config.links.cafe.getById.replace(':id', id);
+        const url = this.config.links.cafe.one.get.replace(':id', id);
         return this.http.get(url)
             .map(response => response.json());
     }

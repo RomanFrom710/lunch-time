@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'ng2-toastr';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { ImageUploadModule } from 'ng2-imageupload';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import {
     Config,
@@ -10,6 +12,7 @@ import {
     WindowService,
     ErrorHandlingInterceptor,
     SelectPointComponent,
+    ImageUploaderComponent,
     BrowserWindowService
 } from './';
 
@@ -17,6 +20,7 @@ import {
 const components = [ // Everything that is declared in shared module should be exported too.
     EmptyLinkDirective,
     DefaultImageDirective,
+    ImageUploaderComponent,
     SelectPointComponent
 ];
 
@@ -24,6 +28,8 @@ const components = [ // Everything that is declared in shared module should be e
     imports: [
         CommonModule,
         AgmCoreModule.forRoot(),
+        ImageUploadModule,
+        FileUploadModule,
         ToastModule
     ],
     declarations: components,

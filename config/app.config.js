@@ -55,9 +55,13 @@ const commonConfig = {
             cafe: {
                 prefix: 'cafe',
                 add: '',
-                getById: ':id',
                 getAll: '',
-                coords: 'coords'
+                coords: 'coords',
+                one: {
+                    prefix: ':id',
+                    get: '',
+                    image: 'image'
+                }
             }
         }
     }

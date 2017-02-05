@@ -6,7 +6,6 @@ import {
     ViewChild
 } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
-import { ImageResult } from 'ng2-imageupload';
 
 import { Cafe } from '../';
 
@@ -19,12 +18,10 @@ import { Cafe } from '../';
 export class CafeDetailsComponent {
     @Input() isEditMode: boolean = false;
     @Input() cafe: Cafe = null;
-    @Input() onSubmit: () => void;
     @Output() cafeChange: EventEmitter<Cafe> = new EventEmitter<Cafe>();
 
     @ViewChild('form') private form: NgForm;
 
-    private imageSrc: string;
     private isValidated: boolean = false;
 
     validate(): boolean {
@@ -38,9 +35,5 @@ export class CafeDetailsComponent {
 
     private hasError(field: NgModel) {
         return field.errors && (this.isValidated || field.touched || field.dirty);
-    }
-
-    private imageSelected(imageResult: ImageResult): void {
-        this.imageSrc = imageResult.dataURL;
     }
 }

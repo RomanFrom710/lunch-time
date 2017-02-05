@@ -67,19 +67,9 @@
                               class="form-control"></textarea>
                 </label>
             </div>
-            <div class="form-group">
-                <label>
-                    Изображение
-                    <input image-upload
-                           (imageSelected)="imageSelected($event)"
-                           type="file"
-                           name="photo"
-                           class="form-control">
-                </label>
-            </div>
         </div>
-        <div class="col-md-6 image-preview">
-            <img [src]="imageSrc" [alt]="cafe.name" [ltDefaultImage]="'./no_image.png'">
+        <div class="col-md-6 image-container">
+            <lt-image-uploader></lt-image-uploader>
         </div>
     </div>
 
