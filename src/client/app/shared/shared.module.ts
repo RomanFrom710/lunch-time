@@ -11,6 +11,7 @@ import {
     DefaultImageDirective,
     WindowService,
     ErrorHandlingInterceptor,
+    CustomErrorHandler,
     SelectPointComponent,
     ImageUploaderComponent,
     BrowserWindowService
@@ -37,6 +38,7 @@ const components = [ // Everything that is declared in shared module should be e
     providers: [
         { provide: Config, useValue: process.env.CONFIG },
         { provide: WindowService, useClass: BrowserWindowService },
+        CustomErrorHandler,
         ErrorHandlingInterceptor
     ]
 })

@@ -5,7 +5,8 @@ import { MainPageComponent, NotFoundComponent } from './info';
 import {
     CafeMapComponent,
     CafeListComponent,
-    CafeModalComponent
+    CafeModalComponent,
+    CafeResolve
 } from './cafe';
 import {
     SignInScreenComponent,
@@ -37,7 +38,10 @@ import {
                 children: [
                     {
                         path: ':id',
-                        component: CafeModalComponent
+                        component: CafeModalComponent,
+                        resolve: {
+                            cafe: CafeResolve
+                        }
                     }
                 ]
             },

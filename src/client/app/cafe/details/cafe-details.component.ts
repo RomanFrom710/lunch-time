@@ -33,7 +33,7 @@ export class CafeDetailsComponent {
         return this.form.valid;
     }
 
-    private hasError(field: NgModel) {
+    private hasError(field: NgModel): boolean {
         return field.errors && (this.isValidated || field.touched || field.dirty);
     }
 }

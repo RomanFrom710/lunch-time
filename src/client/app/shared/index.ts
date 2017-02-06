@@ -5,5 +5,5 @@ export * from './pagination';
 export * from './directives';
 export * from './map';
 export * from './image';
-export * from './http-interceptors';
+export * from './errors';
 export * from './shared.module';

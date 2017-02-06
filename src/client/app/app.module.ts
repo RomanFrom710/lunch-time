@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule, Http } from "@angular/http";
 import { BrowserModule } from '@angular/platform-browser';
 import { provideInterceptorService, InterceptorService } from 'ng2-interceptors';
 
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule, ErrorHandlingInterceptor } from './shared';
+import { SharedModule, ErrorHandlingInterceptor, CustomErrorHandler } from './shared';
 import { UserModule, AuthHandlingInterceptor } from './user';
 import { CafeModule } from './cafe';
 import { InfoModule } from './info';
@@ -26,7 +26,8 @@ import { AppComponent }  from './app.component';
     declarations: [ AppComponent ],
     providers: [
         provideInterceptorService([ErrorHandlingInterceptor, AuthHandlingInterceptor]),
-        { provide: Http, useExisting: InterceptorService }
+        { provide: Http, useExisting: InterceptorService },
+        { provide: ErrorHandler, useClass: CustomErrorHandler }
     ],
     bootstrap: [ AppComponent ]
 })

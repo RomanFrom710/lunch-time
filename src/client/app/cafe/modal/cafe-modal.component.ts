@@ -1,21 +1,19 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Cafe, CafeService } from '../';
+import { Cafe } from '../';
 
 
 @Component({
     selector: 'lt-cafe-modal',
     templateUrl: 'cafe-modal.component.html'
 })
-export class CafeModalComponent {
-    private cafe: Observable<Cafe>;
+export class CafeModalComponent implements OnInit {
+    private cafe: Cafe;
 
-    constructor(cafeService: CafeService,
-                route: ActivatedRoute) {
-        route.params.subscribe((params: Params) => {
-            this.cafe = cafeService.getById(params['id']).share();
-        });
+    constructor(private route: ActivatedRoute) { }
+
+    ngOnInit(): void {
+        this.cafe = this.route.snapshot.data['cafe'];
     }
 }

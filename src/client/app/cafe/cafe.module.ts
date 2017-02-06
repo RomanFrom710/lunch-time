@@ -14,7 +14,8 @@ import {
     CafeListComponent,
     CafeService,
     CafeDetailsComponent,
-    CafeModalComponent
+    CafeModalComponent,
+    CafeResolve
 } from './';
 
 
@@ -37,6 +38,6 @@ import {
         CafeModalComponent
     ],
     exports: [ CafeDetailsComponent ],
-    providers: [ CafeService ]
+    providers: [ CafeService, CafeResolve ]
 })
 export class CafeModule { }

@@ -1,9 +1,9 @@
 <route-modal>
     <modal-header>
-        <h2>{{(cafe | async)?.name}}</h2>
+        <h2>{{cafe.name}}</h2>
     </modal-header>
     <modal-content>
-        {{(cafe | async)?.description}}
+        <lt-cafe-details [cafe]="cafe" [isEditMode]="false"></lt-cafe-details>
     </modal-content>
     <modal-footer>
         <button class="btn btn-primary" [routerLink]="['../']">Закрыть</button>
