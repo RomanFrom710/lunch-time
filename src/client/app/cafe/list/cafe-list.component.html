@@ -7,7 +7,9 @@
 
 <div>
 <pagination-controls (pageChange)="pageChanged($event)"
-                     [autoHide]="true"></pagination-controls>
+                     [autoHide]="true"
+                     previousLabel="Назад"
+                     nextLabel="Вперед"></pagination-controls>
 </div>
 
 <router-outlet><!-- Modal window placeholder --></router-outlet>
