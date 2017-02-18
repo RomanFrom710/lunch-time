@@ -10,6 +10,6 @@ export const vkMockUser = (new User()).fromData({
     photoUrl: 'https://pp.vk.me/c629231/v629231001/c543/FfB--bOEVOY.jpg',
     profileUrl: 'https://vk.com/id1',
     thirdPartyId: '1',
-    userName: 'johnnn',
+    username: 'johnnn',
     userType: UserType.User
 });

@@ -2,8 +2,9 @@
 
 const securityService = require('../../src/server/user/security-service');
 
+
 describe('security service', function () {
-    it('should verify valid passowrd', function (done) {
+    it('should verify valid password', function (done) {
         const password = 'good-guy-password';
 
         securityService.hashPassword(password)

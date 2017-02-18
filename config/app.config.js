@@ -15,7 +15,8 @@ const commonConfig = {
         }
     },
     db: {
-        connectionString: 'mongodb://127.0.0.1/lunchtime'
+        connectionString: 'mongodb://127.0.0.1/lunchtime',
+        testConnectionString: 'mongodb://127.0.0.1/testlunchtime'
     },
     app: { // This part is available in the client app too
         auth: {
