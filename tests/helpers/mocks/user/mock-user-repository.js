@@ -5,18 +5,24 @@ const mockUser = require('./mock-user');
 
 
 const localUserPromise = global.Promise.resolve(mockUser.getLocalUser());
+const thirdPartyUserPromise = global.Promise.resolve(mockUser.getThirdPartyUser());
 const nullPromise = global.Promise.resolve(null);
 
 exports.mockWriting = function () {
     spyOn(userRepository, 'createUser').and.returnValue(localUserPromise);
+    spyOn(userRepository, 'updateUserInfo').and.returnValue(localUserPromise);
 };
 
 exports.mockToFindNothing = function () {
     mockToFind(nullPromise);
 };
 
-exports.mockToFindUser = function () {
+exports.mockToFindLocalUser = function () {
     mockToFind(localUserPromise);
+};
+
+exports.mockToFindThirdPartyUser = function () {
+    mockToFind(thirdPartyUserPromise);
 };
 
 
