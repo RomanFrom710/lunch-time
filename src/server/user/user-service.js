@@ -8,8 +8,6 @@ const userEnums = require('./user-enums');
 const userRepository = require('./user-repository');
 const config = require('../config');
 
-updateAdmin(); // Do it every time when the server starts.
-
 
 exports.findById = function (id) {
     return userRepository.findById(id);
@@ -27,7 +25,7 @@ exports.findOrCreateThirdPartyUser = function (profile) {
             if (userFromDb) {
                 return userFromDb;
             } else {
-                return userRepository.createThirdPartyUser(user);
+                return userRepository.createUser(user);
             }
         });
 };
@@ -35,6 +33,7 @@ exports.findOrCreateThirdPartyUser = function (profile) {
 exports.registerLocalUser = function (localUserDto) {
     localUserDto.authType = 'local';
     localUserDto.userType = localUserDto.userType || userEnums.userType.user;
+    // todo
 };
 
 exports.updateUserInfo = function (id, userDto) {
@@ -42,6 +41,33 @@ exports.updateUserInfo = function (id, userDto) {
     userDto = _.pick(userDto, allowedFields);
 
     return userRepository.updateUserInfo(id, userDto);
+};
+
+exports.updateAdmin = function () {
+    const admin = config.get('admin');
+    if (!(admin && admin.username && admin.password)) {
+        return global.Promise.resolve(null);
+    }
+
+    return userRepository.findLocalByUsernameWithPassword(admin.username)
+        .then(user => {
+            if (user) {
+                throw new Error('Admin already exists');
+            } else {
+                return securityService.hashPassword(admin.password);
+            }
+        })
+        .then(hashedPassword => {
+            const adminDto = {
+                userType: userEnums.userType.admin,
+                authType: 'local',
+                username: admin.username,
+                firstName: admin.username, // It's not personality, it's admin
+                passwordHash: hashedPassword
+            };
+            return userRepository.createUser(adminDto);
+        })
+        .catch(() => { }); // At least we've tried
 };
 
 
@@ -62,30 +88,4 @@ function mapProfileToUserModel(profile) {
     }
 
     return mappedUser;
-}
-
-// Creating admin user
-function updateAdmin() {
-    const admin = config.get('admin');
-    if (admin && admin.username && admin.password) {
-        userRepository.findLocalByUsernameWithPassword(admin.username)
-            .then(user => {
-                if (user) {
-                    throw new Error('Admin already exists');
-                } else {
-                    return securityService.hashPassword(admin.password);
-                }
-            })
-            .then(hashedPassword => {
-                const adminDto = {
-                    userType: userEnums.userType.admin,
-                    authType: 'local',
-                    username: admin.username,
-                    firstName: admin.username, // It's not personality, it's admin
-                    passwordHash: hashedPassword
-                };
-                return userRepository.createLocalUser(adminDto);
-            })
-            .catch(() => { }); // At least we've tried
-    }
 }

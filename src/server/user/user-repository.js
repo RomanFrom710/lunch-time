@@ -18,20 +18,12 @@ exports.findLocalByUsernameWithPassword = function (username) {
 };
 
 exports.findThirdPartyUser = function (authType, thirdPartyId) {
-    const query = {
-        authType: authType,
-        thirdPartyId: thirdPartyId
-    };
-
+    const query = { authType, thirdPartyId };
     return User.findOne(query);
 };
 
 
-exports.createLocalUser = function (userDto) {
-    return User.create(userDto);
-};
-
-exports.createThirdPartyUser = function (userDto) {
+exports.createUser = function (userDto) {
     return User.create(userDto);
 };
 

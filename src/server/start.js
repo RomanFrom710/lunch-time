@@ -7,6 +7,7 @@ mongoose.Promise = global.Promise; // todo: remove after mongoose 5 will be rele
 
 const config = require('./config');
 const setup = require('./setup');
+const userService = require('./user/user-service');
 
 
 mongoose.connect(config.get('db:connectionString'));
@@ -15,5 +16,6 @@ const app = koa();
 app.name = 'Lunch time'; // Just because I can.
 
 setup(app);
+userService.updateAdmin();
 
 app.listen(config.get('port'));

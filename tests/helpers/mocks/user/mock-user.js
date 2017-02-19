@@ -1,27 +1,28 @@
 'use strict';
 
 const _ = require('lodash');
+const faker = require('faker');
 
-const userEnums = require('../../src/server/user/user-enums');
+const userEnums = require('../../../../src/server/user/user-enums');
 
 
 const localUser = {
     authType: 'local',
-    created: new Date('2016-10-22T10:11:34.359Z'),
-    firstName: 'John',
+    created: faker.date.past(),
+    firstName: faker.name.firstName(),
     gender: userEnums.gender.male,
     _id: '58408a9e4f928f02fc5b57af',
-    lastName: 'Doe',
+    lastName: faker.name.lastName(),
     passwordHash: 'abc',
     photoUrl: 'https://pp.vk.me/c629231/v629231001/c543/FfB--bOEVOY.jpg',
-    username: 'johnnn',
+    username: faker.internet.userName(),
     userType: userEnums.userType.user
 };
 
 const thirdPartyUser = _.clone(localUser);
 thirdPartyUser.authType = 'vkontakte';
-thirdPartyUser.profileUrl = 'https://vk.com/id1';
-thirdPartyUser.thirdPartyId = '1';
+thirdPartyUser.thirdPartyProfileUrl = 'https://vk.com/id1';
+thirdPartyUser.thirdPartyId = faker.random.number().toString();
 delete thirdPartyUser.passwordHash;
 
 
