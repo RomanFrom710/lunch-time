@@ -87,4 +87,29 @@ describe('user service', function () {
                 done();
             });
     });
+
+    it('should find user by id', function (done) {
+        mockUserRepository.mockToFindLocalUser();
+        const localUser = mockUser.getLocalUser();
+
+        userService.findById(localUser._id)
+            .then(user => {
+                expect(user).toBeDefined();
+                expect(userRepository.findById).toHaveBeenCalledWith(localUser._id);
+                done();
+            });
+    });
+
+    it('should find local user by username with password', function (done) {
+        mockUserRepository.mockToFindLocalUser();
+        const localUser = mockUser.getLocalUser();
+
+        userService.findLocalByUsernameWithPassword(localUser.username)
+            .then(user => {
+                expect(user).toBeDefined();
+                expect(user.passwordHash).toBeDefined();
+                expect(userRepository.findLocalByUsernameWithPassword).toHaveBeenCalledWith(localUser.username);
+                done();
+            });
+    });
 });
