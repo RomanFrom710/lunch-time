@@ -6,6 +6,7 @@ const path = require('path');
 const cloudinary = require('cloudinary');
 
 
+// todo: finish this service
 exports.upload = function (imageBuffer) {
     return new Promise(function (resolve) {
         const originalImageStream = cloudinary.uploader.upload_stream(function (result) {

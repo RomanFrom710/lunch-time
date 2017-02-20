@@ -58,6 +58,7 @@
     "ng2-popover": "0.0.8",
     "ng2-toastr": "^1.1.2",
     "object-mapper": "^3.0.1",
+    "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-vkontakte": "^0.3.2",
     "reflect-metadata": "^0.1.8",
