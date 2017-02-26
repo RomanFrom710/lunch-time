@@ -13,7 +13,7 @@ exports.connectToTestDb = function (done) {
 };
 
 exports.disconnect = function (done) {
-    mongoose.disconnect(done);
+    mongoose.connection.close(done);
 };
 
 exports.dropTestDb = function (done) {

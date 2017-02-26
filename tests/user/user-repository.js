@@ -14,9 +14,9 @@ describe('user repository', function () {
     const localUserForComparing = _.omit(localUser, ['_id', 'passwordHash']);
     const thirdPartyUserForComparing = _.omit(thirdPartyUser, ['_id', 'passwordHash']);
 
-    beforeAll(done => db.connectToTestDb(done));
-    afterEach(done => db.dropTestDb(done));
-    afterAll(done => db.disconnect(done));
+    beforeAll(db.connectToTestDb);
+    afterEach(db.dropTestDb);
+    afterAll(db.disconnect);
 
     it('should create local user and find it by id', function (done) {
         userRepository.createUser(localUser)

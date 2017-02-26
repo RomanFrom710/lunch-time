@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const faker = require('faker');
+const mongoose = require('mongoose');
 
 const userEnums = require('../../../../src/server/user/user-enums');
 
@@ -12,7 +13,7 @@ exports.getLocalUser = function () {
         created: faker.date.past(),
         firstName: faker.name.firstName(),
         gender: userEnums.gender.male,
-        _id: '58408a9e4f928f02fc5b57af',
+        _id: mongoose.Types.ObjectId(),
         lastName: faker.name.lastName(),
         passwordHash: faker.internet.password(),
         photoUrl: faker.internet.avatar(),

@@ -8,9 +8,9 @@ const testSchemaHelper = require('../helpers/mocks/test-schema');
 
 
 describe('db extensions', function () {
-    beforeAll(done => db.connectToTestDb(done));
-    afterEach(done => db.dropTestDb(done));
-    afterAll(done => db.disconnect(done));
+    beforeAll(db.connectToTestDb);
+    afterEach(db.dropTestDb);
+    afterAll(db.disconnect);
 
     it('should hide db implementation details for the client', function (done) {
         const testSchema = testSchemaHelper.getTestSchema();
