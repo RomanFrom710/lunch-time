@@ -2,15 +2,16 @@
 
 
 module.exports = function (app) {
-    app.use(function* (next) {
+    app.use(async (context, next) => {
         try {
-            yield next;
+            await next();
         } catch (err) {
             if (err.status && err.status < 500) {
-                this.status = err.status;
-                this.body = { error: err.message };
+                context.status = err.status;
+                context.body = { error: err.message };
             } else {
-                this.status = 500; // Better to keep it in secret for the user
+                context.status = 500; // Better to keep it in secret for the user
+                context.body = { error: 'Server error' };
                 console.error(err);
             }
         }

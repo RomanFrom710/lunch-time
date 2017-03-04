@@ -18,54 +18,44 @@ describe('user repository', function () {
     afterEach(db.dropTestDb);
     afterAll(db.disconnect);
 
-    it('should create local user and find it by id', function (done) {
-        userRepository.createUser(localUser)
-            .then(() => userRepository.findById(localUser._id))
-            .then(user => {
-                expect(user).toEqual(jasmine.objectContaining(localUserForComparing));
-                done();
-            });
+    it('should create local user and find it by id', async function (done) {
+        await userRepository.createUser(localUser);
+        const user = await userRepository.findById(localUser._id);
+        expect(user).toEqual(jasmine.objectContaining(localUserForComparing));
+        done();
     });
 
-    it('should create third party user and find it', function (done) {
-        userRepository.createUser(thirdPartyUser)
-            .then(() => userRepository.findThirdPartyUser(thirdPartyUser.authType, thirdPartyUser.thirdPartyId))
-            .then(user => {
-                expect(user).toEqual(jasmine.objectContaining(thirdPartyUserForComparing));
-                done();
-            });
+    it('should create third party user and find it', async function (done) {
+        await userRepository.createUser(thirdPartyUser);
+        const user = await userRepository.findThirdPartyUser(thirdPartyUser.authType, thirdPartyUser.thirdPartyId);
+        expect(user).toEqual(jasmine.objectContaining(thirdPartyUserForComparing));
+        done();
     });
 
-    it('should create local user and find it by username', function (done) {
-        userRepository.createUser(localUser)
-            .then(() => userRepository.findByUsername(localUser.username))
-            .then(user => {
-                expect(user).toEqual(jasmine.objectContaining(localUserForComparing));
-                done();
-            });
+    it('should create local user and find it by username', async function (done) {
+        await userRepository.createUser(localUser);
+        const user = await userRepository.findByUsername(localUser.username);
+        expect(user).toEqual(jasmine.objectContaining(localUserForComparing));
+        done();
     });
 
-    it('should create local user and find it by username with corresponding password', function (done) {
-        userRepository.createUser(localUser)
-            .then(() => userRepository.findLocalByUsernameWithPassword(localUser.username))
-            .then(user => {
-                expect(user.passwordHash).toEqual(localUser.passwordHash);
-                done();
-            });
+    it('should create local user and find it by username with corresponding password', async function (done) {
+        await userRepository.createUser(localUser);
+        const user = await userRepository.findLocalByUsernameWithPassword(localUser.username);
+        expect(user.passwordHash).toEqual(localUser.passwordHash);
+        done();
     });
 
-    it('should correctly update user info', function (done) {
+    it('should correctly update user info', async function (done) {
         const newUserDto = {
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName()
         };
 
-        userRepository.createUser(localUser)
-            .then(() => userRepository.updateUserInfo(localUser._id, newUserDto))
-            .then(() => userRepository.findById(localUser._id))
-            .then(user => {
-                expect(user).toEqual(jasmine.objectContaining(newUserDto));
-                done();
-            });
+        await userRepository.createUser(localUser);
+        await userRepository.updateUserInfo(localUser._id, newUserDto);
+        const user = await userRepository.findById(localUser._id);
+        expect(user).toEqual(jasmine.objectContaining(newUserDto));
+        done();
     });
 });

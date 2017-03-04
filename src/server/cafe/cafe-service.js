@@ -12,14 +12,15 @@ exports.getAllCafeCoords = function () {
     return cafeRepository.getAllCafeCoords();
 };
 
-exports.getAllCafes = function (query) {
+exports.getAllCafes = async function (query) {
     query.page = query.page || 1;
     query.itemsPerPage = query.itemsPerPage || config.get('app:cafe:itemsPerPage');
 
-    return cafeRepository.getAllCafes(query)
-        .then(result => {
-            return { data: result.docs, total: result.total }
-        });
+    const cafes = await cafeRepository.getAllCafes(query);
+    return {
+        data: cafes.docs,
+        total: cafes.total
+    };
 };
 
 

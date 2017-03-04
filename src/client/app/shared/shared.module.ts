@@ -29,9 +29,9 @@ const components = [ // Everything that is declared in shared module should be e
     imports: [
         CommonModule,
         AgmCoreModule.forRoot(),
+        ToastModule.forRoot(),
         ImageUploadModule,
-        FileUploadModule,
-        ToastModule
+        FileUploadModule
     ],
     declarations: components,
     exports: components,

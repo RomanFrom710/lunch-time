@@ -4,30 +4,22 @@ const securityService = require('../../src/server/user/security-service');
 
 
 describe('security service', function () {
-    it('should verify valid password', function (done) {
+    it('should verify valid password', async function (done) {
         const password = 'good-guy-password';
 
-        securityService.hashPassword(password)
-            .then(function (hash) {
-                return securityService.verifyPassword(password, hash);
-            })
-            .then(function (result) {
-                expect(result).toBe(true);
-                done();
-            });
+        const hash = await securityService.hashPassword(password);
+        const result = await securityService.verifyPassword(password, hash);
+        expect(result).toBe(true);
+        done();
     });
 
-    it('should verify invalid password', function (done) {
+    it('should verify invalid password', async function (done) {
         const password = 'another-good-guy-password';
         const wrongPassword = 'bad-guy-password';
 
-        securityService.hashPassword(password)
-            .then(function (hash) {
-                return securityService.verifyPassword(wrongPassword, hash);
-            })
-            .then(function (result) {
-                expect(result).toBe(false);
-                done();
-            });
+        const hash = await securityService.hashPassword(password);
+        const result = await securityService.verifyPassword(wrongPassword, hash);
+        expect(result).toBe(false);
+        done();
     });
 });

@@ -5,45 +5,42 @@ const router = require('koa-router')();
 
 const config = require('../config');
 const authMiddlewares = require('./middleware');
+
 const authEventName = config.get('app:auth:authEventName');
 
 
 router
     // common
-    .get(config.get('app:links:auth:info'), function* () {
-        this.body = this.passport.user;
-        if (!this.body) {
-            this.throw(401);
+    .get(config.get('app:links:auth:info'), context => {
+        context.body = context.state.user;
+        if (!context.body) {
+            context.throw(401);
         }
     })
-    .post(config.get('app:links:auth:logout'), function* () {
-        this.logout();
-        this.session = null;
-        this.body = true;
+    .post(config.get('app:links:auth:logout'), context => {
+        context.logout();
+        context.session = null;
+        context.body = true;
     })
 
     // vk
     .get(config.get('app:links:auth:vk:auth'), authMiddlewares.anonOnly, passport.authenticate('vkontakte'))
-    .get(config.get('app:links:auth:vk:authCallback'), passport.authenticate('vkontakte'),
-        function* () {
-            this.body = `<script>window.opener.postMessage('${authEventName}', '*');window.close()</script>`;
-        })
+    .get(config.get('app:links:auth:vk:authCallback'), passport.authenticate('vkontakte'), context => {
+        context.body = `<script>window.opener.postMessage('${authEventName}', '*');window.close()</script>`;
+    })
 
     // local
-    .post(config.get('app:links:auth:local:auth'), authMiddlewares.anonOnly, function *(next) {
-        const context = this;
-
-        yield passport.authenticate('local',
-            function* (err, user) {
-                if (err) {
-                    context.throw(err);
-                } else if (user) {
-                    context.body = user;
-                    yield context.login(user);
-                } else {
-                    context.throw(400, 'Wrong username or password!');
-                }
-            }).call(context, next);
+    .post(config.get('app:links:auth:local:auth'), authMiddlewares.anonOnly, (context, next) => {
+        return passport.authenticate('local', (err, user) => {
+            if (err) {
+                context.throw(err);
+            } else if (user) {
+                context.body = user;
+                return context.login(user);
+            } else {
+                context.throw(400, 'Wrong username or password!');
+            }
+        })(context, next);
     });
 
 module.exports = router.routes();

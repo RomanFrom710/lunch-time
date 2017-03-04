@@ -25,13 +25,13 @@ module.exports = function (app) {
     }
 };
 
-function* apiFallbackMiddleware(next) {
-    const isApiRequest = this.url.startsWith('/' + config.get('app:links:prefix'));
-    const isHttpRequest = this.headers.accept && /text\/html/.test(this.headers.accept);
+const apiFallbackMiddleware = async (context, next) => {
+    const isApiRequest = context.url.startsWith('/' + config.get('app:links:prefix'));
+    const isHttpRequest = context.headers.accept && /text\/html/.test(context.headers.accept);
 
-    if (this.method === 'GET' && !isApiRequest && isHttpRequest) {
-        this.url = '/index.html';
+    if (context.method === 'GET' && !isApiRequest && isHttpRequest) {
+        context.url = '/index.html';
     }
 
-    yield next;
-}
+    await next();
+};

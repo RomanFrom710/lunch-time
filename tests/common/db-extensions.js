@@ -12,53 +12,51 @@ describe('db extensions', function () {
     afterEach(db.dropTestDb);
     afterAll(db.disconnect);
 
-    it('should hide db implementation details for the client', function (done) {
+    it('should hide db implementation details for the client', async function (done) {
         const testSchema = testSchemaHelper.getTestSchema();
         dbExtensions.applyRemovePrivateFieldsTransform(testSchema);
 
         const Test = mongoose.model('test1', testSchema);
         const testObject = testSchemaHelper.getTestObject();
 
-        Test.create(testObject)
-            .then(() => Test.find({}))
-            .then(response => {
-                let result = response[0];
-                expect(result).toBeDefined();
-                result = result.toJSON();
+        await Test.create(testObject);
+        const response = await Test.find({});
 
-                expect(result.__v).toBeUndefined();
-                expect(result._id).toBeUndefined();
-                expect(result.id).toBeDefined();
+        let result = response[0];
+        expect(result).toBeDefined();
+        result = result.toJSON();
 
-                done();
-            });
+        expect(result.__v).toBeUndefined();
+        expect(result._id).toBeUndefined();
+        expect(result.id).toBeDefined();
+
+        done();
     });
 
-    it('should convert client representation of coordinates to db array on create', function (done) {
+    it('should convert client representation of coordinates to db array on create', async function (done) {
         const testSchema = testSchemaHelper.getTestSchema();
         dbExtensions.applyGeoTransform(testSchema, 'geo');
 
         const Test = mongoose.model('test2', testSchema);
         const testObject = testSchemaHelper.getTestObjectFromClient();
 
-        Test.create(testObject)
-            .then(() => Test.find({}))
-            .then(response => {
-                let result = response[0];
-                expect(result).toBeDefined();
+        await Test.create(testObject);
+        const response = await Test.find({});
 
-                expect(result.geo[0]).toBe(testObject.geo.latitude);
-                expect(result.geo[1]).toBe(testObject.geo.longitude);
+        let result = response[0];
+        expect(result).toBeDefined();
 
-                result = result.toJSON();
-                expect(result.geo.latitude).toBe(testObject.geo.latitude);
-                expect(result.geo.longitude).toBe(testObject.geo.longitude);
+        expect(result.geo[0]).toBe(testObject.geo.latitude);
+        expect(result.geo[1]).toBe(testObject.geo.longitude);
 
-                done();
-            });
+        result = result.toJSON();
+        expect(result.geo.latitude).toBe(testObject.geo.latitude);
+        expect(result.geo.longitude).toBe(testObject.geo.longitude);
+
+        done();
     });
 
-    it('should convert client representation of coordinates to db array on update', function (done) {
+    it('should convert client representation of coordinates to db array on update', async function (done) {
         const testSchema = testSchemaHelper.getTestSchema();
         dbExtensions.applyGeoTransform(testSchema, 'geo');
 
@@ -66,21 +64,20 @@ describe('db extensions', function () {
         const testObject = testSchemaHelper.getTestObjectFromClient();
         const anotherTestObject = testSchemaHelper.getTestObjectFromClient();
 
-        Test.create(testObject)
-            .then(() => Test.findOneAndUpdate({ firstName: testObject.firstName }, { $set: anotherTestObject }))
-            .then(() => Test.find({}))
-            .then(response => {
-                let result = response[0];
-                expect(result).toBeDefined();
+        await Test.create(testObject);
+        await Test.findOneAndUpdate({ firstName: testObject.firstName }, { $set: anotherTestObject });
+        const response = await Test.find({});
 
-                expect(result.geo[0]).toBe(anotherTestObject.geo.latitude);
-                expect(result.geo[1]).toBe(anotherTestObject.geo.longitude);
+        let result = response[0];
+        expect(result).toBeDefined();
 
-                result = result.toJSON();
-                expect(result.geo.latitude).toBe(anotherTestObject.geo.latitude);
-                expect(result.geo.longitude).toBe(anotherTestObject.geo.longitude);
+        expect(result.geo[0]).toBe(anotherTestObject.geo.latitude);
+        expect(result.geo[1]).toBe(anotherTestObject.geo.longitude);
 
-                done();
-            });
+        result = result.toJSON();
+        expect(result.geo.latitude).toBe(anotherTestObject.geo.latitude);
+        expect(result.geo.longitude).toBe(anotherTestObject.geo.longitude);
+
+        done();
     });
 });

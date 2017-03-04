@@ -3,31 +3,31 @@
 const userEnums = require('../user/user-enums');
 
 
-exports.userOnly = function* (next) {
-    if (this.isAuthenticated()) {
-        yield next;
+exports.userOnly = async (context, next) => {
+    if (context.isAuthenticated()) {
+        await next();
     } else {
-        this.throw(401);
+        context.throw(401);
     }
 };
 
-exports.adminOnly = function* (next) {
-    if (!this.isAuthenticated()) {
-        this.throw(401);
+exports.adminOnly = async (context, next) => {
+    if (!context.isAuthenticated()) {
+        context.throw(401);
     }
 
-    const user = this.passport.user;
+    const user = context.state.user;
     if (user.userType === userEnums.userType.admin) {
-        yield next;
+        await next();
     } else {
-        this.throw(403, 'For admins only');
+        context.throw(403, 'For admins only');
     }
 };
 
-exports.anonOnly = function* (next) {
-    if (!this.isAuthenticated()) {
-        yield next;
+exports.anonOnly = async (context, next) => {
+    if (!context.isAuthenticated()) {
+        await next();
     } else {
-        this.throw(400, 'You are already authenticated!');
+        context.throw(400, 'You are already authenticated!');
     }
 };

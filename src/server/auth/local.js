@@ -10,6 +10,7 @@ const strategyOptions = {
     passwordField: 'password'
 };
 
+
 function verifyCallback(username, password, done) {
     let savedUser;
 

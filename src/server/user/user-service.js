@@ -17,17 +17,12 @@ exports.findLocalByUsernameWithPassword = function (username) {
     return userRepository.findLocalByUsernameWithPassword(username);
 };
 
-exports.findOrCreateThirdPartyUser = function (profile) {
+exports.findOrCreateThirdPartyUser = async function (profile) {
     const user = mapProfileToUserModel(profile);
     user.userType = userEnums.userType.user;
-    return userRepository.findThirdPartyUser(user.authType, user.thirdPartyId)
-        .then(userFromDb => {
-            if (userFromDb) {
-                return userFromDb;
-            } else {
-                return userRepository.createUser(user);
-            }
-        });
+
+    const userFromDb = await userRepository.findThirdPartyUser(user.authType, user.thirdPartyId);
+    return userFromDb || userRepository.createUser(user);
 };
 
 exports.registerLocalUser = function (localUserDto) {
@@ -43,31 +38,26 @@ exports.updateUserInfo = function (id, userDto) {
     return userRepository.updateUserInfo(id, userDto);
 };
 
-exports.updateAdmin = function () {
+exports.updateAdmin = async function () {
     const admin = config.get('admin');
     if (!(admin && admin.username && admin.password)) {
-        return global.Promise.resolve(null);
+        return null;
     }
 
-    return userRepository.findLocalByUsernameWithPassword(admin.username)
-        .then(user => {
-            if (user) {
-                throw new Error('Admin already exists');
-            } else {
-                return securityService.hashPassword(admin.password);
-            }
-        })
-        .then(hashedPassword => {
-            const adminDto = {
-                userType: userEnums.userType.admin,
-                authType: 'local',
-                username: admin.username,
-                firstName: admin.username, // It's not personality, it's admin
-                passwordHash: hashedPassword
-            };
-            return userRepository.createUser(adminDto);
-        })
-        .catch(() => { }); // At least we've tried
+    const user = await userRepository.findLocalByUsernameWithPassword(admin.username);
+    if (user) {
+        return null;
+    }
+
+    const hashedPassword = await securityService.hashPassword(admin.password);
+    const adminDto = {
+        userType: userEnums.userType.admin,
+        authType: 'local',
+        username: admin.username,
+        firstName: admin.username, // It's not personality, it's admin
+        passwordHash: hashedPassword
+    };
+    return userRepository.createUser(adminDto);
 };
 
 

@@ -6,7 +6,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { ImageUploadModule } from 'ng2-imageupload';
 import { FileUploadModule } from 'ng2-file-upload';
-import { ModalModule } from 'ng2-modal';
+import { ModalModule } from 'ngx-modal';
 
 import { SharedModule } from '../shared';
 import {

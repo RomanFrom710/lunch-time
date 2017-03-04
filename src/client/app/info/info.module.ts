@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PopoverModule } from 'ng2-popover';
-import { DropdownModule } from 'ng2-dropdown';
+import { PopoverModule } from 'ngx-popover';
+import { DropdownModule } from 'ngx-dropdown';
 
 import { HeaderComponent, MainPageComponent, NotFoundComponent } from './';
 import { UserModule } from '../user';

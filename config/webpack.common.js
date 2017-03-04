@@ -41,9 +41,9 @@ module.exports = {
             {
                 test: /\.less$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                loader: ExtractTextPlugin.extract({ // WTF, api from webpack v1. I like JS world so much.
-                    fallbackLoader: 'style-loader',
-                    loader: [
+                use: ExtractTextPlugin.extract({ // WTF, api from webpack v1. I like JS world so much.
+                    fallback: 'style-loader',
+                    use: [
                         {
                             loader: 'css-loader'
                         },
@@ -59,9 +59,9 @@ module.exports = {
             {
                 test: /\.css$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style-loader',
-                    loader: [
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
                         {
                             loader: 'css-loader',
                             query: {
@@ -90,9 +90,12 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: [ // Libs without sourcemaps.
+                exclude: [ // Libs with sourcemap problems.
                     resolvePath('./node_modules/ng2-toastr'),
-                    resolvePath('./node_modules/ng2-modal'),
+                    resolvePath('./node_modules/angular2-google-maps'),
+                    resolvePath('./node_modules/ngx-popover'),
+                    resolvePath('./node_modules/ngx-dropdown'),
+                    resolvePath('./node_modules/ngx-modal'),
                     resolvePath('./node_modules/ng2-imageupload'),
                     resolvePath('./node_modules/ng2-interceptors')
                 ],
