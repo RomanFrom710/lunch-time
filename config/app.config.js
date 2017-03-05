@@ -3,16 +3,13 @@
 const nconf = require('nconf');
 
 const resolveLinks = require('./helpers/link-resolver');
+const detectAuthMethods = require('./helpers/auth-methods-detector');
 
 
 const commonConfig = {
     port: 3000,
     keys: {
-        cookie: 'very-secret-key',
-        vk: { // Just for development purposes
-            id: 1,
-            secret: 'key'
-        }
+        cookie: 'very-secret-key'
     },
     db: {
         connectionString: 'mongodb://127.0.0.1/lunchtime',
@@ -20,7 +17,7 @@ const commonConfig = {
     },
     app: { // This part is available in the client app too
         auth: {
-            authEventName: 'lt-authenticated', // Used for interaction between auth window and main app
+            authEventName: 'lt-authenticated', // Used for interaction between auth window and main app.
         },
         cafe: {
             itemsPerPage: 15
@@ -70,6 +67,11 @@ const commonConfig = {
 
 commonConfig.app.links = resolveLinks(commonConfig.app.links);
 
-module.exports = nconf
+nconf
     .env({ separator: '__', lowerCase: true })
-    .defaults(commonConfig);
+    .defaults(commonConfig)
+    .use('memory');
+
+detectAuthMethods(nconf);
+
+module.exports = nconf;

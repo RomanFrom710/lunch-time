@@ -18,4 +18,5 @@ function verifyCallback (accessToken, refreshToken, profile, done) {
         .catch(err => done(err));
 }
 
-module.exports = new VkStrategy(options, verifyCallback);
+const hasVkKeys = options.clientID && options.clientSecret;
+module.exports = hasVkKeys ? new VkStrategy(options, verifyCallback) : null;

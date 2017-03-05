@@ -7,6 +7,7 @@ import { Point } from './';
 export class Config {
     auth: {
         authEventName: string;
+        vk: boolean;
     };
 
     cafe: {

@@ -7,7 +7,7 @@ const local = require('./local');
 const userService = require('../user/user-service');
 
 
-passport.use(vk);
+vk && passport.use(vk);
 passport.use(local);
 
 passport.serializeUser(function(user, done) {
