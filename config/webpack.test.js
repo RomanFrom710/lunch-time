@@ -1,9 +1,9 @@
 'use strict';
 
 const webpackMerge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const commonConfig = require('./webpack.common');
-const resolvePath = require('./helpers/path-resolver');
 
 
 const testConfig = {
@@ -17,19 +17,9 @@ const testConfig = {
             {
                 test: /\.spec.ts$/,
                 use: [
-                    'ts-loader',
+                    'awesome-typescript-loader',
                     'angular2-template-loader'
                 ],
-            },
-            { // We don't need vendor styles
-                test: /\.less$/,
-                exclude: resolvePath('./src/client/app'),
-                use: ['null-loader']
-            },
-            {
-                test: /\.css$/,
-                exclude: resolvePath('./src/client/app'),
-                use: ['null-loader']
             },
             {
                 test: /\.(woff|woff2|eot|svg|ttf)$/,
@@ -37,7 +27,9 @@ const testConfig = {
             }
         ]
     },
-    plugins: []
+    plugins: [new ExtractTextPlugin({
+        filename: '[name].[hash].css'
+    })]
 };
 
-module.exports = webpackMerge(commonConfig, testConfig);
+module.exports = webpackMerge.strategy({ plugins: 'replace' })(commonConfig, testConfig);

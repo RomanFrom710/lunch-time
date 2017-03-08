@@ -41,7 +41,7 @@ module.exports = {
             {
                 test: /\.less$/, // Vendor styles
                 exclude: resolvePath('./src/client/app'),
-                use: ExtractTextPlugin.extract({ // WTF, api from webpack v1. I like JS world so much.
+                use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
                         {
