@@ -59,11 +59,12 @@
                     </p>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="hasError(address)">
                 <label>
                     Описание
                     <textarea [(ngModel)]="cafe.description"
                               name="description"
+                              required
                               class="form-control"></textarea>
                 </label>
             </div>

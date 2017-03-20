@@ -17,7 +17,7 @@ const commonConfig = {
     },
     app: { // This part is available in the client app too
         auth: {
-            authEventName: 'lt-authenticated', // Used for interaction between auth window and main app.
+            authEventName: 'lt-authenticated' // Used for interaction between auth window and main app.
         },
         cafe: {
             itemsPerPage: 15
