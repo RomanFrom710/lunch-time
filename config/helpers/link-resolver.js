@@ -1,27 +1,31 @@
 'use strict';
 
+const Uri = require('urijs');
 // This helper looks deeply through the object, finds prefix
 // properties and adds their values to links.
 
-const separator = '/';
 const prefixName = 'prefix';
 
-function deepResolve(links, currentPrefix) {
+function deepResolve(links, currentBase) {
     if (typeof(links) === 'string') {
-        return links.length ? // Do not add trailing slash
-            (currentPrefix + separator + links) : currentPrefix;
+        if (links.length) {
+            currentBase.segment(links);
+        }
+        return currentBase.normalize().toString();
     }
 
     if (typeof(links) === 'object') {
         const newLinksObject = {};
 
-        currentPrefix += separator + links[prefixName];
+        if (links[prefixName]) {
+            currentBase.segment(links[prefixName]);
+        }
 
         Object.keys(links).forEach(key => {
             if (key === prefixName) {
                 newLinksObject[key] = links[key];
             } else {
-                newLinksObject[key] = deepResolve(links[key], currentPrefix);
+                newLinksObject[key] = deepResolve(links[key], currentBase.clone());
             }
         });
 
@@ -31,8 +35,15 @@ function deepResolve(links, currentPrefix) {
     return links; // It's neither object nor string.
 }
 
-function resolveLinks (linksObject) {
-    return deepResolve(linksObject, '');
+function resolveLinks(config) {
+    let linksObject = config.get('links');
+
+    const baseUrl = new Uri(config.get('endpoints:apiUrl'))
+        .port(config.get('endpoints:apiPort'));
+
+    linksObject = deepResolve(linksObject, baseUrl);
+    console.log(linksObject);
+    config.set('app:links', linksObject);
 }
 
 module.exports = resolveLinks;

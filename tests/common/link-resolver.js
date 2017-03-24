@@ -1,6 +1,7 @@
 'use strict';
 
 const resolveLinks = require('../../config/helpers/link-resolver');
+const config = require('../../src/server/config');
 
 
 describe('link resolver', function () {
@@ -15,10 +16,21 @@ describe('link resolver', function () {
                 auth: '',
                 authCallback: 'callback'
             }
+        },
+        another: {
+            link: 'link'
         }
     };
 
-    const newLinks = resolveLinks(links);
+    const endpoints = {
+        apiUrl: 'http://site.com',
+        apiPort: 81
+    };
+
+    config.set('links', links);
+    config.set('endpoints', endpoints);
+    resolveLinks(config);
+    const newLinks = config.get('app:links');
 
     it('should not break anything', function () {
         expect(newLinks.auth).toBeDefined();
@@ -27,13 +39,13 @@ describe('link resolver', function () {
     });
 
     it('should correctly add prefixes', function () {
-        expect(newLinks.auth.logout).toBe('/api/auth/logout');
-        expect(newLinks.auth.vk.authCallback).toBe('/api/auth/vk/callback');
+        expect(newLinks.auth.logout).toBe('http://site.com:81/api/auth/logout');
+        expect(newLinks.auth.vk.authCallback).toBe('http://site.com:81/api/auth/vk/callback');
     });
 
     it('should not add trailing slash for empty links', function () {
-        expect(newLinks.auth.info).toBe('/api/auth');
-        expect(newLinks.auth.vk.auth).toBe('/api/auth/vk');
+        expect(newLinks.auth.info).toBe('http://site.com:81/api/auth');
+        expect(newLinks.auth.vk.auth).toBe('http://site.com:81/api/auth/vk');
     });
 
     it('should not change prefix properties', function () {
@@ -41,4 +53,8 @@ describe('link resolver', function () {
         expect(newLinks.auth.prefix).toBe(links.auth.prefix);
         expect(newLinks.auth.vk.prefix).toBe(links.auth.vk.prefix);
     });
+
+    it('should correctly treat paths without prefix', function () {
+        expect(newLinks.another.link).toBe('http://site.com:81/api/link');
+    })
 });

@@ -12,14 +12,14 @@ const imageService = require('../image/image-service');
 const multerMiddleware = multer({ storage: multer.memoryStorage() }).single('photo');
 
 router
-    .get(config.get('app:links:cafe:coords'), async context => {
+    .get(config.get('links:cafe:coords'), async context => {
         context.body = await cafeService.getAllCafeCoords();
     })
-    .get(config.get('app:links:cafe:one:get'), async context => {
+    .get(config.get('links:cafe:one:get'), async context => {
         const id = context.params.id;
         context.body = await cafeService.findById(id);
     })
-    .get(config.get('app:links:cafe:getAll'), async context => {
+    .get(config.get('links:cafe:getAll'), async context => {
         const query = {
             page: +context.query.page,
             itemsPerPage: +context.query.itemsPerPage
@@ -27,10 +27,10 @@ router
 
         context.body = await cafeService.getAllCafes(query);
     })
-    .post(config.get('app:links:cafe:one:image'), authMiddlewares.adminOnly, multerMiddleware, async context => {
+    .post(config.get('links:cafe:one:image'), authMiddlewares.adminOnly, multerMiddleware, async context => {
         context.throw(500); // todo: finish image uploading
     })
-    .post(config.get('app:links:cafe:add'), authMiddlewares.adminOnly, async context => {
+    .post(config.get('links:cafe:add'), authMiddlewares.adminOnly, async context => {
         const cafe = context.request.body;
         context.body = await cafeService.createCafe(cafe);
     });

@@ -13,9 +13,9 @@ const userService = require('./user/user-service');
 mongoose.connect(config.get('db:connectionString'));
 
 const app = new Koa();
-app.name = 'Lunch time'; // Just because I can.
+app.name = 'Lunch Time API';
 
 setup(app);
 userService.updateAdmin();
 
-app.listen(config.get('port'));
+app.listen(config.get('endpoints:apiPort'));

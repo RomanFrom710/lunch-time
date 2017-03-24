@@ -11,26 +11,26 @@ const authEventName = config.get('app:auth:authEventName');
 
 router
     // common
-    .get(config.get('app:links:auth:info'), context => {
+    .get(config.get('links:auth:info'), context => {
         context.body = context.state.user;
         if (!context.body) {
             context.throw(401);
         }
     })
-    .post(config.get('app:links:auth:logout'), context => {
+    .post(config.get('links:auth:logout'), context => {
         context.logout();
         context.session = null;
         context.body = true;
     })
 
     // vk
-    .get(config.get('app:links:auth:vk:auth'), authMiddlewares.anonOnly, passport.authenticate('vkontakte'))
-    .get(config.get('app:links:auth:vk:authCallback'), passport.authenticate('vkontakte'), context => {
+    .get(config.get('links:auth:vk:auth'), authMiddlewares.anonOnly, passport.authenticate('vkontakte'))
+    .get(config.get('links:auth:vk:authCallback'), passport.authenticate('vkontakte'), context => {
         context.body = `<script>window.opener.postMessage('${authEventName}', '*');window.close()</script>`;
     })
 
     // local
-    .post(config.get('app:links:auth:local:auth'), authMiddlewares.anonOnly, (context, next) => {
+    .post(config.get('links:auth:local:auth'), authMiddlewares.anonOnly, (context, next) => {
         return passport.authenticate('local', (err, user) => {
             if (err) {
                 context.throw(err);

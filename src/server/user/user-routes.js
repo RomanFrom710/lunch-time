@@ -7,7 +7,7 @@ const userService = require('./user-service');
 const authMiddleware = require('../auth/middleware').userOnly;
 
 router
-    .put(config.get('app:links:user:selfUpdate'), authMiddleware, async context => {
+    .put(config.get('links:user:selfUpdate'), authMiddleware, async context => {
         const userDto = context.request.body;
         const newUser = await userService.updateUserInfo(context.state.user.id, userDto);
         context.login(newUser);
