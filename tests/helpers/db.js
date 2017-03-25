@@ -8,7 +8,7 @@ const config = require('../../src/server/config');
 mongoose.Promise = global.Promise; // todo: remove after mongoose 5 will be released
 
 exports.connectToTestDb = function (done) {
-    const connectionString = config.get('db:testConnectionString');
+    const connectionString = config.get('db:testconnectionstring');
     mongoose.connect(connectionString, done);
 };
 

@@ -16,7 +16,8 @@ import {
     AuthService,
     AuthGuard,
     UserService,
-    AuthHandlingInterceptor
+    AuthHandlingInterceptor,
+    CorsInterceptor
 } from './';
 
 
@@ -42,7 +43,8 @@ import {
         UserService,
         UserMenuService,
         AuthGuard,
-        AuthHandlingInterceptor
+        AuthHandlingInterceptor,
+        CorsInterceptor
     ]
 })
 export class UserModule { }

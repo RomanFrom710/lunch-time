@@ -35,15 +35,13 @@ function deepResolve(links, currentBase) {
     return links; // It's neither object nor string.
 }
 
-function resolveLinks(config) {
-    let linksObject = config.get('links');
+function resolveLinks(links, endpoints) {
+    const baseUrl = new Uri(endpoints.apiurl).port(endpoints.apiport);
 
-    const baseUrl = new Uri(config.get('endpoints:apiUrl'))
-        .port(config.get('endpoints:apiPort'));
-
-    linksObject = deepResolve(linksObject, baseUrl);
-    console.log(linksObject);
-    config.set('app:links', linksObject);
+    return {
+        full: deepResolve(links, baseUrl),
+        relative: deepResolve(links, new Uri('/'))
+    };
 }
 
 module.exports = resolveLinks;

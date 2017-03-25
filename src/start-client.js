@@ -35,4 +35,4 @@ if (process.env.NODE_ENV === 'development') {
     app.use(koaStatic('./public'));
 }
 
-app.listen(config.get('endpoints:clientPort'));
+app.listen(config.get('endpoints:clientport'));

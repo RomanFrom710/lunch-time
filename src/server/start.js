@@ -10,7 +10,7 @@ const setup = require('./setup');
 const userService = require('./user/user-service');
 
 
-mongoose.connect(config.get('db:connectionString'));
+mongoose.connect(config.get('db:connectionstring'));
 
 const app = new Koa();
 app.name = 'Lunch Time API';
@@ -18,4 +18,4 @@ app.name = 'Lunch Time API';
 setup(app);
 userService.updateAdmin();
 
-app.listen(config.get('endpoints:apiPort'));
+app.listen(config.get('endpoints:apiport'));

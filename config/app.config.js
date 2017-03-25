@@ -8,48 +8,16 @@ const detectAuthMethods = require('./helpers/auth-methods-detector');
 
 const commonConfig = {
     endpoints: {
-        apiUrl: 'http://localhost',
-        apiPort: 81,
-        clientPort: 3000
+        apiurl: 'http://localhost',
+        apiport: 81,
+        clientport: 3000
     },
     keys: {
         cookie: 'very-secret-key'
     },
     db: {
-        connectionString: 'mongodb://127.0.0.1/lunchtime',
-        testConnectionString: 'mongodb://127.0.0.1/testlunchtime'
-    },
-    links: {
-        prefix: 'api',
-        auth: {
-            prefix: 'auth',
-            info: '',
-            logout: 'logout',
-            vk: {
-                prefix: 'vk',
-                auth: '',
-                authCallback: 'callback'
-            },
-            local: {
-                prefix: 'local',
-                auth: ''
-            }
-        },
-        user: {
-            prefix: 'user',
-            selfUpdate: ''
-        },
-        cafe: {
-            prefix: 'cafe',
-            add: '',
-            getAll: '',
-            coords: 'coords',
-            one: {
-                prefix: ':id',
-                get: '',
-                image: 'image'
-            }
-        }
+        connectionstring: 'mongodb://127.0.0.1/lunchtime',
+        testconnectionstring: 'mongodb://127.0.0.1/testlunchtime'
     },
     app: { // This part is available in the client app too
         auth: {
@@ -69,12 +37,48 @@ const commonConfig = {
     }
 };
 
+const links = {
+    prefix: 'api',
+    auth: {
+        prefix: 'auth',
+        info: '',
+        logout: 'logout',
+        vk: {
+            prefix: 'vk',
+            auth: '',
+            authCallback: 'callback'
+        },
+        local: {
+            prefix: 'local',
+            auth: ''
+        }
+    },
+    user: {
+        prefix: 'user',
+        selfUpdate: ''
+    },
+    cafe: {
+        prefix: 'cafe',
+        add: '',
+        getAll: '',
+        coords: 'coords',
+        one: {
+            prefix: ':id',
+            get: '',
+            image: 'image'
+        }
+    }
+};
+
 nconf
     .use('memory')
     .env({ separator: '__', lowerCase: true })
     .defaults(commonConfig);
 
-resolveLinks(nconf);
 detectAuthMethods(nconf);
+
+const resolvedLinks = resolveLinks(links, nconf.get('endpoints'));
+nconf.set('links', resolvedLinks.relative);
+nconf.set('app:links', resolvedLinks.full);
 
 module.exports = nconf;

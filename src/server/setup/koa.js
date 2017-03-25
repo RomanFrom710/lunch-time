@@ -17,5 +17,5 @@ module.exports = function (app) {
         .use(koaSession({ store: new KoaMongooseStore() }))
         .use(koaPassport.initialize())
         .use(koaPassport.session())
-        .use(koaCors());
+        .use(koaCors({ credentials: true }));
 };

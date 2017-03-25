@@ -20,7 +20,7 @@ const devConfig = {
         new webpack.HotModuleReplacementPlugin(),
         new WebpackBrowserPlugin({
             url: 'http://localhost',
-            port: appConfig.get('endpoints:clientPort')
+            port: appConfig.get('endpoints:clientport')
         }),
         new webpack.IgnorePlugin(/server\//)
     ]
