@@ -21,8 +21,7 @@ const devConfig = {
         new WebpackBrowserPlugin({
             url: 'http://localhost',
             port: appConfig.get('endpoints:clientport')
-        }),
-        new webpack.IgnorePlugin(/server\//)
+        })
     ]
 };
 
