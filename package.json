@@ -16,11 +16,10 @@
     "start": "npm-run-all --parallel start-client start-server",
     "start-client": "node ./src/start-client",
     "start-server": "node ./src/start-server",
-    "build-prod": "webpack --progress --config ./config/webpack.prod.js",
     "test": "npm run test-server && npm run test-client",
     "test-server": "jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "test-client": "karma start",
-    "postinstall": "typings install && npm run build-prod"
+    "postinstall": "typings install"
   },
   "dependencies": {
     "@angular/animations": "^4.0.0",

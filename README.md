@@ -1,19 +1,17 @@
 # lunch-time
 
 ## npm scripts
-* *npm start* &mdash; runs the server.
-* *npm run build-dev* &mdash; compiles everything in dev mode without HMR.
-* *npm run build-prod* &mdash; compiles everything in production mode.
+* *npm start* &mdash; runs both the server and the client with bundles building.
+* *npm run start-client* &mdash; runs the client.
+* *npm run start-server* &mdash; runs the server.
+* *npm test* &mdash; run both server and client tests.
 * *npm run test-server* &mdash; run server tests via jasmine.
 * *npm run test-client* &mdash; run client tests via karma.
-* *npm test* &mdash; run both server and client tests.
-* *npm run nodemon* &mdash; start server with nodemon (you must build client part before it).
 
 ## Environment variables
 
 * *NODE_ENV* === 'production' &mdash; by default, enables minification.
 * *NODE_ENV* === 'development' &mdash; enables webpack Hot Module Replacement.
-* *NODE_ENV* === 'nodemon' &mdash; the same as *production*, but enables errors in console on the server.
 
 
 ### keys
@@ -26,9 +24,12 @@
 
 ### db
 * *DB__CONNECTIONSTRING* &mdash; connection string for your MongoDB.
+* *DB__TESTCONNECTIONSTRING* &mdash; connection string for your MongoDB for backend tests.
 
 ### server
-* *PORT* &mdash; your port number.
+* *ENDPOINTS_APIURL* &mdash; URL for API calls.
+* *ENDPOINTS_APIPORT* &mdash; port number for the API server.
+* *ENDPOINTS_CLIENTPORT* &mdash; port number for the client.
 
 ### admin
 Use these variables only to create the first admin account. It'll be created automatically.

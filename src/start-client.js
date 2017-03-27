@@ -25,14 +25,13 @@ app.use(async (context, next) => {
     await next();
 });
 
+const webpackCompiler = webpack(webpackConfig);
 if (process.env.NODE_ENV === 'development') {
-    const webpackCompiler = webpack(webpackConfig);
-
     app
         .use(webpackDevMiddleware(webpackCompiler))
         .use(webpackHotMiddleware(webpackCompiler));
 } else {
-    app.use(koaStatic('./public'));
+    webpackCompiler.run(() => app.use(koaStatic('./public')));
 }
 
 app.listen(config.get('endpoints:clientport'));
