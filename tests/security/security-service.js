@@ -1,6 +1,6 @@
 'use strict';
 
-const securityService = require('../../src/server/user/security-service');
+const securityService = require('../../src/server/security/security-service');
 
 
 describe('security service', function () {

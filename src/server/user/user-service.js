@@ -3,7 +3,7 @@
 const mapper = require('object-mapper');
 const _ = require('lodash');
 
-const securityService = require('./security-service');
+const securityService = require('../security/security-service');
 const userEnums = require('./user-enums');
 const userRepository = require('./user-repository');
 const config = require('../config');

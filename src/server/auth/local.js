@@ -3,7 +3,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const userService = require('../user/user-service');
-const securityService = require('../user/security-service');
+const securityService = require('../security/security-service');
 
 const strategyOptions = {
     usernameField: 'username',
