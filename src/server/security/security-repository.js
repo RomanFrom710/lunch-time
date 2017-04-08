@@ -10,3 +10,7 @@ exports.getByToken = function (token) {
 exports.addOffer = function (token, userType) {
     return RegistrationOffer.create({ token, userType });
 };
+
+exports.removeOffer = function (token) {
+    return RegistrationOffer.remove({ token });
+};

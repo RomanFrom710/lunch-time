@@ -13,6 +13,7 @@ import {
     UserMenuService,
     SocialAuthTypesService,
     GenderPipe,
+    UserTypePipe,
     AuthService,
     AuthGuard,
     UserService,
@@ -33,9 +34,10 @@ import {
         SignInScreenComponent,
         UserDetailsComponent,
         GenderPipe,
+        UserTypePipe,
         ProfileSettingsComponent
     ],
-    exports: [ SignInScreenComponent, GenderPipe ],
+    exports: [ SignInScreenComponent, GenderPipe, UserTypePipe ],
     providers: [
         UserStore,
         AuthService,

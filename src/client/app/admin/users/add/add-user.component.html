@@ -1,0 +1,26 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <fieldset>
+            <label>Тип пользователя</label>
+            <div class="radio">
+                <label>
+                    <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.User">
+                    {{UserTypeEnum.User | ltUserType}}
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.SpotOwner">
+                    {{UserTypeEnum.SpotOwner | ltUserType}}
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.Admin">
+                    {{UserTypeEnum.Admin | ltUserType}}
+                </label>
+            </div>
+        </fieldset>
+    </div>
+    <button class="btn btn-success" (click)="addUser()">Добавить</button>
+</form>

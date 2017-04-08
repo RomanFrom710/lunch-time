@@ -19,7 +19,8 @@ import {
     AdminPanelComponent,
     ManageCafesComponent,
     AddCafeComponent,
-    ManageUsersComponent
+    ManageUsersComponent,
+    AddUserComponent
 } from './admin';
 
 
@@ -65,6 +66,12 @@ import {
                     {
                         path: 'users',
                         component: ManageUsersComponent,
+                        canActivate: [AuthGuard],
+                        data: { roles: [UserType.Admin] }
+                    },
+                    {
+                        path: 'users/add',
+                        component: AddUserComponent,
                         canActivate: [AuthGuard],
                         data: { roles: [UserType.Admin] }
                     },

@@ -35,6 +35,10 @@ export class Config {
         user: {
             selfUpdate: string;
         },
+        security: {
+            addOffer: string;
+            verifyToken: string;
+        },
         cafe: {
             add: string;
             getAll: string;

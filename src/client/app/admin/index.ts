@@ -1,3 +1,4 @@
+export * from './shared';
 export * from './cafes';
 export * from './users';
 export * from './panel';

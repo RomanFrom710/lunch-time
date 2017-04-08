@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { UserService, User, Gender } from '../../';
+import { User, Gender } from '../../';
 
 
 // todo: Add validation for this component
@@ -15,5 +15,5 @@ export class UserDetailsComponent {
 
     private GenderEnum = Gender;
 
-    constructor(private userService: UserService) { }
+    constructor() { }
 }

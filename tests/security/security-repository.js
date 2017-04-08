@@ -27,4 +27,12 @@ describe('security repository', function () {
         expect(foundOffer).toBeFalsy();
         done();
     });
+
+    it('should remove offer by token', async function (done) {
+        await securityRepository.addOffer(offer.token, offer.userType);
+        await securityRepository.removeOffer(offer.token);
+        const foundOffer = await securityRepository.getByToken(offer.token);
+        expect(foundOffer).toBeFalsy();
+        done();
+    });
 });

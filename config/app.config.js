@@ -57,6 +57,11 @@ const links = {
         prefix: 'user',
         selfUpdate: ''
     },
+    security: {
+        prefix: 'security',
+        addOffer: '',
+        verifyToken: ':token'
+    },
     cafe: {
         prefix: 'cafe',
         add: '',

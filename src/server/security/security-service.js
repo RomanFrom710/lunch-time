@@ -1,6 +1,7 @@
 'use strict';
 
 const bcrypt = require('bcryptjs');
+const uuid = require('uuid');
 
 const securityRepository = require('./security-repository');
 
@@ -20,4 +21,14 @@ exports.verifyPassword = function (password, hash) {
 exports.verifyToken = async function (token) {
     const offer = await securityRepository.getByToken(token);
     return offer.userType || null;
+};
+
+exports.addOffer = async function (userType) {
+    const token = uuid();
+    await securityRepository.addOffer(token, userType);
+    return token;
+};
+
+exports.removeOffer = function (token) {
+    return securityRepository.removeOffer(token);
 };

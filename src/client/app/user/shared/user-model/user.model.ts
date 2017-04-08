@@ -1,20 +1,16 @@
 import { Serializable, Point } from '../../../shared';
 
 
-// All this stuff is stored in shared module, because checking current user
-// is common task and is needed throughout the whole app.
-
-// todo: rewrite to string-based enums, when this feature will be released in typescript
 export enum Gender {
-    Male,
-    Female
+    Male = 1,
+    Female = 2
 }
 
 export enum UserType {
-    Anon, // Needed for guards compatibility
-    User,
-    SpotOwner,
-    Admin
+    Anon = 0, // Needed for guards compatibility
+    User = 1,
+    SpotOwner = 2,
+    Admin = 3
 }
 
 export class User extends Serializable {

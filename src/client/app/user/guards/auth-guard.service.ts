@@ -32,7 +32,6 @@ export class AuthGuard implements CanActivate {
             return routeRoles.indexOf(UserType.Anon) !== -1;
         }
 
-        const currentType = UserType[this.currentUser.userType.toString()];
-        return routeRoles.indexOf(currentType) !== -1;
+        return routeRoles.indexOf(this.currentUser.userType) !== -1;
     }
 }
