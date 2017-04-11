@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared';
 @NgModule({
     imports: [
         RouterModule,
+        CommonModule,
         HttpModule,
         FormsModule,
         CafeModule,

@@ -1,4 +1,4 @@
-import { Serializable } from '../';
+import { Serializable } from '../../';
 
 
 export class PaginationResult<T> extends Serializable {

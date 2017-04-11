@@ -8,7 +8,7 @@ import {
 
 
 @Directive({ selector: '[ltDefaultImage]' })
-export class DefaultImageDirective implements OnChanges{
+export class DefaultImageDirective implements OnChanges {
     @HostBinding('attr.src')
     @Input()
     src: string;

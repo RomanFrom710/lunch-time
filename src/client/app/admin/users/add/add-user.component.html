@@ -1,26 +1,39 @@
 <form class="form-horizontal">
-    <div class="form-group">
-        <fieldset>
-            <label>Тип пользователя</label>
-            <div class="radio">
-                <label>
-                    <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.User">
-                    {{UserTypeEnum.User | ltUserType}}
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.SpotOwner">
-                    {{UserTypeEnum.SpotOwner | ltUserType}}
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.Admin">
-                    {{UserTypeEnum.Admin | ltUserType}}
-                </label>
-            </div>
-        </fieldset>
+    <div class="col-md-6">
+        <div class="form-group">
+            <fieldset>
+                <label>Тип пользователя</label>
+                <div class="radio">
+                    <label>
+                        <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.User">
+                        {{UserTypeEnum.User | ltUserType}}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.SpotOwner">
+                        {{UserTypeEnum.SpotOwner | ltUserType}}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input [(ngModel)]="userType" type="radio" name="userType" [value]="UserTypeEnum.Admin">
+                        {{UserTypeEnum.Admin | ltUserType}}
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" (click)="addUser()">Добавить</button>
+        </div>
     </div>
-    <button class="btn btn-success" (click)="addUser()">Добавить</button>
+
+    <div class="form-group col-md-6">
+        <div class="form-group">
+            <label>
+                Ссылка на регистрацию
+                <lt-copy-text [value]="registerLink | async"></lt-copy-text>
+            </label>
+        </div>
+    </div>
 </form>

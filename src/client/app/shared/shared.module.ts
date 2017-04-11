@@ -4,6 +4,7 @@ import { ToastModule } from 'ng2-toastr';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { ImageUploadModule } from 'ng2-imageupload';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import {
     Config,
@@ -13,6 +14,7 @@ import {
     ErrorHandlingInterceptor,
     CustomErrorHandler,
     SelectPointComponent,
+    CopyTextComponent,
     ImageUploaderComponent,
     BrowserWindowService
 } from './';
@@ -22,6 +24,7 @@ const components = [ // Everything that is declared in shared module should be e
     EmptyLinkDirective,
     DefaultImageDirective,
     ImageUploaderComponent,
+    CopyTextComponent,
     SelectPointComponent
 ];
 
@@ -31,6 +34,7 @@ const components = [ // Everything that is declared in shared module should be e
         AgmCoreModule.forRoot(),
         ToastModule.forRoot(),
         ImageUploadModule,
+        ClipboardModule,
         FileUploadModule
     ],
     declarations: components,

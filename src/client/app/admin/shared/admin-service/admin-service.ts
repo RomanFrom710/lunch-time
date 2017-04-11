@@ -13,6 +13,6 @@ export class AdminService {
 
     addOffer(userType: UserType): Observable<string> {
         return this.http.post(this.config.links.security.addOffer, { userType })
-            .map(response => response.json());
+            .map(response => response.text());
     }
 }

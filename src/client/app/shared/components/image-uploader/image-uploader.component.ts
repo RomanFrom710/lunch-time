@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { ImageResult } from 'ng2-imageupload';
 
-import { Config } from '../config';
+import { Config } from '../../config';
 
 
 @Component({

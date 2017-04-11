@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule, Http } from "@angular/http";
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideInterceptorService, InterceptorService } from 'ng2-interceptors';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,7 @@ import { AppComponent }  from './app.component';
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         SharedModule,
         InfoModule,

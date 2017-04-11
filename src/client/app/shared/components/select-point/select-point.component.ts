@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { MouseEvent, LatLngLiteral } from 'angular2-google-maps/core';
 
-import { Point } from '../';
-import { Config } from '../../config';
+import { Point, Config } from '../../';
 
 
 @Component({
