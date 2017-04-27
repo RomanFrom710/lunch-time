@@ -5,6 +5,7 @@ const router = require('koa-router')();
 
 const config = require('../config');
 const authMiddlewares = require('./middleware');
+const userService = require('../user/user-service');
 
 const authEventName = config.get('app:auth:authEventName');
 
@@ -41,6 +42,11 @@ router
                 context.throw(400, 'Wrong username or password!');
             }
         })(context, next);
+    })
+    .post(config.get('links:auth:local:register'), authMiddlewares.anonOnly, async context => {
+        const user = context.request.body;
+        await userService.registerLocalUser(user);
+        return context.login(user);
     });
 
 module.exports = router.routes();

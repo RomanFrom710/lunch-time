@@ -9,6 +9,7 @@ import {
     LocalSignInComponent,
     ProfileSettingsComponent,
     SignInScreenComponent,
+    RegisterComponent,
     UserDetailsComponent,
     UserMenuService,
     SocialAuthTypesService,
@@ -16,6 +17,7 @@ import {
     UserTypePipe,
     AuthService,
     AuthGuard,
+    RegisterGuard,
     UserService,
     AuthHandlingInterceptor,
     CorsInterceptor
@@ -33,6 +35,7 @@ import {
         LocalSignInComponent,
         SignInScreenComponent,
         UserDetailsComponent,
+        RegisterComponent,
         GenderPipe,
         UserTypePipe,
         ProfileSettingsComponent
@@ -45,6 +48,7 @@ import {
         UserService,
         UserMenuService,
         AuthGuard,
+        RegisterGuard,
         AuthHandlingInterceptor,
         CorsInterceptor
     ]

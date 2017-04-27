@@ -22,6 +22,11 @@ export class AuthService {
         return this.userStore.getUser();
     }
 
+    registerLocalUser(user: User): Observable<boolean> {
+        return this.http.post(this.config.links.auth.local.register, user)
+            .map(response => !!response);
+    }
+
     authVk(): void {
         this.windowService
             .openTempWindow(this.config.links.auth.vk.auth, this.config.auth.authEventName)

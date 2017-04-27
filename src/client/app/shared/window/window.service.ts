@@ -9,4 +9,5 @@ export abstract class WindowService {
     abstract openTempWindow(newWindowUrl: string, messageName: string): Observable<boolean>;
     abstract getStorageValue(key: string): any;
     abstract setStorageValue(key: string, value: any): void;
+    abstract getCurrentOrigin(): string;
 }

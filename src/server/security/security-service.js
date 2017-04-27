@@ -20,7 +20,7 @@ exports.verifyPassword = function (password, hash) {
 
 exports.verifyToken = async function (token) {
     const offer = await securityRepository.getByToken(token);
-    return offer.userType || null;
+    return (offer && offer.userType) || null;
 };
 
 exports.addOffer = async function (userType) {

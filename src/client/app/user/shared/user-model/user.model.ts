@@ -20,6 +20,7 @@ export class User extends Serializable {
     gender: Gender;
     id: string;
     lastName: string;
+    password: string;
     photoUrl: string;
     place: Point;
     thirdPartyId: string;

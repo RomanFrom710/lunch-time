@@ -11,7 +11,9 @@ import {
 import {
     SignInScreenComponent,
     ProfileSettingsComponent,
+    RegisterComponent,
     AuthGuard,
+    RegisterGuard,
     UserModule,
     UserType
 } from './user';
@@ -93,6 +95,11 @@ import {
                         redirectTo: 'places'
                     }
                 ]
+            },
+            {
+                path: 'register/:token',
+                canActivate: [RegisterGuard],
+                component: RegisterComponent
             },
             {
                 path: '',

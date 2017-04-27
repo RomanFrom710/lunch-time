@@ -30,6 +30,7 @@ export class Config {
             },
             local: {
                 auth: string;
+                register: string;
             }
         },
         user: {
@@ -45,7 +46,6 @@ export class Config {
             coords: string;
             one: {
                 get: string;
-                image: string;
             }
         }
     }

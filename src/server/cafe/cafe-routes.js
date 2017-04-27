@@ -6,7 +6,6 @@ const multer = require('koa-router-multer');
 const config = require('../config');
 const authMiddlewares = require('../auth/middleware');
 const cafeService = require('./cafe-service');
-const imageService = require('../image/image-service');
 
 
 const multerMiddleware = multer({ storage: multer.memoryStorage() }).single('photo');
@@ -26,9 +25,6 @@ router
         };
 
         context.body = await cafeService.getAllCafes(query);
-    })
-    .post(config.get('links:cafe:one:image'), authMiddlewares.adminOnly, multerMiddleware, async context => {
-        context.throw(500); // todo: finish image uploading
     })
     .post(config.get('links:cafe:add'), authMiddlewares.adminOnly, async context => {
         const cafe = context.request.body;

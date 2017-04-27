@@ -34,4 +34,8 @@ export class BrowserWindowService implements WindowService {
             localStorage.setItem(key, JSON.stringify(value));
         }
     }
+
+    getCurrentOrigin(): string {
+        return window.location.origin;
+    }
 }

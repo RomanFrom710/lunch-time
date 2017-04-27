@@ -50,7 +50,8 @@ const links = {
         },
         local: {
             prefix: 'local',
-            auth: ''
+            auth: '',
+            register: 'register'
         }
     },
     user: {
@@ -69,8 +70,7 @@ const links = {
         coords: 'coords',
         one: {
             prefix: ':id',
-            get: '',
-            image: 'image'
+            get: ''
         }
     }
 };

@@ -19,4 +19,8 @@ export class MockWindowService implements WindowService {
     setStorageValue(key: string, value: any): void {
         this.mockStorage[key] = value;
     }
+
+    getCurrentOrigin(): string {
+        return 'http://localhost/';
+    }
 }
