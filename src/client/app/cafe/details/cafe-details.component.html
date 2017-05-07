@@ -19,8 +19,13 @@
         </div>
     </div>
 
-    <div *ngIf="cafe.place" class="row">
-        <lt-select-point [isEditMode]="false" [(point)]="cafe.place"></lt-select-point>
+    <div class="row">
+        <div class="col-md-6">
+            <lt-cafe-prices [cafe]="cafe"></lt-cafe-prices>
+        </div>
+        <div *ngIf="cafe.place" class="col-md-6">
+            <lt-select-point [isEditMode]="false" [(point)]="cafe.place"></lt-select-point>
+        </div>
     </div>
 </div>
 

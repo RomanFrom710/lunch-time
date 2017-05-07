@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const paginate = require('mongoose-paginate');
 
+const priceSchema = require('./price-schema');
 const dbExtensions = require('../shared/db-extensions');
 
 
@@ -11,7 +12,9 @@ const cafeSchema = new mongoose.Schema({
     address: { type: String, trim: true, required: true }, // todo: find a way to take it from geo without google API key
     description: { type: String, trim: true, required: true },
 
-    place: { type: [Number], index: '2d', required: true }
+    place: { type: [Number], index: '2d', required: true },
+
+    prices: { type: [priceSchema] }
 }, {
     collection: 'cafes' // Mongoose thinks it must be 'caves'! No caves here!
 });

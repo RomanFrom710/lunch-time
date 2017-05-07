@@ -71,6 +71,10 @@ const links = {
         one: {
             prefix: ':id',
             get: ''
+        },
+        price: {
+            prefix: 'price',
+            add: ':id'
         }
     }
 };

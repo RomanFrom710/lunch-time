@@ -1,0 +1,36 @@
+<div>
+    <table *ngIf="cafe.prices?.length" class="table">
+        <thead>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Голосов</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let price of cafe.prices" [class]="price.hasVoted ? 'has-voted' : ''">
+                <td>{{price.name}}</td>
+                <td>{{price.price}}</td>
+                <td>{{price.votes}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="currentUser | async">
+        <h4>Добавить новую информацию</h4>
+        <label *ngIf="cafe.prices?.length">
+            По существующей позиции
+            <select [(ngModel)]="newPrice.name" [disabled]="!!newPriceName" class="form-control">
+                <option *ngFor="let price of cafe.prices" [value]="price.id">{{price.name}}</option>
+            </select>
+        </label>
+        <label>
+            По новой позиции
+            <input class="form-control" [(ngModel)]="newPriceName" placeholder="Новая позиция">
+        </label>
+        <label>
+            Цена
+            <input class="form-control" [(ngModel)]="newPrice.price">
+        </label>
+        <div>
+            <button class="btn btn-success" (click)="add()">Добавить</button>
+        </div>
+    </div>
+</div>

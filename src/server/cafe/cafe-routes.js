@@ -1,14 +1,11 @@
 'use strict';
 
 const router = require('koa-router')();
-const multer = require('koa-router-multer');
 
 const config = require('../config');
 const authMiddlewares = require('../auth/middleware');
 const cafeService = require('./cafe-service');
 
-
-const multerMiddleware = multer({ storage: multer.memoryStorage() }).single('photo');
 
 router
     .get(config.get('links:cafe:coords'), async context => {
@@ -29,6 +26,12 @@ router
     .post(config.get('links:cafe:add'), authMiddlewares.adminOnly, async context => {
         const cafe = context.request.body;
         context.body = await cafeService.createCafe(cafe);
+    })
+    .post(config.get('links:cafe:price:add'), authMiddlewares.userOnly, async context => {
+        const priceDto = context.request.body;
+        priceDto.cafeId = context.params.id;
+        priceDto.user = context.state.user.id;
+        context.body = await cafeService.addPriceInfo(priceDto);
     });
 
 

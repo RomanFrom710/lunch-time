@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const cafeRepository = require('./cafe-repository');
 const config = require('../config');
 
@@ -26,4 +28,26 @@ exports.getAllCafes = async function (query) {
 
 exports.createCafe = function (cafeDto) {
     return cafeRepository.createCafe(cafeDto);
+};
+
+exports.addPriceInfo = async function (priceDto) { // todo: move db code to repository
+    const cafe = await cafeRepository.findById(priceDto.cafeId);
+    const existingPrice = _.find(cafe.prices, _.pick(priceDto, 'name'));
+    if (existingPrice) {
+        const existingVote = _.find(existingPrice, _.pick(priceDto, 'user'));
+        if (existingVote) {
+            existingVote.date = Date.now();
+            existingVote.price = priceDto.price;
+        } else {
+            existingPrice.votes.push(_.pick(priceDto, ['user', 'price']));
+        }
+    } else {
+        cafe.prices.push({
+            name: priceDto.name,
+            votes: [_.pick(priceDto, ['user', 'price'])]
+        });
+    }
+
+    await cafe.save();
+    return true;
 };

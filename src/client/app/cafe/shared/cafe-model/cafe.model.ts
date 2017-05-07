@@ -1,4 +1,5 @@
 import { Serializable, Point } from '../../../shared';
+import { Price } from '../';
 
 
 export class Cafe extends Serializable {
@@ -7,5 +8,6 @@ export class Cafe extends Serializable {
     address: string;
     description: string;
     place: Point;
+    prices: [Price];
     photoUrl: string;
 }

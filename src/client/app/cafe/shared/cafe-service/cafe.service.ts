@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { Cafe, CafeQuery } from '../';
+import { Cafe, CafeQuery, Price } from '../';
 import { Config, PaginationResult } from '../../../shared';
 
 
@@ -33,6 +33,11 @@ export class CafeService {
 
     addCafe(cafe: Cafe): Observable<boolean> {
         return this.http.post(this.config.links.cafe.add, cafe)
+            .map(response => response.json());
+    }
+
+    addPrice(cafeId: string, price: Price): Observable<boolean> {
+        return this.http.post(this.config.links.cafe.price.add.replace(':id', cafeId), price)
             .map(response => response.json());
     }
 }

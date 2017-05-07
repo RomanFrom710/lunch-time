@@ -27,26 +27,29 @@ export class Config {
             vk: {
                 auth: string;
                 auth_callback: string;
-            },
+            };
             local: {
                 auth: string;
                 register: string;
-            }
-        },
+            };
+        };
         user: {
             selfUpdate: string;
-        },
+        };
         security: {
             addOffer: string;
             verifyToken: string;
-        },
+        };
         cafe: {
             add: string;
             getAll: string;
             coords: string;
             one: {
                 get: string;
-            }
-        }
-    }
+            };
+            price: {
+                add: string;
+            };
+        };
+    };
 }

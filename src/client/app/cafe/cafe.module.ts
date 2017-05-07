@@ -15,6 +15,7 @@ import {
     CafeService,
     CafeDetailsComponent,
     CafeModalComponent,
+    CafePricesComponent,
     CafeResolve
 } from './';
 
@@ -35,6 +36,7 @@ import {
         CafeMapComponent,
         CafeListComponent,
         CafeDetailsComponent,
+        CafePricesComponent,
         CafeModalComponent
     ],
     exports: [ CafeDetailsComponent ],
