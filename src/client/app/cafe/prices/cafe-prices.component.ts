@@ -21,17 +21,12 @@ export class CafePricesComponent {
 
     private currentUser: Observable<User>;
     private newPrice: Price = new Price();
-    private newPriceName: string;
 
     constructor(private cafeService: CafeService, authService: AuthService) {
         this.currentUser = authService.currentUser;
     }
 
     add(): void {
-        if (this.newPriceName) {
-            this.newPrice.name = this.newPriceName;
-        }
-
         // todo: add validation
         this.cafeService.addPrice(this.cafe.id, this.newPrice).subscribe(() => {});
     }

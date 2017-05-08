@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const mongoose = require('mongoose');
 
 const cafeRepository = require('./cafe-repository');
 const config = require('../config');
@@ -32,9 +33,9 @@ exports.createCafe = function (cafeDto) {
 
 exports.addPriceInfo = async function (priceDto) { // todo: move db code to repository
     const cafe = await cafeRepository.findById(priceDto.cafeId);
-    const existingPrice = _.find(cafe.prices, _.pick(priceDto, 'name'));
+    const existingPrice = _.find(cafe.prices, _.pick(priceDto, 'id'));
     if (existingPrice) {
-        const existingVote = _.find(existingPrice, _.pick(priceDto, 'user'));
+        const existingVote = _.find(existingPrice.votes, { user: new mongoose.mongo.ObjectId(priceDto.user) });
         if (existingVote) {
             existingVote.date = Date.now();
             existingVote.price = priceDto.price;

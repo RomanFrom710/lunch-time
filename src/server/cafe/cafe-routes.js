@@ -13,7 +13,8 @@ router
     })
     .get(config.get('links:cafe:one:get'), async context => {
         const id = context.params.id;
-        context.body = await cafeService.findById(id);
+        const userId = context.state.user && context.state.user.id;
+        context.body = await cafeService.findById(id, userId);
     })
     .get(config.get('links:cafe:getAll'), async context => {
         const query = {
