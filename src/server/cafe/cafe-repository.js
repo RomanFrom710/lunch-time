@@ -21,7 +21,6 @@ exports.getAllCafes = function (query) {
             }
         };
     }
-    console.log(query);
 
     return Cafe.paginate(mongoQuery, {
         page: query.page,

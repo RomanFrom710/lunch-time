@@ -41,7 +41,7 @@ exports.createCafe = function (cafeDto) {
 
 exports.addPriceInfo = async function (priceDto) { // todo: move db code to repository
     const cafe = await cafeRepository.findById(priceDto.cafeId);
-    const existingPrice = _.find(cafe.prices, _.pick(priceDto, 'id'));
+    const existingPrice = priceDto.id && _.find(cafe.prices, _.pick(priceDto, 'id'));
     if (existingPrice) {
         const existingVote = _.find(existingPrice.votes, { user: new mongoose.mongo.ObjectId(priceDto.user) });
         if (existingVote) {

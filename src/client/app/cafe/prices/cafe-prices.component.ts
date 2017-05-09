@@ -27,6 +27,9 @@ export class CafePricesComponent {
     }
 
     add(): void {
+        if (this.newPrice.name) {
+            this.newPrice.id = null;
+        }
         // todo: add validation
         this.cafeService.addPrice(this.cafe.id, this.newPrice).subscribe(() => {});
     }

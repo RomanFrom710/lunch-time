@@ -17,13 +17,13 @@
         <h4>Добавить новую информацию</h4>
         <label *ngIf="cafe.prices?.length">
             По существующей позиции
-            <select [(ngModel)]="newPrice.name" [disabled]="!!newPrice.id" class="form-control">
+            <select [(ngModel)]="newPrice.id" [disabled]="!!newPrice.name" class="form-control">
                 <option *ngFor="let price of cafe.prices" [value]="price.id">{{price.name}}</option>
             </select>
         </label>
         <label>
             По новой позиции
-            <input class="form-control" [(ngModel)]="newPrice.id" placeholder="Новая позиция">
+            <input class="form-control" [(ngModel)]="newPrice.name" placeholder="Новая позиция">
         </label>
         <label>
             Цена
