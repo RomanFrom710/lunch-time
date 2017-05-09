@@ -1,3 +1,13 @@
+<div *ngIf="(currentUser | async)?.place">
+    <label>
+        В радиусе (метров) <input type="number" min="0" [(ngModel)]="query.radius" class="form-control">
+    </label>
+    <div>
+        <button class="btn btn-success" (click)="update()">Обновить</button>
+    </div>
+    <hr>
+</div>
+
 <div class="row">
     <div *ngFor="let cafe of cafes | async | paginate : paginateQuery"
         class="col-lg-3 col-md-4 col-sm-6">

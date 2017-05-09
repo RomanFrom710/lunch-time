@@ -20,6 +20,9 @@ export class CafeService {
         const params = new URLSearchParams();
         params.set('page', query.page.toString());
         params.set('itemsPerPage', query.itemsPerPage.toString());
+        if (query.radius) {
+            params.set('radius', query.radius.toString());
+        }
 
         return this.http.get(this.config.links.cafe.getAll, { search: params })
             .map(response => response.json());

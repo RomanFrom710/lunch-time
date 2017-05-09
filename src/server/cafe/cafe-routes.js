@@ -19,7 +19,9 @@ router
     .get(config.get('links:cafe:getAll'), async context => {
         const query = {
             page: +context.query.page,
-            itemsPerPage: +context.query.itemsPerPage
+            itemsPerPage: +context.query.itemsPerPage,
+            radius: +context.query.radius,
+            userId: context.state.user && context.state.user.id
         };
 
         context.body = await cafeService.getAllCafes(query);

@@ -12,7 +12,18 @@ exports.getAllCafeCoords = function () {
 };
 
 exports.getAllCafes = function (query) {
-    return Cafe.paginate({}, {
+    let mongoQuery = {};
+    if (query.radius && query.coords) {
+        mongoQuery = {
+            place: {
+                $nearSphere: query.coords,
+                $maxDistance: query.radius
+            }
+        };
+    }
+    console.log(query);
+
+    return Cafe.paginate(mongoQuery, {
         page: query.page,
         limit: query.itemsPerPage
     });

@@ -3,8 +3,11 @@
 const _ = require('lodash');
 const mongoose = require('mongoose');
 
+const userService = require('../user/user-service');
 const cafeRepository = require('./cafe-repository');
 const config = require('../config');
+
+const earthRadiusInMeters = 6371000;
 
 
 exports.findById = function (id) {
@@ -18,6 +21,11 @@ exports.getAllCafeCoords = function () {
 exports.getAllCafes = async function (query) {
     query.page = query.page || 1;
     query.itemsPerPage = query.itemsPerPage || config.get('app:cafe:itemsPerPage');
+    if (query.radius) {
+        query.radius /= earthRadiusInMeters;
+        const currentUser = await userService.findById(query.userId);
+        query.coords = currentUser.place;
+    }
 
     const cafes = await cafeRepository.getAllCafes(query);
     return {
