@@ -17,7 +17,7 @@
 
 ### keys
 #### cookies
-* *KEYS_COOKIE* &mdash; your cookie key.
+* *KEYS__COOKIE* &mdash; your cookie key.
 
 #### vk
 * *KEYS__VK__ID* &mdash; your application ID.
@@ -28,9 +28,9 @@
 * *DB__TESTCONNECTIONSTRING* &mdash; connection string for your MongoDB for backend tests.
 
 ### server
-* *ENDPOINTS_APIURL* &mdash; URL for API calls.
-* *ENDPOINTS_APIPORT* &mdash; port number for the API server.
-* *ENDPOINTS_CLIENTPORT* &mdash; port number for the client.
+* *ENDPOINTS__APIURL* &mdash; URL for API calls.
+* *ENDPOINTS__APIPORT* &mdash; port number for the API server.
+* *ENDPOINTS__CLIENTPORT* &mdash; port number for the client.
 
 ### admin
 Use these variables only to create the first admin account. It'll be created automatically.
