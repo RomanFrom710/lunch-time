@@ -7,6 +7,7 @@
 * *npm test* &mdash; run both server and client tests.
 * *npm run test-server* &mdash; run server tests via jasmine.
 * *npm run test-client* &mdash; run client tests via karma.
+* *npm run coverage* &mdash; run test coverage tool.
 
 ## Environment variables
 
@@ -16,7 +17,7 @@
 
 ### keys
 #### cookies
-* *COOKIEKEY* &mdash; your cookie key.
+* *KEYS_COOKIE* &mdash; your cookie key.
 
 #### vk
 * *KEYS__VK__ID* &mdash; your application ID.
